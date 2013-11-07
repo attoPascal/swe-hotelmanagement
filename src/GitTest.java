@@ -10,6 +10,11 @@ public class GitTest {
 		 * @autor philipp
 		 */
 		System.out.println("me too");
+		
+		/**
+		 * @author vincent
+		 */
+		while(true){System.out.println("Vincent ist cool");}
 	}
 
 }
