@@ -3,6 +3,7 @@
  * Testing if git and eclipse work together how they should
  */
 public class GitTest {
+
 	public static void main(String[] args) {
 		System.out.println("I love lamp");
 
@@ -14,7 +15,13 @@ public class GitTest {
 		/**
 		 * @author vincent
 		 */
-		while(true){System.out.println("Vincent ist cool");}
+		while (isVincentCool()) {
+			System.out.println("Vincent ist cool");
+		}
+	}
+	
+	public static boolean isVincentCool() {
+		return false;
 	}
 
 }
