@@ -3,25 +3,23 @@
  * Testing if git and eclipse work together how they should
  */
 public class GitTest {
-
+	private static Coolness allTheCoolKids = new Coolness();
+	
 	public static void main(String[] args) {
-		System.out.println("I love lamp");
-
-		/**
-		 * @autor philipp
-		 */
-		System.out.println("me too");
+		if (allTheCoolKids.isCool("Gerald")) {
+			System.out.println("Gerald ist cool");
+		}
 		
-		/**
-		 * @author vincent
-		 */
-		while (isVincentCool()) {
+		if (allTheCoolKids.isCool("Pascal")) {
+			System.out.println("Pascal ist cool");
+		}
+		
+		if (allTheCoolKids.isCool("Philipp")) {
+			System.out.println("Philipp ist cool");
+		}
+		
+		if (allTheCoolKids.isCool("Vincent")) {
 			System.out.println("Vincent ist cool");
 		}
 	}
-	
-	public static boolean isVincentCool() {
-		return false;
-	}
-
 }
