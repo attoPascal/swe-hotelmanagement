@@ -3,23 +3,23 @@
  * Testing if git and eclipse work together how they should
  */
 public class GitTest {
-	private static Coolness allTheCoolKids = new Coolness();
+	private static Woamness allTheWoamKids = new Woamness();
 	
 	public static void main(String[] args) {
-		if (allTheCoolKids.isCool("Gerald")) {
-			System.out.println("Gerald ist cool");
+		if (allTheWoamKids.isWoam("Gerald")) {
+			System.out.println("Gerald ist woam");
 		}
 		
-		if (allTheCoolKids.isCool("Pascal")) {
-			System.out.println("Pascal ist cool");
+		if (allTheWoamKids.isWoam("Pascal")) {
+			System.out.println("Pascal ist woam");
 		}
 		
-		if (allTheCoolKids.isCool("Philipp")) {
-			System.out.println("Philipp ist cool");
+		if (allTheWoamKids.isWoam("Philipp")) {
+			System.out.println("Philipp ist woam");
 		}
 		
-		if (allTheCoolKids.isCool("Vincent")) {
-			System.out.println("Vincent ist cool");
+		if (allTheWoamKids.isWoam("Vincent")) {
+			System.out.println("Vincent ist woam");
 		}
 	}
 }
