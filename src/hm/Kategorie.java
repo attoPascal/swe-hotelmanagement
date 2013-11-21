@@ -1,6 +1,9 @@
 package hm;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Kategorie {
 
@@ -63,13 +66,29 @@ public class Kategorie {
 	}
 
 
-	public HashMap<Integer, Zimmer> getZimmerList() {
+	public HashMap<Integer, Zimmer> getZimmerMap() {
 		return zimmerMap;
 	}
 
 
 	public void setZimmerMap(HashMap<Integer, Zimmer> zimmerMap) {
 		this.zimmerMap = zimmerMap;
+	}
+
+
+	public Zimmer getZimmer(Aufenthalt aufenthalt) {
+		Zimmer zimmer;
+		 Iterator<Entry<Integer, Zimmer>> it = zimmerMap.entrySet().iterator();
+		    while (it.hasNext()) {
+		        Map.Entry zimmers = (Map.Entry)it.next();//TODO variable name
+		        zimmer = (Zimmer)zimmers.getValue();
+		        it.remove();
+		        if (!BuchungsManagement.isBooked(zimmer, aufenthalt)){
+		        	return zimmer;
+		        }
+		    }
+		
+		return null;
 	}
 	
 }
