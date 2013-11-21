@@ -59,9 +59,18 @@ public class Buchung {
 	*/
 	public Buchung(Kategorie kategorie, Date d, int tage){
 		
+		this.kategorie = kategorie;
 		this.aufenthalt = new Aufenthalt(d,tage);
-		this.kosten = tage * zimmer.getKategorie().getPreis();
+		this.kosten = tage * kategorie.getPreis();
+		this.zimmer = kategorie.getZimmer(aufenthalt);
+	}
+	
+	public Buchung(Kategorie kategorie, Aufenthalt aufenthalt){
 		
+		this.kategorie = kategorie;
+		this.aufenthalt = aufenthalt;
+		this.kosten = aufenthalt.getDays() * kategorie.getPreis();
+		this.zimmer = kategorie.getZimmer(aufenthalt);
 	}
 
 }

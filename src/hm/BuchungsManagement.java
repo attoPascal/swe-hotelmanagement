@@ -10,17 +10,13 @@ public class BuchungsManagement {
 			
 			Zimmer gebuchtesZimmer;
 			
-			for (Zimmer zimmer : kategorie.getZimmerList()){
-				
-				if(!(isBooked(zimmer, aufenthalt))){ gebuchtesZimmer = zimmer; break;}
-				
-			}
+			Buchung buchung = new Buchung(kategorie, aufenthalt);
 			
-			gebuchtesZimmer.addBuchung(aufenthalt);
+			buchung.getZimmer().addBuchung(aufenthalt);
 			
 		}
 		
-		public boolean isBooked(Zimmer zimmer, Aufenthalt aufenthalt){
+		public static boolean isBooked(Zimmer zimmer, Aufenthalt aufenthalt){
 			
 			for(Buchung buchung : zimmer.getBuchungen()){
 				
