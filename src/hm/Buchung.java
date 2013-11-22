@@ -25,6 +25,14 @@ public class Buchung {
 	
 	
 	
+	public Kategorie getKategorie() {
+		return kategorie;
+	}
+
+	public void setKategorie(Kategorie kategorie) {
+		this.kategorie = kategorie;
+	}
+
 	public Zimmer getZimmer() {
 		return zimmer;
 	}
