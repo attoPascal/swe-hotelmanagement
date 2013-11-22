@@ -9,19 +9,16 @@ public class Kategorie {
 
 	/**
 	 * Name der Kategorie
-	 * @uml.property  name="name"
 	 */
 	private String name;
 
 	/**
 	 * Preis pro Nacht in cent
-	 * @uml.property  name="preis"
 	 */
 	private int preis;
 	
 	/**
 	 * Liste von Zimmern dieser Kategorie
-	 * @uml.property  name="zimmerList"
 	 */
 	HashMap<Integer, Zimmer> zimmerMap = new HashMap<Integer, Zimmer>();
 	
@@ -35,14 +32,12 @@ public class Kategorie {
 	
 	/**
 	 * @return
-	 * @uml.property  name="preis"
 	 */
 	public int getPreis() {
 		return preis;
 	}
 	/**
 	 * @param preis
-	 * @uml.property  name="preis"
 	 */
 	public void setPreis(int preis) {
 		this.preis = preis;
@@ -51,8 +46,8 @@ public class Kategorie {
 	public String getKategoriename() {
 		return name;
 	}
-	public void setKategoriename(String kategoriename) {
-		this.name = kategoriename;
+	public void setKategoriename(String name) {
+		this.name = name;
 	}
 
 
@@ -70,11 +65,30 @@ public class Kategorie {
 		return zimmerMap;
 	}
 
-
+	//TODO void???
 	public void setZimmerMap(HashMap<Integer, Zimmer> zimmerMap) {
 		this.zimmerMap = zimmerMap;
 	}
 
+	//TODO void???
+	public void addZimmer(Zimmer zimmer){
+		
+		zimmerMap.put(zimmer.getNummer(), zimmer);
+		
+	}
+	
+	public boolean hasZimmer(int nummer){
+		
+		return zimmerMap.containsKey(nummer) ? true : false;
+		
+	}
+	
+	//TODO void?
+	public void removeZimmer(int nummer){
+		
+		zimmerMap.remove(nummer);
+		
+	}
 
 	public Zimmer getZimmer(Aufenthalt aufenthalt) {
 		Zimmer zimmer;

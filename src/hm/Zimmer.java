@@ -15,7 +15,7 @@ public class Zimmer {
 	ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 	
 	
-	public Zimmer (Kategorie kategorie, int nummer){
+	public Zimmer(int nummer){
 		
 		this.nummer = nummer;
 		
@@ -42,10 +42,10 @@ public class Zimmer {
 		this.nummer = nummer;
 	}
 	
-	public void addBuchung(Aufenthalt aufenthalt){
+	public void addBuchung(Kategorie kategorie, Aufenthalt aufenthalt){
 		
-		//TODO 
-		
+		buchungen.add(new Buchung(kategorie, aufenthalt));
+
 	}
 
 }
