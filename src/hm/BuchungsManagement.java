@@ -1,18 +1,12 @@
 package hm;
 
-import java.util.ArrayList;
-
 public class BuchungsManagement {
 
 
 		
 		public void neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt){
-			
-			Zimmer gebuchtesZimmer;
-			
-			Buchung buchung = new Buchung(kategorie, aufenthalt);
-			
-			buchung.getZimmer().addBuchung(aufenthalt);
+									
+			kategorie.getZimmer(aufenthalt).addBuchung(kategorie, aufenthalt);
 			
 		}
 		
