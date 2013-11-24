@@ -8,6 +8,8 @@ public class Zimmer {
 	 * Zimmernummer
 	 */
 	private int nummer;
+	
+	private Kategorie kategorie;
 
 	/**
 	 * Liste mit allen Buchungen für dieses Zimmer
@@ -15,10 +17,8 @@ public class Zimmer {
 	ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 	
 	
-	public Zimmer (Kategorie kategorie, int nummer){
-		
-		this.nummer = nummer;
-		
+	public Zimmer (int nummer, Kategorie kat){
+	
 	}
 	
 
@@ -32,9 +32,17 @@ public class Zimmer {
 	}
 
 
-	
 	public int getNummer() {
 		return nummer;
+	}
+	
+	public void setKategorie(Kategorie kategorie) {
+		this.kategorie = kategorie;
+	}
+
+
+	public Kategorie getKategorie() {
+		return this.kategorie;
 	}
 
 

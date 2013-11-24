@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public class BuchungsManagement {
 
-
-		
+	
 		public void neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt){
 			
 			Zimmer gebuchtesZimmer;
