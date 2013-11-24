@@ -36,6 +36,10 @@ public class Zimmer {
 		return nummer;
 	}
 	
+	public void setNummer(int nummer) {
+		this.nummer = nummer;
+	}
+	
 	public void setKategorie(Kategorie kategorie) {
 		this.kategorie = kategorie;
 	}
@@ -43,11 +47,6 @@ public class Zimmer {
 
 	public Kategorie getKategorie() {
 		return this.kategorie;
-	}
-
-
-	public void setNummer(int nummer) {
-		this.nummer = nummer;
 	}
 	
 	public void addBuchung(Aufenthalt aufenthalt){
