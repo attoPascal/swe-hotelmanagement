@@ -23,12 +23,9 @@ public class Kategorie {
 	HashMap<Integer, Zimmer> zimmerMap = new HashMap<Integer, Zimmer>();
 	
 	public Kategorie(String name, int preis){
-		
 		this.name = name;
 		this.preis = preis;
-		
 	}
-	
 	
 	/**
 	 * @return
@@ -45,28 +42,17 @@ public class Kategorie {
 		this.preis = preis;
 	}
 	
-	public String getKategoriename() {
-		return name;
-	}
-	public void setKategoriename(String kategoriename) {
-		this.name = kategoriename;
-	}
-
-
 	public String getName() {
 		return name;
 	}
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
 	public HashMap<Integer, Zimmer> getZimmerList() {
 		return zimmerMap;
 	}
-
 
 	public void setZimmerMap(HashMap<Integer, Zimmer> zimmerMap) {
 		this.zimmerMap = zimmerMap;

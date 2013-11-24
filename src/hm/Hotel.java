@@ -19,12 +19,24 @@ public class Hotel {
 	 */
 	ArrayList<Zimmer> zimmer = new ArrayList<Zimmer>();
 	
+	int id;
+	String name;
+	
+	public Hotel(String name, int id) {
+		this.id = id;
+		this.name = name;
+	}
+	
+	public int getID() {
+		return this.id;
+	}
+	
 	/*
 	 * ------------------
 	 * Kategorie-Methoden
 	 * ------------------
 	 */
-
+	
 	/**
 	 * @returns sämtliche vorhandenen Zimmerkategorien
 	 */
@@ -64,7 +76,7 @@ public class Hotel {
 	/**
 	 * @returns sämtliche vorhandene Zimmer
 	 */
-	public ArrayList<Zimmer> getZimmer() {
+	public ArrayList<Zimmer> getZimmerList() {
 		return zimmer;
 	}
 	
@@ -94,7 +106,7 @@ public class Hotel {
 	/**
 	 * ändert die Kategorie eines bestehenden Zimmers
 	 */
-	public void updateZimmerKategorie(int nummer, String kat) {
+	public void updateZimmerKategorie(int nummer, String kategorie) {
 		
 	}
 	
@@ -104,7 +116,4 @@ public class Hotel {
 	public void deleteZimmer(int nummer) {
 		
 	}
-	
-	
-	
 }
