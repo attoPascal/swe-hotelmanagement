@@ -22,7 +22,7 @@ public class Kategorie {
 	 */
 	HashMap<Integer, Zimmer> zimmerMap = new HashMap<Integer, Zimmer>();
 	
-	Kategorie(String name, int preis){
+	public Kategorie(String name, int preis){
 		
 		this.name = name;
 		this.preis = preis;
