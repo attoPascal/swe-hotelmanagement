@@ -23,8 +23,20 @@ public class Buchung {
 	 */
 	private int kosten;
 	
+	private static int buchungen = 0;
+	
+	private int id;
 	
 	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public Kategorie getKategorie() {
 		return kategorie;
 	}
@@ -71,6 +83,8 @@ public class Buchung {
 		this.aufenthalt = new Aufenthalt(d,tage);
 		this.kosten = tage * kategorie.getPreis();
 		this.zimmer = kategorie.getZimmer(aufenthalt);
+		this.id = buchungen++;
+		
 	}
 	
 	public Buchung(Kategorie kategorie, Aufenthalt aufenthalt){
@@ -79,6 +93,7 @@ public class Buchung {
 		this.aufenthalt = aufenthalt;
 		this.kosten = aufenthalt.getDays() * kategorie.getPreis();
 		this.zimmer = kategorie.getZimmer(aufenthalt);
+		this.id = buchungen++;
 	}
 
 }
