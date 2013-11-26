@@ -6,7 +6,7 @@ public class KategorieManagement {
 		
 		Kategorie kategorie = hotel.getKategorie(name);
 		
-		kategorie.setKategoriename(newName);
+		kategorie.setName(newName);
 		kategorie.setPreis(preis);
 	}
 
