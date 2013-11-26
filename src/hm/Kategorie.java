@@ -43,13 +43,6 @@ public class Kategorie {
 		this.preis = preis;
 	}
 	
-	public String getKategoriename() {
-		return name;
-	}
-	public void setKategoriename(String name) {
-		this.name = name;
-	}
-
 
 	public String getName() {
 		return name;
