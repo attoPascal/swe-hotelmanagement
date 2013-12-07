@@ -6,11 +6,9 @@ import java.util.Date;
 public class Buchung {
 
 	/**
-	 * zu Buchendes Zimmer
+	 * zu buchendes Zimmer
 	 */
 	private Zimmer zimmer;
-	
-	
 	private Kategorie kategorie;
 	
 	/**
