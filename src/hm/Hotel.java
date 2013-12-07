@@ -5,15 +5,17 @@ import java.util.ArrayList;
 public class Hotel {
 
 	private String name;
-	
+
 	/**
+	 * Die Kategorien, die das Hotel anbietet
 	 */
-	private ArrayList<Kategorie> kategorien = new ArrayList<Kategorie> ();
-	
+	private ArrayList<Kategorie> kategorien = new ArrayList<Kategorie>();
+
 	/**
+	 * Liste der Zimmer, die das Hotel zur Verfügung hat
 	 */
 	private ArrayList<Zimmer> zimmerList = new ArrayList<Zimmer>();
-	
+
 	public Hotel() {
 		super();
 		this.name = "default";
@@ -51,49 +53,40 @@ public class Hotel {
 	public void setZimmer(ArrayList<Zimmer> zimmerList) {
 		this.zimmerList = zimmerList;
 	}
-	
-	public void addZimmer(Zimmer zimmer){
-		
+
+	public void addZimmer(Zimmer zimmer) {
 		zimmerList.add(zimmer);
-		
 	}
-	
-	public void removeZimmer(Zimmer zimmer){
-		
+
+	public void removeZimmer(Zimmer zimmer) {
 		zimmerList.remove(zimmer);
-		
 	}
 
 	public void addKategorie(Kategorie kategorie) {
-
 		kategorien.add(kategorie);
-		
 	}
-	
-	public void removeKategorie(Kategorie kategorie){
-		
+
+	public void removeKategorie(Kategorie kategorie) {
 		kategorien.remove(kategorie);
-		
 	}
-	
-	public Kategorie getKategorie(String name){
-		
-		for (Kategorie kategorie : kategorien){
-			if (kategorie.getName().equals(name)) return kategorie;
+
+	public Kategorie getKategorie(String name) {
+
+		for (Kategorie kategorie : kategorien) {
+			if (kategorie.getName().equals(name))
+				return kategorie;
 		}
-		
+
 		return null;
-		
 	}
 
 	public Zimmer getZimmer(int nummer) {
-		
-		for (Zimmer zimmer: zimmerList){
-			if (zimmer.getNummer() == nummer) return zimmer;
+
+		for (Zimmer zimmer : zimmerList) {
+			if (zimmer.getNummer() == nummer)
+				return zimmer;
 		}
 		return null;
 	}
-	
-	
-	
+
 }
