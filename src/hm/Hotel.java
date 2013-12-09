@@ -49,7 +49,7 @@ public class Hotel {
 	public ArrayList<Zimmer> getZimmerList() {
 		return zimmerList;
 	}
-
+	
 	public void setZimmer(ArrayList<Zimmer> zimmerList) {
 		this.zimmerList = zimmerList;
 	}
