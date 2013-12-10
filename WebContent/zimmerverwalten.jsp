@@ -23,10 +23,17 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("select").change(function() {
-				$("#response").load(
-					"ZimmerManagement?action=set&zimmer=" + $(this).attr("data-zimmer") +
-					"&kategorie=" + $(this).val() +
-					"&hotel=BigSharkyFish"
+				$.get(
+					"ZimmerManagement",
+					{
+						action: "set",
+						zimmer: $(this).attr("data-zimmer"),
+						kategorie: $(this).val(),
+						hotel: "CrazySharkyFish"
+					},
+					function(response) {
+						$("textarea").text(response);
+					}
 				);
 			});
 		});
@@ -51,8 +58,10 @@
 			<td><%= z.getNummer() %></td>
 			<td>
 				<select size="1" data-zimmer="<%= z.getNummer() %>">
-					<% for (Kategorie k : kList) { %>
-					<option value="<%= k.getName() %>"><%= k.getName() %></option>
+					<% for (Kategorie k : kList) {
+						String selected = (k.hasZimmer(z.getNummer())) ? "selected=\"selected\"" : "";
+					%>
+					<option value="<%= k.getName() %>"<%= selected %>><%= k.getName() %></option>
 					<% } %>
 
 				</select>

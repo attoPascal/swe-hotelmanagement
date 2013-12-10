@@ -71,8 +71,9 @@ public class CreateTestData extends HttpServlet {
 		katList.add(kat3);
 		hotel.setKategorien(katList);
 		
-		out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
-		DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
+		//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
+		DAO dao = new SerializedDAO("data.ser");
+		//DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
 		dao.saveHotel(hotel);
 		
 		Hotel h2 = dao.getHotelByName("CrazySharkyFish");

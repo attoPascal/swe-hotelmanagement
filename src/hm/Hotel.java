@@ -99,22 +99,23 @@ public class Hotel implements Serializable {
 	//TODO toHtml?
 	public String toString(){
 		
-		String s;
+		StringBuffer s = new StringBuffer();
 		
-		s = "Hotelname: " + getName();
+		s.append("<h1>Hotel '" + getName() + "'</h1>");
 		
-		ArrayList<Kategorie> kategorien = getKategorien();
-		
-		s += "<br>" + "Kategorien: " + "<br />";
-		
-		for (Kategorie kategorie : kategorien){
+		for (Kategorie kategorie : this.getKategorien()){
+			s.append("<h2>Kategorie '" + kategorie.getName() + "'</h2>");
+			s.append("<div>Preis: " + kategorie.getPreis() + "</div>");
+			s.append("<div>Ausstattung: " + kategorie.getAusstattung() + "</div>");
 			
-			s += "<br>" + "Name: " + kategorie.getName() + "<br />" + "<br>"+ "Preis: " + kategorie.getPreis() +  "<br />" + "<br>" + "Ausstattung: "+kategorie.getAusstattung() + "<br />";
-			
+			s.append("<div>Zimmer: ");
+			for (int zimmerNummer : kategorie.getZimmerMap().keySet()) {
+				s.append(zimmerNummer + " ");
+			}
+			s.append("</div>");
 		}
 		
-		return s;
-			
+		return s.toString();	
 	}
 
 }
