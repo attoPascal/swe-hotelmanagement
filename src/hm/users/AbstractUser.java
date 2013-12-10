@@ -15,7 +15,7 @@ public abstract class AbstractUser {
 	protected String password;
 
 	/**
-	 * @return
+	 * @return Name (username) des Benutzers
 	 * @uml.property  name="username"
 	 */
 	public String getUsername() {
@@ -31,7 +31,7 @@ public abstract class AbstractUser {
 	}
 
 	/**
-	 * @return
+	 * @return Password des Users
 	 * @uml.property  name="password"
 	 */
 	public String getPassword() {

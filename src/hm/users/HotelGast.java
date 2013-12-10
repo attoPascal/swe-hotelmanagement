@@ -12,19 +12,33 @@ public class HotelGast extends AbstractUser{
 		this.buchung = buchung;
 		this.zahlungsdaten = zahlungsdaten;
 	}
+	
+	/**
+	 * @return bestehende Buchung des HotelGasts
+	 */
 	public Buchung getBuchung() {
 		return buchung;
 	}
+	
+	/**
+	 * @param buchung
+	 */
 	public void setBuchung(Buchung buchung) {
 		this.buchung = buchung;
 	}
+	
+	/**
+	 * @return Zahlungsdaten des Hotelgasts
+	 */
 	public String getZahlungsdaten() {
 		return zahlungsdaten;
 	}
+	
+	/**
+	 * @param zahlungsdaten
+	 */
 	public void setZahlungsdaten(String zahlungsdaten) {
 		this.zahlungsdaten = zahlungsdaten;
 	}
-	
-	
 	
 }
