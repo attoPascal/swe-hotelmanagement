@@ -99,6 +99,10 @@ public class SerializedDAO implements DAO {
 		return null;
 	}
 	
+	/**
+	 * Speichern in File
+	 * @param map HashMap, die in Datei gespeichert wird
+	 */
 	void saveMap(HashMap<String, ArrayList<?>> map) {
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
