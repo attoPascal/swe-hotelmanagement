@@ -8,9 +8,11 @@
 
 <%
 	ZimmerManagement zm = new ZimmerManagement();
-	Hotel hotel = zm.getDAO().getHotelByName("CrazySharkyFish");
+	
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
 	ArrayList<Kategorie> kList = hotel.getKategorien();
+	
+	Hotel hotel = zm.getDAO().getHotelByName("CrazySharkyFish");
 %>
 
 <!DOCTYPE html>
