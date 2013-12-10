@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 public class BuchungsManagement extends HttpServlet {
 	/**
@@ -41,17 +43,16 @@ public class BuchungsManagement extends HttpServlet {
 		int day = Integer.parseInt(request.getParameter("day"));
 		int month = Integer.parseInt(request.getParameter("months"));
 		int year = Integer.parseInt(request.getParameter("year"));
-
-		System.out.println(day +' '+ month +' '+ year);
 		
 		DAO dao = new SerializedDAO("data.ser");
     	
     	Hotel hotel = dao.getHotelByName("CrazySharkyFish");
-    	
-    	neueBuchung(hotel.getKategorie(name), new Aufenthalt(new Date(), 1));
+    	Calendar c = new GregorianCalendar ();
+    	c.set(day, year, month-1);
+    	int zimmernummer = neueBuchung(hotel.getKategorie(name), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
 		
-		
-		PrintWriter out = response.getWriter();
+    	PrintWriter out = response.getWriter();
+		out.println("Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + zimmernummer);
 		out.println(createHotel("name"));
 	}
 
@@ -65,10 +66,12 @@ public class BuchungsManagement extends HttpServlet {
 
 	}
 
-	public void neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
+	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
 
-		kategorie.getZimmer(aufenthalt).addBuchung(kategorie, aufenthalt);
-
+		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
+		zimmer.addBuchung(kategorie, aufenthalt);
+		
+		return zimmer.getNummer();
 	}
 
 	public static boolean isBooked(Zimmer zimmer, Aufenthalt aufenthalt) {
