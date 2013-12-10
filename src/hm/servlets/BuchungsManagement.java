@@ -43,22 +43,31 @@ public class BuchungsManagement extends HttpServlet {
     	Hotel hotel = dao.getHotelByName("CrazySharkyFish");
     	Calendar c = new GregorianCalendar ();
     	c.set(day, year, month-1, 0, 0);
-    	int zimmernummer = neueBuchung(hotel.getKategorie(name), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
-		
     	PrintWriter out = response.getWriter();
-		out.println("Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + zimmernummer);
-		
-		out.println(hotel.getKategorie(name).toString());
-			
-		dao.saveHotel(hotel);
+
+    	try{
+    	
+    		int zimmernummer = neueBuchung(hotel.getKategorie(name), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+    		
+    		out.println("Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + zimmernummer);
+    		
+    		out.println(hotel.getKategorie(name).toString());
+    			
+    		dao.saveHotel(hotel);
+    		
+    		
+    	}catch(NullPointerException e){
+    		
+    		out.println("Es ist zu diesem Zeitpunkt leider kein Zimmer mehr frei!");
+    		
+    	}
+
 	}
 
 
 	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
 
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
-		
-		if (zimmer == null)System.out.println("ohh nein zimmer ist null!!!");
 		
 		zimmer.addBuchung(kategorie, aufenthalt);
 		
