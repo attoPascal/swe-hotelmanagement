@@ -39,13 +39,34 @@ public class Aufenthalt implements Serializable {
 	}
 
 	public boolean overlaps(Aufenthalt aufenthalt) {
-
-		if ((this.anfang.getTime() > aufenthalt.getAnfang().getTime() && this.anfang
-				.getTime() < aufenthalt.getEnde().getTime())
-				|| (this.anfang.getTime() < aufenthalt.getAnfang().getTime() && this.ende
-						.getTime() > aufenthalt.getAnfang().getTime())) {
+		
+		long a1 = this.anfang.getTime();
+		long a2 = aufenthalt.getAnfang().getTime();
+		long e1 = this.ende.getTime();
+		long e2 = aufenthalt.getEnde().getTime();
+		
+	
+		//a1 a2 e1 e2 || a1 a2 e2 e1
+		if (a1 < a2 && a2 < e1){
 			return true;
-		} else
+		}
+		
+		//a2 a1 e2 e1 || a1 a2 e2 e1 
+		if (a1 > e2 && a2 < e2){
+			return true;
+		}
+		
+		// a1  e1
+		// a2  e2
+		if (a1 == a2 && e1 ==  e2){
+			return true;
+		}
+		
+		//a2 a1 e1 e2
+		if (a2 < a1 && a1 < e2){
+			return true;
+					
+		}else
 			return false;
 	}
 
