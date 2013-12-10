@@ -12,23 +12,17 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title> Hotelmanagement  </title>
 	</head>	
-	<body>		
-			
+	<body>			
 		<%
-		
 		DAO dao = new SerializedDAO("data.ser");
     	
     	Hotel hotel = dao.getHotelByName("CrazySharkyFish");		
 		ArrayList<Kategorie> klist = hotel.getKategorien();
 		%>
-		
 		<%= hotel.toString() %>
-		
-
-						
 		<form action="BuchungsManagement">			
 			 <h2>Bitte suchen sie eine Kategorien aus</h2> <br>
-
+				<label>Kategorie:</label>
 				<select name= "select" size="1" >
 					<% for (Kategorie k : klist) { %>
 					<option value="<%= k.getName() %>"><%= k.getName() %></option>
@@ -36,7 +30,9 @@
 
 				</select>
 				<br>
-			<input type="text" name="day">
+				<br>
+      <input type="text" name="day" title="Tag" style="color:#888;" 
+    value="Tag" onfocus="inputFocus(this)" onblur="inputBlur(this)" /> 
 			
 	  <select name="months" size="1"  tabindex="1">
         <option value="1">Jänner</option>
@@ -53,10 +49,9 @@
         <option value="12">Dezember</option>
       </select>
       
-      <input type="text" name="year">
+      <input type="text" name="year" title="Jahr" style="color:#888;" 
+    value="Jahr" onfocus="inputFocus(this)" onblur="inputBlur(this)" />      
             
-
-
 			<input type="submit" name= "submit" value="submit" tabindex="2">						
 		</form>	
 		
