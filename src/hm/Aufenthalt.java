@@ -48,4 +48,12 @@ public class Aufenthalt implements Serializable {
 		} else
 			return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Aufenthalt [anfang=" + anfang + ", ende=" + ende + "]";
+	}
+	
+	
+	
 }
