@@ -39,7 +39,8 @@ public class CreateTestData extends HttpServlet {
 		response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 		
-		Hotel hotel = new Hotel("CrazySharkyFish");
+		Hotel h1 = new Hotel("CrazySharkyFish");
+		Hotel h2 = new Hotel("FunkySharkyFish");
 		
 		Zimmer z1 = new Zimmer(101);
 		Zimmer z2 = new Zimmer(102);
@@ -47,17 +48,31 @@ public class CreateTestData extends HttpServlet {
 		Zimmer z4 = new Zimmer(104);
 		Zimmer z5 = new Zimmer(105);
 		
-		ArrayList<Zimmer> zList = new ArrayList<Zimmer>();
-		zList.add(z1);
-		zList.add(z2);
-		zList.add(z3);
-		zList.add(z4);
-		zList.add(z5);
-		hotel.setZimmerList(zList);
+		Zimmer z6 = new Zimmer(101);
+		Zimmer z7 = new Zimmer(201);
+		Zimmer z8 = new Zimmer(301);
+		Zimmer z9 = new Zimmer(401);
+		
+		h1.addZimmer(z1);
+		h1.addZimmer(z2);
+		h1.addZimmer(z3);
+		h1.addZimmer(z4);
+		h1.addZimmer(z5);
+		
+		h2.addZimmer(z6);
+		h2.addZimmer(z7);
+		h2.addZimmer(z8);
+		h2.addZimmer(z9);
+
 		
 		Kategorie kat1 = new Kategorie("Einzel", 50, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 100, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 200, "Bad & Klo, Affenbutler");
+		
+		Kategorie kat4 = new Kategorie("Einzel", 60, "nix");
+		Kategorie kat5 = new Kategorie("Doppel", 80, "nix");
+		Kategorie kat6 = new Kategorie("Tripel", 120, "nix");
+		Kategorie kat7 = new Kategorie("Quadrupel", 150, "nix");
 		
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);
@@ -65,21 +80,31 @@ public class CreateTestData extends HttpServlet {
 		kat2.addZimmer(z4);
 		kat3.addZimmer(z5);
 		
-		ArrayList<Kategorie> katList = new ArrayList<Kategorie>();
-		katList.add(kat1);
-		katList.add(kat2);
-		katList.add(kat3);
-		hotel.setKategorien(katList);
+		kat4.addZimmer(z6);
+		kat5.addZimmer(z7);
+		kat6.addZimmer(z8);
+		kat7.addZimmer(z9);
+		
+		h1.addKategorie(kat1);
+		h1.addKategorie(kat2);
+		h1.addKategorie(kat3);
+		
+		h2.addKategorie(kat4);
+		h2.addKategorie(kat5);
+		h2.addKategorie(kat6);
+		h2.addKategorie(kat7);
+		
 		
 		//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
 		DAO dao = new SerializedDAO("data.ser");
 		//DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
-		dao.saveHotel(hotel);
+		dao.saveHotel(h1);
+		dao.saveHotel(h2);
 		
-		Hotel h2 = dao.getHotelByName("CrazySharkyFish");
-		ArrayList<Kategorie> katList2 = h2.getKategorien();
+		Hotel h3 = dao.getHotelByName("CrazySharkyFish");
+		ArrayList<Kategorie> katList = h3.getKategorien();
 		
-		for (Kategorie k : katList2) {
+		for (Kategorie k : katList) {
 			out.write(k.getName() + ": ");
 			
 			for (Entry<Integer, Zimmer> e : k.getZimmerMap().entrySet()) {

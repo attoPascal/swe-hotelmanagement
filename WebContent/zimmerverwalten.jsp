@@ -8,11 +8,10 @@
 
 <%
 	ZimmerManagement zm = new ZimmerManagement();
-	
+	ArrayList<Hotel> hList = zm.getDAO().getHotelList();
+	Hotel hotel = hList.get(0);
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
 	ArrayList<Kategorie> kList = hotel.getKategorien();
-	
-	Hotel hotel = zm.getDAO().getHotelByName("CrazySharkyFish");
 %>
 
 <!DOCTYPE html>
@@ -45,6 +44,14 @@
 <body>
 
 	<h1>Zimmer verwalten</h1>
+	
+	<p>Hotel ausw&auml;hlen:
+		<select size="1" name="hotel">
+			<% for (Hotel h : hList) { %>
+			<option value="<%= h.getName() %>"><%= h.getName() %></option>
+			<% } %>
+		</select>
+	</p>
 
 	<textarea rows="1" cols="20" id="response"></textarea>
 	
