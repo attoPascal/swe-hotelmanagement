@@ -41,19 +41,29 @@ public class ZimmerManagement extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		response.setContentType("text/html");
+		//response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+        
+        String hotel;
+        String kategorie;
+        int zimmerNummer;
         
         if (action != null) {
 	        switch (action) {
 	        case "create":
 	        	break;
 	        case "delete":
+	        	hotel = request.getParameter("hotel");
+	        	zimmerNummer = Integer.parseInt(request.getParameter("zimmer"));
+	        	
+	        	this.deleteZimmer(hotel, zimmerNummer);
+	        	
+	        	response.sendRedirect("zimmerverwalten.jsp");
 	        	break;
 	        case "set":
-	        	String hotel = request.getParameter("hotel");
-	        	String kategorie = request.getParameter("kategorie");
-	        	int zimmerNummer = Integer.parseInt(request.getParameter("zimmer"));
+	        	hotel = request.getParameter("hotel");
+	        	kategorie = request.getParameter("kategorie");
+	        	zimmerNummer = Integer.parseInt(request.getParameter("zimmer"));
 	        	
 	        	setZimmerKategorie(hotel, kategorie, zimmerNummer);
 	        	
@@ -85,10 +95,11 @@ public class ZimmerManagement extends HttpServlet {
 		
 	}
 	
-	public void deleteZimmer(Hotel hotel, int nummer){
+	public void deleteZimmer(String hotelName, int nummer){
+		Hotel hotel = dao.getHotelByName(hotelName);
 		Zimmer zimmer = hotel.getZimmer(nummer);
 		hotel.removeZimmer(zimmer);
-		
+		dao.saveHotel(hotel);
 	}
 	
 	public void setZimmerKategorie(String hotelName, String katName, int zimmerNummer){
