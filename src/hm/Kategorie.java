@@ -16,15 +16,18 @@ public class Kategorie {
 	 * Preis pro Nacht in cent
 	 */
 	private int preis;
+	
+	private String ausstattung;
 
 	/**
 	 * Liste von Zimmern dieser Kategorie
 	 */
 	HashMap<Integer, Zimmer> zimmerMap = new HashMap<Integer, Zimmer>();
 
-	public Kategorie(String name, int preis) {
+	public Kategorie(String name, int preis, String ausstattung) {
 		this.name = name;
 		this.preis = preis;
+		this.ausstattung = ausstattung;
 	}
 
 	/**
@@ -47,6 +50,14 @@ public class Kategorie {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getAusstattung() {
+		return this.ausstattung;
+	}
+	
+	public void setAusstattung(String ausstattung) {
+		this.ausstattung = ausstattung;
 	}
 
 	public HashMap<Integer, Zimmer> getZimmerMap() {
