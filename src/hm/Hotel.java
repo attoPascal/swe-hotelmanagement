@@ -90,6 +90,7 @@ public class Hotel {
 		return null;
 	}
 	
+	//TODO toHtml?
 	public String toString(){
 		
 		String s;
@@ -98,11 +99,11 @@ public class Hotel {
 		
 		ArrayList<Kategorie> kategorien = getKategorien();
 		
-		s = "\nKategorien: ";
+		s += "<br>" + "Kategorien: " + "<br />";
 		
 		for (Kategorie kategorie : kategorien){
 			
-			s += "\nName: " + kategorie.getName() + "\n" + "Preis: "+kategorie.getPreis() + "Ausstattung: "+kategorie.getAusstattung();
+			s += "<br>" + "Name: " + kategorie.getName() + "<br />" + "<br>"+ "Preis: " + kategorie.getPreis() +  "<br />" + "<br>" + "Ausstattung: "+kategorie.getAusstattung() + "<br />";
 			
 		}
 		

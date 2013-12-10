@@ -36,10 +36,13 @@ public class BuchungsManagement extends HttpServlet {
 		hotel.addZimmer(new Zimmer(5));
 
 		hotel.addKategorie(new Kategorie("Suite", 50, "Fernseher, Waschbecken"));
+		
+		hotel.addKategorie(new Kategorie("Absteige", 50, "Eimer zum reinkacken"));
+
 
 		hotel.getKategorie("Suite").addZimmer(hotel.getZimmer(5));
 
-		return hotel.getName();
+		return hotel.toString();
 
 	}
 
