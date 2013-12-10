@@ -103,7 +103,6 @@ public class Hotel implements Serializable {
 		
 		s.append("<h1>Hotel '" + getName() + "'</h1>");
 		
-<<<<<<< HEAD
 		for (Kategorie kategorie : this.getKategorien()){
 			s.append("<h2>Kategorie '" + kategorie.getName() + "'</h2>");
 			s.append("<div>Preis: " + kategorie.getPreis() + "</div>");
@@ -114,18 +113,20 @@ public class Hotel implements Serializable {
 				s.append(zimmerNummer + " ");
 			}
 			s.append("</div>");
-=======
+		}
+
 		ArrayList<Kategorie> kategorien = getKategorien();
-		
+		/*
 		s += "<br>" + "Kategorien: " + "<br />";
 		
 		for (Kategorie kategorie : kategorien){
 			
 			s += kategorie.toString();
->>>>>>> 90a8cdb898025df12f9171c3cae22436c62682a5
-		}
-		
-		return s.toString();	
-	}
 
+		}*/
+		
+
+		return s.toString();	
+
+	}
 }
