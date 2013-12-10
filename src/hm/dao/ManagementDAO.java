@@ -18,32 +18,46 @@ public class ManagementDAO implements DAO {
 		
 	}
 	
+	/**
+	 * ArrayList, die die Hotels enthaelt
+	 * @return null
+	 */
 	public ArrayList<Hotel> getHotelList() {
 		return null;
 	}
 	
+	/**
+	 * ArrayList, die die Kategorien enthaelt
+	 * @return null
+	 */
 	public ArrayList<Kategorie> getKatList() {
 		return null;
 	}
 	
 	/**
-	 * Laden aus Datei
+	 * Laden der kategorie aus einer Datei
 	 */
 	public Kategorie getKatByName() {
 		return null;
 	}
 	
+	/**
+	 * Laden des Hotels aus einer Datei
+	 */
 	public Hotel getHotelByName(String name) {
 		return null;
 	}
 	
 	/**
-	 * Speichern in Datei
+	 * Speichern der kategorie in einer Datei
 	 */
 	public void saveKategorie(Kategorie kat) {
 		
 	}
 	
+	/**
+	 * Speichern des Hotels in einer Datei
+	 */
 	public void saveHotel(Hotel hotel) {
 		
 	}
