@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class SerializedDAO implements DAO {
 	private File file;
@@ -56,7 +57,18 @@ public class SerializedDAO implements DAO {
 		HashMap<String, ArrayList<?>> map = getMap();
 		ArrayList<Hotel> list = this.getHotelList();
 		
+		//altes Hotel aus Liste entfernen
+		Iterator<Hotel> it = list.iterator();
+		while (it.hasNext()) {
+			Hotel h = it.next();
+			if (h.getName().equals(hotel.getName())) {
+				it.remove();
+			}
+		}
+		
+		//neues Hotel zu Liste hinzufuegen
 		list.add(hotel);
+		
 		map.put("hotels", list);
 		this.saveMap(map);
 	}

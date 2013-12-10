@@ -30,7 +30,10 @@ public class ZimmerManagement extends HttpServlet {
      */
     public ZimmerManagement() {
         super();
-        dao = new SerializedDAO("/Users/pascal/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/LittleSharkyFish/data.ser");
+        dao = new SerializedDAO("data.ser");
+        //dao = new SerializedDAO("/Users/pascal/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/LittleSharkyFish/data.ser");
+        //System.out.println(this.getServletContext().getRealPath("/"));
+        //System.out.println(System.getProperty("user.dir"));
     }
 
 	/**
@@ -48,16 +51,16 @@ public class ZimmerManagement extends HttpServlet {
 	        case "delete":
 	        	break;
 	        case "set":
-	        	int zimmer = Integer.parseInt(request.getParameter("zimmer"));
-	        	String kategorie = request.getParameter("kategorie");
 	        	String hotel = request.getParameter("hotel");
+	        	String kategorie = request.getParameter("kategorie");
+	        	int zimmerNummer = Integer.parseInt(request.getParameter("zimmer"));
 	        	
-	        	//setZimmerKategorie(hotel, kategorie, zimmer);
+	        	setZimmerKategorie(hotel, kategorie, zimmerNummer);
 	        	
 	        	out.write("Kategorie geaendert\n");
-	        	out.write("fuer Hotel: '" + hotel + "'\n");
-	        	out.write("Zimmer Nr " + zimmer + "\n");
-	        	out.write("neue Kategorie: '" + kategorie + "'");
+	        	/*out.write("fuer Hotel: '" + hotel.getName() + "'\n");
+	        	out.write("Zimmer Nr " + zimmerNummer + "\n");
+	        	out.write("neue Kategorie: '" + kategorie.getName() + "'");*/
 	        }
         } else {
         	out.write("<p>No action. Nothing to do. Will display test data instead.</p>");
@@ -70,6 +73,8 @@ public class ZimmerManagement extends HttpServlet {
         		out.write(h.toString());
         		out.write("</div>");
         	}
+        	
+        	//out.write(this.getServletContext().getRealPath("/"));
 
         }
 	}
@@ -86,10 +91,22 @@ public class ZimmerManagement extends HttpServlet {
 		
 	}
 	
-	public void setZimmerKategorie(Hotel hotel, Kategorie kategorie, int nummer){
-		Zimmer zimmer = hotel.getZimmer(nummer);
+	public void setZimmerKategorie(String hotelName, String katName, int zimmerNummer){
+		Hotel hotel = dao.getHotelByName(hotelName);
+		Kategorie kategorie = hotel.getKategorie(katName);
+		Zimmer zimmer = hotel.getZimmer(zimmerNummer);
+		
+		//aus alter Kategorie entfernen
+		for (Kategorie k : hotel.getKategorien()) {
+			if (k.hasZimmer(zimmerNummer)) {
+				k.removeZimmer(zimmerNummer);
+			}
+		}
+		
+		//zu neuer Kategorie hinzufuegen
 		kategorie.addZimmer(zimmer);
 		
+		dao.saveHotel(hotel);
 	}
 	
 	public DAO getDAO() {
