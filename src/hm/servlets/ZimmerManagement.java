@@ -52,11 +52,11 @@ public class ZimmerManagement extends HttpServlet {
 	        case "create":
 	        	createZimmer(hotelName, zimmerNummer);
 	        	setZimmerKategorie(hotelName, katName, zimmerNummer);
-	        	response.sendRedirect("zimmerverwalten.jsp");
+	        	response.sendRedirect("zimmerverwalten.jsp?hotel=" + hotelName);
 	        	break;
 	        case "delete":
 	        	deleteZimmer(hotelName, zimmerNummer);
-	        	response.sendRedirect("zimmerverwalten.jsp");
+	        	response.sendRedirect("zimmerverwalten.jsp?hotel=" + hotelName);
 	        	break;
 	        case "set":
 	        	setZimmerKategorie(hotelName, katName, zimmerNummer);
