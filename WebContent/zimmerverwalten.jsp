@@ -66,7 +66,14 @@
 
 				</select>
 			</td>
-			<td><input type="button" value="-"></td>
+			<td>
+				<form action="ZimmerManagement" method="get">
+					<input type="hidden" name="action" value="delete">
+					<input type="hidden" name="hotel" value="CrazySharkyFish">
+					<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
+					<input type="submit" value="-">
+				</form>
+			</td>
 		</tr>
 		<% } %>
 
