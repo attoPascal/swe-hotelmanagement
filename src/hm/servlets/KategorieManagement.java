@@ -84,11 +84,11 @@ public class KategorieManagement extends HttpServlet {
 	/**
 	 * Erlaubt das Veraendern eines Kategorie-Objekts
 	 * 
-	 * @param hotel
-	 * @param name
-	 * @param newName
-	 * @param preis
-	 * @param ausstattung
+	 * @param hotel Hotel, in dem die Kategorie vorkommt
+	 * @param name bestehender Name der Kategorie
+	 * @param newName neuer Name der kategorie
+	 * @param preis Preis der Kategorie in Cent pro Nacht
+	 * @param ausstattung Beschreibung der Ausstattung von Zimmern der Kategorie; als String gespeichert
 	 */
 	public void editCategory(Hotel hotel, String name, String newName,
 			int preis, String ausstattung) {
@@ -104,10 +104,10 @@ public class KategorieManagement extends HttpServlet {
 	/**
 	 * Erstellt ein Kategorie-Objekt
 	 * 
-	 * @param hotel
-	 * @param name
-	 * @param ausstattung
-	 * @param preis
+	 * @param hotel hotel, dem die Kategorie hinzugefuegt wird
+	 * @param name Name der neuen Kategorie
+	 * @param ausstattung Beschreibung der Ausstattung
+	 * @param preis Preis der Kategorie in Cent pro Nacht
 	 */
 	public void createCategority(Hotel hotel, String name, String ausstattung,
 			int preis) {
@@ -120,8 +120,8 @@ public class KategorieManagement extends HttpServlet {
 	/**
 	 * Entfernt ein Kategorie-Objekt
 	 * 
-	 * @param hotel
-	 * @param name
+	 * @param hotel Hotel, aus dem die Kategorie entfernt werden soll
+	 * @param name Name der Kategorie, die entfernt werden soll
 	 */
 	public void removeKategorie(Hotel hotel, String name) {
 		Kategorie kat = hotel.getKategorie(name);
