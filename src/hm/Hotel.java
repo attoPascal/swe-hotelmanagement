@@ -49,7 +49,7 @@ public class Hotel {
 	public ArrayList<Zimmer> getZimmerList() {
 		return zimmerList;
 	}
-
+	
 	public void setZimmer(ArrayList<Zimmer> zimmerList) {
 		this.zimmerList = zimmerList;
 	}
@@ -78,6 +78,10 @@ public class Hotel {
 		}
 
 		return null;
+	}
+	
+	public void setKategorie(Kategorie kat) {
+		// TODO
 	}
 
 	public Zimmer getZimmer(int nummer) {

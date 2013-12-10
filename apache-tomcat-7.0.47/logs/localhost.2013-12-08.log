@@ -1,0 +1,20 @@
+Dec 08, 2013 10:27:23 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextInitialized()
+Dec 08, 2013 10:27:23 PM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextInitialized()
+Dec 08, 2013 10:27:23 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@196a4632')
+Dec 08, 2013 10:27:31 PM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: sessionDestroyed('33B3B3417794FDE6F4D7323A984A8ABF')
+Dec 08, 2013 10:27:42 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.runtime.JspApplicationContextImpl', 'org.apache.jasper.runtime.JspApplicationContextImpl@5910c667')
+Dec 08, 2013 10:27:42 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: attributeAdded('org.apache.jasper.compiler.ELInterpreter', 'org.apache.jasper.compiler.ELInterpreterFactory$DefaultELInterpreter@2d0cadbc')
+Dec 08, 2013 10:27:42 PM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: sessionCreated('AC5DC556F7728CD2F15DBEA4FC570D97')
+Dec 08, 2013 10:28:25 PM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: attributeAdded('AC5DC556F7728CD2F15DBEA4FC570D97', 'javax.servlet.jsp.jstl.fmt.request.charset', 'UTF-8')
+Dec 08, 2013 10:30:05 PM org.apache.catalina.core.ApplicationContext log
+INFO: SessionListener: contextDestroyed()
+Dec 08, 2013 10:30:05 PM org.apache.catalina.core.ApplicationContext log
+INFO: ContextListener: contextDestroyed()
