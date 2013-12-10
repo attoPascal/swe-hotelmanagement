@@ -3,9 +3,12 @@ package hm.servlets;
 import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
+import hm.dao.DAO;
+import hm.dao.SerializedDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +28,6 @@ public class ZimmerManagement extends HttpServlet {
      */
     public ZimmerManagement() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -55,7 +57,19 @@ public class ZimmerManagement extends HttpServlet {
 	        	out.write("neue Kategorie: '" + kategorie + "'");
 	        }
         } else {
-        	out.write("No action. Nothing to do.");
+        	out.write("<p>No action. Nothing to do. Will display test data instead.</p>");
+        	
+        	DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
+        	
+        	ArrayList<Hotel> list = dao.getHotelList();
+        	out.write("Number of Hotels: " + list.size() + "<br>");
+        	
+        	for (Hotel h : list) {
+        		out.write("<div>");
+        		out.write(h.toString());
+        		out.write("</div>");
+        	}
+
         }
 	}
 	
@@ -76,4 +90,8 @@ public class ZimmerManagement extends HttpServlet {
 		kategorie.addZimmer(zimmer);
 		
 	}
+	
+	/*public Hotel getHotelByName(String name) {
+		return dao.getHotelByName(name);
+	}*/
 }
