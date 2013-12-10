@@ -42,7 +42,7 @@ public class BuchungsManagement extends HttpServlet {
     	
     	Hotel hotel = dao.getHotelByName("CrazySharkyFish");
     	Calendar c = new GregorianCalendar ();
-    	c.set(day, year, month-1);
+    	c.set(day, year, month-1, 0, 0);
     	int zimmernummer = neueBuchung(hotel.getKategorie(name), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
 		
     	PrintWriter out = response.getWriter();
@@ -53,19 +53,13 @@ public class BuchungsManagement extends HttpServlet {
 		dao.saveHotel(hotel);
 	}
 
-	String createHotel(String name) {
-
-		DAO dao = new SerializedDAO("data.ser");
-    	
-    	Hotel hotel = dao.getHotelByName("CrazySharkyFish");
-
-		return hotel.toString();
-
-	}
 
 	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
 
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
+		
+		if (zimmer == null)System.out.println("ohh nein zimmer ist null!!!");
+		
 		zimmer.addBuchung(kategorie, aufenthalt);
 		
 		return zimmer.getNummer();
