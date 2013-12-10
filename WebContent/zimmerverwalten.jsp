@@ -1,4 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="hm.Hotel" %>
+<%@ page import="hm.Zimmer" %>
+<%@ page import="hm.Kategorie" %>
+<%@ page import="hm.servlets.ZimmerManagement" %>
+<%@ page import="hm.dao.DAO" %>
+
+<%
+	ZimmerManagement zm = new ZimmerManagement();
+	Hotel hotel = zm.getDAO().getHotelByName("CrazySharkyFish");
+	ArrayList<Zimmer> zList = hotel.getZimmerList();
+	ArrayList<Kategorie> kList = hotel.getKategorien();
+%>
+
 <!DOCTYPE html>
 
 <html>
@@ -32,16 +46,15 @@
 			<th></th>
 		</tr>
 
-		<% for (int i = 1; i <= 10; i++) { %>
+		<% for (Zimmer z : zList) { %>
 		<tr>
-			<td><%=i%></td>
+			<td><%= z.getNummer() %></td>
 			<td>
-				<select size="1" data-zimmer="<%=i%>">
-					<option value="be">Budget Einzel</option>
-					<option value="bd">Budget Doppel</option>
-					<option value="ar">Apartment Romance</option>
-					<option value="af">Apartment Family</option>
-					<option value="ps">Presidential Suite</option>
+				<select size="1" data-zimmer="<%= z.getNummer() %>">
+					<% for (Kategorie k : kList) { %>
+					<option value="<%= k.getName() %>"><%= k.getName() %></option>
+					<% } %>
+
 				</select>
 			</td>
 			<td><input type="button" value="-"></td>
