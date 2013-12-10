@@ -81,6 +81,15 @@ public class KategorieManagement extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Erlaubt das Veraendern eines Kategorie-Objekts
+	 * 
+	 * @param hotel
+	 * @param name
+	 * @param newName
+	 * @param preis
+	 * @param ausstattung
+	 */
 	public void editCategory(Hotel hotel, String name, String newName,
 			int preis, String ausstattung) {
 
@@ -92,6 +101,14 @@ public class KategorieManagement extends HttpServlet {
 		//hotel.setKategorie(kat);
 	}
 
+	/**
+	 * Erstellt ein Kategorie-Objekt
+	 * 
+	 * @param hotel
+	 * @param name
+	 * @param ausstattung
+	 * @param preis
+	 */
 	public void createCategority(Hotel hotel, String name, String ausstattung,
 			int preis) {
 		Kategorie kat = new Kategorie(name, preis, ausstattung);
@@ -100,6 +117,12 @@ public class KategorieManagement extends HttpServlet {
 		management.saveHotel(hotel);
 	}
 
+	/**
+	 * Entfernt ein Kategorie-Objekt
+	 * 
+	 * @param hotel
+	 * @param name
+	 */
 	public void removeKategorie(Hotel hotel, String name) {
 		Kategorie kat = hotel.getKategorie(name);
 		hotel.removeKategorie(kat);
