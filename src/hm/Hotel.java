@@ -80,9 +80,6 @@ public class Hotel {
 		return null;
 	}
 	
-	public void setKategorie(Kategorie kat) {
-		// TODO
-	}
 
 	public Zimmer getZimmer(int nummer) {
 
@@ -91,6 +88,26 @@ public class Hotel {
 				return zimmer;
 		}
 		return null;
+	}
+	
+	public String toString(){
+		
+		String s;
+		
+		s = "Hotelname: " + getName();
+		
+		ArrayList<Kategorie> kategorien = getKategorien();
+		
+		s = "\nKategorien: ";
+		
+		for (Kategorie kategorie : kategorien){
+			
+			s += "\nName: " + kategorie.getName() + "\n" + "Preis: "+kategorie.getPreis() + "Ausstattung: "+kategorie.getAusstattung();
+			
+		}
+		
+		return s;
+			
 	}
 
 }
