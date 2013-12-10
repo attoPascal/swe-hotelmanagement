@@ -38,13 +38,14 @@
 						action: "set",
 						zimmer: $(this).attr("data-zimmer"),
 						kategorie: $(this).val(),
-						hotel: "CrazySharkyFish"
+						hotel: $("select.set-hotel").val()
 					},
 					function(response) {
 						$("textarea").text(response);
 					}
 				);
 			});
+			
 			$("select.set-hotel").change(function() {
 				$("#managerooms").load(
 					"zimmerverwalten.jsp?hotel=" + $(this).val() +" #managerooms");
@@ -58,8 +59,10 @@
 	
 	<p>Hotel ausw&auml;hlen:
 		<select size="1" name="hotel" class="set-hotel">
-			<% for (Hotel h : hList) { %>
-			<option value="<%= h.getName() %>"><%= h.getName() %></option>
+			<% for (Hotel h : hList) { 
+				String selected = (h.getName().equals(hotel.getName())) ? "selected=\"selected\"" : "";
+			%>
+			<option value="<%= h.getName() %>"<%= selected %>><%= h.getName() %></option>
 			<% } %>
 		</select>
 	</p>
@@ -92,7 +95,7 @@
 				<td>
 					<form action="ZimmerManagement" method="get">
 						<input type="hidden" name="action" value="delete">
-						<input type="hidden" name="hotel" value="CrazySharkyFish">
+						<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
 						<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
 						<input type="submit" value="-">
 					</form>
@@ -107,7 +110,7 @@
 				<tr>
 					<td>
 						<input type="hidden" name="action" value="create">
-						<input type="hidden" name="hotel" value="CrazySharkyFish">
+						<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
 						<input type="text" name="zimmer" size="4">
 					</td>
 					<td>
