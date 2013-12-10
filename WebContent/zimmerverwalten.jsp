@@ -31,7 +31,7 @@
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("select.set-kategorie").change(function() {
+			$(document).on("change", "select.set-kategorie", function() {
 				$.get(
 					"ZimmerManagement",
 					{
