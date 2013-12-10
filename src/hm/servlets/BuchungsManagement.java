@@ -24,7 +24,7 @@ import java.util.GregorianCalendar;
 
 public class BuchungsManagement extends HttpServlet {
 	/**
-	 * 
+	 * Servlet implementation class BuchungsManagement
 	 */
 	private static final long serialVersionUID = 4L;
 
@@ -64,7 +64,13 @@ public class BuchungsManagement extends HttpServlet {
 
 	}
 
-
+	/**
+	 * Erstellt eine neue Buchung
+	 * 
+	 * @param kategorie
+	 * @param aufenthalt
+	 * @return
+	 */
 	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
 
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);

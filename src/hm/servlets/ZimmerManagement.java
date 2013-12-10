@@ -80,12 +80,24 @@ public class ZimmerManagement extends HttpServlet {
         }
 	}
 	
+	/**
+	 * Erstellt ein Zimmer-Objekt
+	 * 
+	 * @param hotelName
+	 * @param nummer
+	 */
 	public void createZimmer(String hotelName, int nummer){
 		Hotel hotel = dao.getHotelByName(hotelName);
 		hotel.addZimmer(new Zimmer(nummer));
 		dao.saveHotel(hotel);
 	}
 	
+	/**
+	 * Entfernt ein Zimmer-Objekt
+	 * 
+	 * @param hotelName
+	 * @param nummer
+	 */
 	public void deleteZimmer(String hotelName, int nummer){
 		Hotel hotel = dao.getHotelByName(hotelName);
 		Zimmer zimmer = hotel.getZimmer(nummer);
@@ -93,6 +105,13 @@ public class ZimmerManagement extends HttpServlet {
 		dao.saveHotel(hotel);
 	}
 	
+	/**
+	 * Erlaubt das Zuordnen eines bestimmten Zimmers zu einer Kategorie
+	 * 
+	 * @param hotelName
+	 * @param katName
+	 * @param zimmerNummer
+	 */
 	public void setZimmerKategorie(String hotelName, String katName, int zimmerNummer){
 		Hotel hotel = dao.getHotelByName(hotelName);
 		Kategorie kategorie = hotel.getKategorie(katName);
