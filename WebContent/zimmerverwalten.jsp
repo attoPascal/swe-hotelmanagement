@@ -7,9 +7,16 @@
 <%@ page import="hm.dao.DAO" %>
 
 <%
+	int hNummer;
+	if (!request.getParameter("hotel").equals("")) {
+		hNummer = Integer.parseInt(request.getParameter("hotel"));
+	} else {
+		hNummer = 0;
+	}
+
 	ZimmerManagement zm = new ZimmerManagement();
 	ArrayList<Hotel> hList = zm.getDAO().getHotelList();
-	Hotel hotel = hList.get(0);
+	Hotel hotel = hList.get(hNummer);
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
 	ArrayList<Kategorie> kList = hotel.getKategorien();
 %>
@@ -87,34 +94,31 @@
 			</td>
 		</tr>
 		<% } %>
-		</table>
-		
-		
-		<form action="ZimmerManagement" method="get">
-			<table>
-				<tr>
-					<td>
-						<input type="hidden" name="action" value="create">
-						<input type="hidden" name="hotel" value="CrazySharkyFish">
-						<input type="text" name="zimmer" size="4">
-					</td>
-					<td>
-						<select name="kategorie" size="1">
-							<option>- Kategorie -</option>
-							<% for (Kategorie k : kList) { %>
-							<option value="<%= k.getName() %>"><%= k.getName() %></option>
-							<% } %>
-						</select>
-					</td>
-					<td>
-						<input type="submit" value="+">
-					</td>
-				</tr>
-			</table>
-		</form>
-
+	</table>
 	
-
+	
+	<form action="ZimmerManagement" method="get">
+		<table>
+			<tr>
+				<td>
+					<input type="hidden" name="action" value="create">
+					<input type="hidden" name="hotel" value="CrazySharkyFish">
+					<input type="text" name="zimmer" size="4">
+				</td>
+				<td>
+					<select name="kategorie" size="1">
+						<option>- Kategorie -</option>
+						<% for (Kategorie k : kList) { %>
+						<option value="<%= k.getName() %>"><%= k.getName() %></option>
+						<% } %>
+					</select>
+				</td>
+				<td>
+					<input type="submit" value="+">
+				</td>
+			</tr>
+		</table>
+	</form>
 </body>
 
 </html>
