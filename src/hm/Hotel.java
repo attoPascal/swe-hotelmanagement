@@ -76,6 +76,10 @@ public class Hotel implements Serializable {
 		kategorien.remove(kategorie);
 	}
 
+	/**
+	 * @param name gesuchte Kategorie
+	 * @return gibt gesuchte kategorie des Hotels zurueck; Null wenn es nicht gefunden wird.
+	 */
 	public Kategorie getKategorie(String name) {
 
 		for (Kategorie kategorie : kategorien) {
