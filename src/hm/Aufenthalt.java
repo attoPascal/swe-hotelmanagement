@@ -1,9 +1,14 @@
 package hm;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Aufenthalt {
+public class Aufenthalt implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date anfang;
 	private Date ende;
 

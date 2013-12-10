@@ -1,8 +1,14 @@
 package hm;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Zimmer {
+public class Zimmer implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Zimmernummer
@@ -10,7 +16,7 @@ public class Zimmer {
 	private int nummer;
 
 	/**
-	 * Liste mit allen Buchungen für dieses Zimmer
+	 * Liste mit allen Buchungen fuer dieses Zimmer
 	 */
 	ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 	

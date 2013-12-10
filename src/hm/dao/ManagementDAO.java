@@ -18,7 +18,7 @@ public class ManagementDAO implements DAO {
 		
 	}
 	
-	public ArrayList<Hotel> getHotellist() {
+	public ArrayList<Hotel> getHotelList() {
 		return null;
 	}
 	

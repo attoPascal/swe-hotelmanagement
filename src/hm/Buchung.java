@@ -1,10 +1,15 @@
 package hm;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Buchung {
+public class Buchung implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * zu buchendes Zimmer
 	 */
