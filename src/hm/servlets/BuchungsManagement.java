@@ -31,13 +31,7 @@ public class BuchungsManagement extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// reading the user input
-		
-		Enumeration<String> e = request.getParameterNames();
-		
-		
-		while (e.hasMoreElements()){
-		System.out.println(e.nextElement());}
-		
+				
 		String name = request.getParameter("select");
 		
 		int day = Integer.parseInt(request.getParameter("day"));
@@ -53,7 +47,10 @@ public class BuchungsManagement extends HttpServlet {
 		
     	PrintWriter out = response.getWriter();
 		out.println("Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + zimmernummer);
-		out.println(createHotel("name"));
+		
+		out.println(hotel.getKategorie(name).toString());
+			
+		dao.saveHotel(hotel);
 	}
 
 	String createHotel(String name) {
@@ -74,17 +71,6 @@ public class BuchungsManagement extends HttpServlet {
 		return zimmer.getNummer();
 	}
 
-	public static boolean isBooked(Zimmer zimmer, Aufenthalt aufenthalt) {
 
-		for (Buchung buchung : zimmer.getBuchungen()) {
-
-			if (buchung.getAufenthalt().overlaps(aufenthalt))
-				return true;
-
-		}
-
-		return false;
-
-	}
 
 }
