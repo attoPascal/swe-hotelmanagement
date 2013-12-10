@@ -8,7 +8,6 @@ import hm.dao.SerializedDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ZimmerManagement
+ * Servlet. Ermoeglicht das Erstellen und Loeschen von Zimmer-Objekten sowie das Zuordnen von Zimmern zu einer Kategorie
  */
 @WebServlet("/ZimmerManagement")
 public class ZimmerManagement extends HttpServlet {
@@ -26,6 +25,7 @@ public class ZimmerManagement extends HttpServlet {
 	DAO dao;
        
     /**
+     * Konstruiert das ZimmerManagement-Servlet und Initialisiert DAO
      * @see HttpServlet#HttpServlet()
      */
     public ZimmerManagement() {
@@ -67,16 +67,7 @@ public class ZimmerManagement extends HttpServlet {
 	        }
 	        
         } else {
-        	out.write("<p>No action. Nothing to do. Will display test data instead.</p>");
-        	
-        	ArrayList<Hotel> list = dao.getHotelList();
-        	out.write("Number of Hotels: " + list.size() + "<br>");
-        	
-        	for (Hotel h : list) {
-        		out.write("<div>");
-        		out.write(h.toString());
-        		out.write("</div>");
-        	}
+        	out.write("Keine Aktion");
         }
 	}
 	
@@ -130,6 +121,10 @@ public class ZimmerManagement extends HttpServlet {
 		dao.saveHotel(hotel);
 	}
 	
+	/**
+	 * Gibt ein DAO-Objekt zur konsistenten Speicherung von Hoteldaten zurueck
+	 * @return DAO (Implementierung: Serialisiert)
+	 */
 	public DAO getDAO() {
 		return dao;
 	}
