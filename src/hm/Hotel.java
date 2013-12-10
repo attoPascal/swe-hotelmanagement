@@ -115,17 +115,6 @@ public class Hotel implements Serializable {
 			s.append("</div>");
 		}
 
-		ArrayList<Kategorie> kategorien = getKategorien();
-		/*
-		s += "<br>" + "Kategorien: " + "<br />";
-		
-		for (Kategorie kategorie : kategorien){
-			
-			s += kategorie.toString();
-
-		}*/
-		
-
 		return s.toString();	
 
 	}
