@@ -38,7 +38,7 @@ public class Kategorie implements Serializable {
 	}
 
 	/**
-	 * @return preis
+	 * @return preis gibt Preis der Kategorie zurueck (pro Nacht in Cent)
 	 */
 	public int getPreis() {
 		return preis;
@@ -77,19 +77,36 @@ public class Kategorie implements Serializable {
 	}
 
 	// TODO void???
+	/**
+	 * @param zimmer Zimmer-objekt, das der Kategorie hinzugefuegt wird
+	 */
 	public void addZimmer(Zimmer zimmer) {
 		zimmerMap.put(zimmer.getNummer(), zimmer);
 	}
 
+	/**
+	 * Ueberprueft, ob eine Kategorie ueber ein Zimmer verfuegt
+	 * @param nummer Zur identifizierung des Zimmers
+	 * @return true, wenn die zimmerMap das Zimmer enthaelt; sonst false
+	 */
 	public boolean hasZimmer(int nummer) {
 		return zimmerMap.containsKey(nummer) ? true : false;
 	}
 
 	// TODO void?
+	/**
+	 * Entfernt Zimmer aus Kategorie
+	 * @param nummer Zur identifizierung des Zimmers
+	 */
 	public void removeZimmer(int nummer) {
 		zimmerMap.remove(nummer);
 	}
 
+	/**
+	 * Sucht ein Zimmer, das zu einem gegebenen Zeitraum(Aufenthalt) nicht besetzt ist(mit getBuchungen())
+	 * @param aufenthalt Zeitraum der Buchung fuer das Zimmer
+	 * @return
+	 */
 	public Zimmer getZimmer(Aufenthalt aufenthalt) {
 		Zimmer zimmer;
 		Iterator<Entry<Integer, Zimmer>> it = zimmerMap.entrySet().iterator();
@@ -113,6 +130,9 @@ public class Kategorie implements Serializable {
 		return null;
 	}
 
+	/**
+	 * gibt in einem String die Kategorie mit Name, Preis und Ausstattung zurueck
+	 */
 	public String toString(){
 		
 		String s = "<br>" + "Name: " + this.getName() + "<br>"+ "Preis: " + this.getPreis() + "<br>" + "Ausstattung: "+this.getAusstattung() ;
