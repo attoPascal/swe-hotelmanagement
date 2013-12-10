@@ -2,12 +2,18 @@ package hm;
 
 import hm.servlets.BuchungsManagement;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class Kategorie {
+public class Kategorie implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Name der Kategorie
