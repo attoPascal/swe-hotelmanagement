@@ -79,6 +79,10 @@ public class Hotel {
 
 		return null;
 	}
+	
+	public void setKategorie(Kategorie kat) {
+		// TODO
+	}
 
 	public Zimmer getZimmer(int nummer) {
 

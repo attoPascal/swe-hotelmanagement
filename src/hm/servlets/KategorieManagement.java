@@ -2,9 +2,11 @@ package hm.servlets;
 
 import hm.Hotel;
 import hm.Kategorie;
+import hm.ManagementDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,66 +19,92 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/KategorieManagement")
 public class KategorieManagement extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-    /**
-     * Default constructor. 
-     */
-    public KategorieManagement() {
-        // TODO Auto-generated constructor stub
-    }
+	private static final long serialVersionUID = 2L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * "Model"-Klasse
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");
-		response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        
-        if (action != null) {
-	        switch (action) {
-	        case "create":
-	        	break;
-	        case "delete":
-	        	break;
-	        case "edit":
-	        	String newName = request.getParameter("newname");
-	        	int betten = Integer.parseInt(request.getParameter("betten"));
-	        	int preis = Integer.parseInt(request.getParameter("preis"));
-	        	String ausstattung = request.getParameter("ausstattung");
-	        	/*
-	        	 * Irgendwo muss ein Hotel-Liste gespeichert sein, um für den
-	        	 * String "hotel" ein Hotelobjekt zu bekommen
-	        	 */
-	        	String hotel = request.getParameter("hotel");
-	        	
-	        	//editCategory(hotel, name, newName, preis);
-	        	
-	        	out.write("Kategorie bearbeitet\n");
-	        	out.write("Für Hotel: " + hotel + "\n");
-	        	out.write("Neuer Name: " + newName + "\n");
-	        	out.write("Betten: " + betten + "\n");
-	        	out.write("Preis " + preis + "\n");
-	        	out.write("Ausstattung: " + ausstattung);
-	        }
-        } else {
-        	out.write("No action. Nothing to do.");
-        }
-	}
-	
-	public void editCategority(Hotel hotel, String name, String newName, int preis){
-		Kategorie kategorie = hotel.getKategorie(name);
-		kategorie.setName(newName);
-		kategorie.setPreis(preis);
+	private ManagementDAO management = new ManagementDAO();
+
+	/**
+	 * Default constructor.
+	 */
+	public KategorieManagement() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void createCategority(Hotel hotel, String name, int preis){
-		hotel.addKategorie(new Kategorie (name, preis));
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		String action = request.getParameter("action");
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+
+		String name = request.getParameter("name");
+		int preis = Integer.parseInt(request.getParameter("preis"));
+		String ausstattung = request.getParameter("ausstattung");
+		/**
+		 * Hotel-Objekt aus dem Speicher holen
+		 */
+		Hotel hotel = management.getHotelByName(request.getParameter("hotel"));
+
+		if (action != null) {
+
+			if (action.equals("create")) {
+				this.createCategority(hotel, name, ausstattung, preis);
+
+				out.write("Neue Kategorie erstellt\n");
+
+			} else if (action.equals("delete")) {
+				this.removeKategorie(hotel, name);
+
+				out.write("Kategorie erfolgreich gelöscht\n");
+
+			} else if (action.equals("edit")) {
+				String newName = request.getParameter("newname");
+
+				this.editCategory(hotel, name, newName, preis, ausstattung);
+
+				out.write("Kategorie bearbeitet\n");
+				out.write("Für Hotel: " + hotel + "\n");
+				out.write("Neuer Name: " + newName + "\n");
+				out.write("Preis " + preis + "\n");
+				out.write("Ausstattung: " + ausstattung);
+			}
+
+		} else {
+			out.write("No action. Nothing to do.");
+		}
 	}
-	
-	public void removeKategorie(Hotel hotel, String name){
-		Kategorie kategorie = hotel.getKategorie(name);
-		hotel.removeKategorie(kategorie);
+
+	public void editCategory(Hotel hotel, String name, String newName,
+			int preis, String ausstattung) {
+
+		Kategorie kat = hotel.getKategorie(name);
+		kat.setName(newName);
+		kat.setPreis(preis);
+		kat.setAusstattung(ausstattung);
+
+		hotel.setKategorie(kat);
+	}
+
+	public void createCategority(Hotel hotel, String name, String ausstattung,
+			int preis) {
+		Kategorie kat = new Kategorie(name, preis, ausstattung);
+
+		hotel.addKategorie(kat);
+		management.saveKategorie(kat);
+		management.saveHotel(hotel);
+	}
+
+	public void removeKategorie(Hotel hotel, String name) {
+		Kategorie kat = hotel.getKategorie(name);
+		hotel.removeKategorie(kat);
+
+		management.saveHotel(hotel);
 	}
 }
