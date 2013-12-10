@@ -53,5 +53,18 @@ public class Zimmer implements Serializable {
 		buchungen.add(new Buchung(kategorie, aufenthalt));
 
 	}
+	
+	public static boolean isBooked(Zimmer zimmer, Aufenthalt aufenthalt) {
+
+		for (Buchung buchung : zimmer.getBuchungen()) {
+
+			if (buchung.getAufenthalt().overlaps(aufenthalt))
+				return true;
+
+		}
+
+		return false;
+
+	}
 
 }

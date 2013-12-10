@@ -3,6 +3,7 @@ package hm;
 import hm.servlets.BuchungsManagement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -99,8 +100,16 @@ public class Kategorie implements Serializable {
 			zimmer = (Zimmer) zimmers.getValue();
 			it.remove();
 			
+			ArrayList<Buchung> buchungen = zimmer.getBuchungen();
+			
+			for(Buchung buchung : buchungen){
+				
+				buchung.getAufenthalt().toString();
+				
+			}
+			
 			/* wirklich?? */
-			if (!BuchungsManagement.isBooked(zimmer, aufenthalt)) {
+			if (!Zimmer.isBooked(zimmer, aufenthalt)) {
 				return zimmer;
 			}
 		}
@@ -108,4 +117,12 @@ public class Kategorie implements Serializable {
 		return null;
 	}
 
+	public String toString(){
+		
+		String s = "<br>" + "Name: " + this.getName() + "<br>"+ "Preis: " + this.getPreis() + "<br>" + "Ausstattung: "+this.getAusstattung() ;
+
+		return s;
+	}
+
 }
+

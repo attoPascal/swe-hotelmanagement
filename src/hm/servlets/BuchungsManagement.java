@@ -5,6 +5,8 @@ import hm.Buchung;
 import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
+import hm.dao.DAO;
+import hm.dao.SerializedDAO;
 
 import java.io.IOException;
 
@@ -14,6 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.GregorianCalendar;
 
 public class BuchungsManagement extends HttpServlet {
 	/**
@@ -24,45 +31,46 @@ public class BuchungsManagement extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// reading the user input
-		String name = request.getParameter("name");
-		PrintWriter out = response.getWriter();
-		out.println(createHotel(name));
+				
+		String name = request.getParameter("select");
+		
+		int day = Integer.parseInt(request.getParameter("day"));
+		int month = Integer.parseInt(request.getParameter("months"));
+		int year = Integer.parseInt(request.getParameter("year"));
+		
+		DAO dao = new SerializedDAO("data.ser");
+    	
+    	Hotel hotel = dao.getHotelByName("CrazySharkyFish");
+    	Calendar c = new GregorianCalendar ();
+    	c.set(day, year, month-1);
+    	int zimmernummer = neueBuchung(hotel.getKategorie(name), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+		
+    	PrintWriter out = response.getWriter();
+		out.println("Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + zimmernummer);
+		
+		out.println(hotel.getKategorie(name).toString());
+			
+		dao.saveHotel(hotel);
 	}
 
 	String createHotel(String name) {
 
-		Hotel hotel = new Hotel(name);
-
-		hotel.addZimmer(new Zimmer(5));
-
-		hotel.addKategorie(new Kategorie("Suite", 50, "Fernseher, Waschbecken"));
-		
-		hotel.addKategorie(new Kategorie("Absteige", 50, "Eimer zum reinkacken"));
-
-
-		hotel.getKategorie("Suite").addZimmer(hotel.getZimmer(5));
+		DAO dao = new SerializedDAO("data.ser");
+    	
+    	Hotel hotel = dao.getHotelByName("CrazySharkyFish");
 
 		return hotel.toString();
 
 	}
 
-	public void neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
+	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
 
-		kategorie.getZimmer(aufenthalt).addBuchung(kategorie, aufenthalt);
-
+		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
+		zimmer.addBuchung(kategorie, aufenthalt);
+		
+		return zimmer.getNummer();
 	}
 
-	public static boolean isBooked(Zimmer zimmer, Aufenthalt aufenthalt) {
 
-		for (Buchung buchung : zimmer.getBuchungen()) {
-
-			if (buchung.getAufenthalt().overlaps(aufenthalt))
-				return true;
-
-		}
-
-		return false;
-
-	}
 
 }
