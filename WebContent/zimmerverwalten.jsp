@@ -1,64 +1,133 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="hm.Hotel" %>
+<%@ page import="hm.Zimmer" %>
 <%@ page import="hm.Kategorie" %>
-<%@ page import="hm.servlets.KategorieManagement" %>
+<%@ page import="hm.servlets.ZimmerManagement" %>
 <%@ page import="hm.dao.DAO" %>
 
+<%	
+	ZimmerManagement zm = new ZimmerManagement();
+	ArrayList<Hotel> hList = zm.getDAO().getHotelList();
+	
+	String hotelName = request.getParameter("hotel");
+	Hotel hotel;
+	if (hotelName != null) {
+		hotel = zm.getDAO().getHotelByName(hotelName);
+	} else {
+		hotel = hList.get(0);
+	}
+
+	ArrayList<Zimmer> zList = hotel.getZimmerList();
+	ArrayList<Kategorie> kList = hotel.getKategorien();
+%>
 
 <!DOCTYPE html>
 
 <html>
-
 <head>
-  <title>UI Kategorien verwalten</title>
-  <meta name="description" content="Little Sharky Fish - SWE Projekt Hotelmanagement">
-  <meta charset="UTF-8">
+	<title>Zimmer verwalten</title>
+	<meta charset="US-ASCII">
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("select.set-kategorie").change(function() {
+				$.get(
+					"ZimmerManagement",
+					{
+						action: "set",
+						zimmer: $(this).attr("data-zimmer"),
+						kategorie: $(this).val(),
+						hotel: $("select.set-hotel").val()
+					},
+					function(response) {
+						$("textarea").text(response);
+					}
+				);
+			});
+			
+			$("select.set-hotel").change(function() {
+				$("#managerooms").load(
+					"zimmerverwalten.jsp?hotel=" + $(this).val() +" #managerooms");
+			});
+		});
+	</script>
 </head>
 
 <body>
-
-	<h1>Kategorien verwalten</h1>
-
-	<p>Kategorie:<br>
-  		<select>
-    		<option>Presidential Suite</option>
-    		<option>Economy Room </option>
-  		</select>
+	<h1>Zimmer verwalten</h1>
+	
+	<p>Hotel ausw&auml;hlen:
+		<select size="1" name="hotel" class="set-hotel">
+			<% for (Hotel h : hList) { 
+				String selected = (h.getName().equals(hotel.getName())) ? "selected=\"selected\"" : "";
+			%>
+			<option value="<%= h.getName() %>"<%= selected %>><%= h.getName() %></option>
+			<% } %>
+		</select>
 	</p>
+
+	<textarea rows="1" cols="20" id="response"></textarea>
 	
-	<form action="http://localhost:8080/LittleSharkyFish/KategorieManagement" method="get">
-	
+	<div id="managerooms">
 		<table>
 			<tr>
-    			<td>Hotel:</td>
-    			<td><input type="text" name="hotel"></td>
-  			</tr>
-  			<tr>
-    			<td>Name:</td>
-    			<td><input type="text" name="name"></td>
-  			</tr>
-  			<tr>
-    			<td>Preis:</td>
-    			<td><input type="text" name="preis" value="50"></td>
-  			</tr>
-  			<tr>
-    			<td>Neuer Name:</td>
-    			<td><input type="text" name="newname"></td>
-  			</tr>
+				<th>Zimmer</th>
+				<th>Kategorie</th>
+				<th></th>
+			</tr>
+	
+			<% for (Zimmer z : zList) { %>
+			<tr>
+				<td>
+					<input type="text" value="<%= z.getNummer() %>" size="4" readonly="readonly">
+				</td>
+				<td>
+					<select size="1" class="set-kategorie" data-zimmer="<%= z.getNummer() %>">
+						<% for (Kategorie k : kList) {
+							String selected = (k.hasZimmer(z.getNummer())) ? "selected=\"selected\"" : "";
+						%>
+						<option value="<%= k.getName() %>"<%= selected %>><%= k.getName() %></option>
+						<% } %>
+	
+					</select>
+				</td>
+				<td>
+					<form action="ZimmerManagement" method="get">
+						<input type="hidden" name="action" value="delete">
+						<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
+						<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
+						<input type="submit" value="-">
+					</form>
+				</td>
+			</tr>
+			<% } %>
 		</table>
-
-		<div>Ausstattung:<br>
-  			<textarea cols="50" rows="5" name="ausstattung">Sauna, Bad mit Whirlpool, 3 TVs mit Flatscreens, Affenbutler</textarea>
-		</div>
-
-	
-    	<input type="submit" name="action" value="create">
-		<input type="submit" name="action" value="edit">
-		<input type="submit" name="action" value="delete">
-	
-	</form>
-
+		
+		
+		<form action="ZimmerManagement" method="get">
+			<table>
+				<tr>
+					<td>
+						<input type="hidden" name="action" value="create">
+						<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
+						<input type="text" name="zimmer" size="4">
+					</td>
+					<td>
+						<select name="kategorie" size="1">
+							<option>- Kategorie -</option>
+							<% for (Kategorie k : kList) { %>
+							<option value="<%= k.getName() %>"><%= k.getName() %></option>
+							<% } %>
+						</select>
+					</td>
+					<td>
+						<input type="submit" value="+">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 
 </html>
