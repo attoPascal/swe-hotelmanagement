@@ -68,8 +68,11 @@ public class BuchungsManagement extends HttpServlet {
 	 * Erstellt eine neue Buchung
 	 * 
 	 * @param kategorie
+	 * Kategorie des Zimmers
 	 * @param aufenthalt
-	 * @return
+	 * Zeitraum, der gebucht wurde
+	 * @return 
+	 * gibt die Nummer des Zimmers zurück, das gebucht wurde.
 	 */
 	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
 
