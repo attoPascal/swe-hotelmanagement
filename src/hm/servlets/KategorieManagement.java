@@ -79,6 +79,8 @@ public class KategorieManagement extends HttpServlet {
 		} else {
 			out.write("No action. Nothing to do.");
 		}
+		management.saveHotel(hotel);
+
 	}
 
 	/**
