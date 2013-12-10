@@ -1,0 +1,15 @@
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:27:31 +0100] "GET /examples/jsp HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:27:31 +0100] "GET /examples/jsp/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:27:31 +0100] "GET /examples/jsp/images/code.gif HTTP/1.1" 200 292
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:27:31 +0100] "GET /examples/jsp/images/execute.gif HTTP/1.1" 200 1242
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:27:31 +0100] "GET /examples/jsp/images/return.gif HTTP/1.1" 200 1231
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:27:42 +0100] "GET /examples/jsp/jsp2/el/functions.jsp?foo=JSP+2.0 HTTP/1.1" 200 1336
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:28:03 +0100] "GET /examples/jsp/jsp2/el/implicit-objects.jsp?foo=bar HTTP/1.1" 200 2681
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:28:15 +0100] "GET /examples/jsp/jsp2/el/composite.html HTTP/1.1" 200 1451
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:28:25 +0100] "GET /examples/jsp/jsp2/jspx/basic.jspx HTTP/1.1" 200 1922
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:28:34 +0100] "GET /examples/jsp/jsp2/jspx/basic.html HTTP/1.1" 200 1334
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:28:35 +0100] "GET /examples/jsp/jsp2/jspx/basic.jspx.html HTTP/1.1" 200 2275
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:28:51 +0100] "GET /examples/jsp/tagplugin/foreach.jsp HTTP/1.1" 200 727
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:28:56 +0100] "GET /examples/jsp/tagplugin/foreach.html HTTP/1.1" 200 1265
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:28:57 +0100] "GET /examples/jsp/tagplugin/foreach.jsp.html HTTP/1.1" 200 1829
+0:0:0:0:0:0:0:1 - - [08/Dec/2013:22:29:54 +0100] "GET /TomcatTest/Servlet1 HTTP/1.1" 404 989
