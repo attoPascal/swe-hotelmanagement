@@ -2,7 +2,7 @@ package hm.servlets;
 
 import hm.Hotel;
 import hm.Kategorie;
-import hm.dao.ManagementDAO;
+import hm.dao.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +23,7 @@ public class KategorieManagement extends HttpServlet {
 	/**
 	 * "Model"-Klasse
 	 */
-	private ManagementDAO management = new ManagementDAO();
+	private DAO management = new SerializedDAO("/home/philipp/Studium/2013_WS/SWE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/LittleSharkyFish/data.ser");
 
 	/**
 	 * Default constructor.
@@ -40,6 +40,7 @@ public class KategorieManagement extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String action = request.getParameter("action");
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
@@ -88,7 +89,7 @@ public class KategorieManagement extends HttpServlet {
 		kat.setPreis(preis);
 		kat.setAusstattung(ausstattung);
 
-		hotel.setKategorie(kat);
+		//hotel.setKategorie(kat);
 	}
 
 	public void createCategority(Hotel hotel, String name, String ausstattung,
@@ -96,7 +97,6 @@ public class KategorieManagement extends HttpServlet {
 		Kategorie kat = new Kategorie(name, preis, ausstattung);
 
 		hotel.addKategorie(kat);
-		management.saveKategorie(kat);
 		management.saveHotel(hotel);
 	}
 
