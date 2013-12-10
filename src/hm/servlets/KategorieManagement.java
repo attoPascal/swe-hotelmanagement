@@ -23,7 +23,7 @@ public class KategorieManagement extends HttpServlet {
 	/**
 	 * "Model"-Klasse
 	 */
-	private DAO management = new SerializedDAO("/home/philipp/Studium/2013_WS/SWE/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/LittleSharkyFish/data.ser");
+	private DAO management = new SerializedDAO("data.ser");
 
 	/**
 	 * Default constructor.
