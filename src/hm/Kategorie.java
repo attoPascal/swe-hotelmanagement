@@ -1,5 +1,7 @@
 package hm;
 
+import hm.servlets.BuchungsManagement;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -87,9 +89,11 @@ public class Kategorie {
 		Zimmer zimmer;
 		Iterator<Entry<Integer, Zimmer>> it = zimmerMap.entrySet().iterator();
 		while (it.hasNext()) {
-			Map.Entry zimmers = (Map.Entry) it.next();// TODO variable name
+			Map.Entry<Integer, Zimmer> zimmers = (Map.Entry<Integer, Zimmer>) it.next();// TODO variable name
 			zimmer = (Zimmer) zimmers.getValue();
 			it.remove();
+			
+			/* wirklich?? */
 			if (!BuchungsManagement.isBooked(zimmer, aufenthalt)) {
 				return zimmer;
 			}
