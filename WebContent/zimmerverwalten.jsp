@@ -8,7 +8,7 @@
 
 <%
 	int hNummer;
-	if (!request.getParameter("hotel").equals("")) {
+	if (request.getParameter("hotel") != null) {
 		hNummer = Integer.parseInt(request.getParameter("hotel"));
 	} else {
 		hNummer = 0;
