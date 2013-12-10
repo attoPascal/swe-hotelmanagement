@@ -44,6 +44,9 @@ public class Hotel implements Serializable {
 		this.zimmerList = zimmerList;
 	}
 
+	/**
+	 * @return gibt eine ArrayList(kategorien) mit allen im Hotel gespeicherten Kategorien zurueck
+	 */
 	public ArrayList<Kategorie> getKategorien() {
 		return kategorien;
 	}
@@ -52,6 +55,9 @@ public class Hotel implements Serializable {
 		this.kategorien = kategorien;
 	}
 
+	/**
+	 * @return gibt eine ArrayList(zimmerList) mit allen im Hotel gespeicherten Zimmern zurueck
+	 */
 	public ArrayList<Zimmer> getZimmerList() {
 		return zimmerList;
 	}
@@ -60,23 +66,38 @@ public class Hotel implements Serializable {
 		this.zimmerList = zimmerList;
 	}
 
+	/**
+	 * @param zimmer Wird dem Hotel-Objekt hinzugefuegt
+	 */
 	public void addZimmer(Zimmer zimmer) {
 		zimmerList.add(zimmer);
 	}
 
+	/**
+	 * @param zimmer Wird aus dem Hotel-Objekt entfernt
+	 */
 	public void removeZimmer(Zimmer zimmer) {
 		zimmerList.remove(zimmer);
 	}
 
+	/**
+	 * Fuegt eine Kategorie dem Hotel-Objekt hinzu
+	 * @param kategorie die hinzugefuegt wird
+	 */
 	public void addKategorie(Kategorie kategorie) {
 		kategorien.add(kategorie);
 	}
 
+	/**
+	 * Loescht eine Kategorie des Hotel-Objekts
+	 * @param kategorie gesuchte Kategorie
+	 */
 	public void removeKategorie(Kategorie kategorie) {
 		kategorien.remove(kategorie);
 	}
 
 	/**
+	 * Sucht eine Kategorie des Hotels
 	 * @param name gesuchte Kategorie
 	 * @return gibt gesuchte kategorie des Hotels zurueck; Null wenn es nicht gefunden wird.
 	 */
@@ -90,7 +111,11 @@ public class Hotel implements Serializable {
 		return null;
 	}
 	
-
+	/**
+	 * Sucht ein Zimmer des Hotels
+	 * @param nummer des gesuchten Zimmers
+	 * @return gibt gesuchtes Zimmer zurueck, wenn es gefunden wird; sonst null
+	 */
 	public Zimmer getZimmer(int nummer) {
 
 		for (Zimmer zimmer : zimmerList) {
