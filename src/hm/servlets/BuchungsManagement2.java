@@ -1,5 +1,5 @@
 package hm.servlets;
-
+//test
 import hm.Aufenthalt;
 import hm.Buchung;
 //import hm.Hotel;
