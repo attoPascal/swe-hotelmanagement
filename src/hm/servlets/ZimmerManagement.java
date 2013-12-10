@@ -40,38 +40,32 @@ public class ZimmerManagement extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
-		//response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        
-        String hotel;
-        String kategorie;
-        int zimmerNummer;
         
         if (action != null) {
+        	String hotelName = request.getParameter("hotel");
+            String katName   = request.getParameter("kategorie");
+            int zimmerNummer = Integer.parseInt(request.getParameter("zimmer"));
+        	
 	        switch (action) {
 	        case "create":
+	        	createZimmer(hotelName, zimmerNummer);
+	        	setZimmerKategorie(hotelName, katName, zimmerNummer);
+	        	response.sendRedirect("zimmerverwalten.jsp");
 	        	break;
 	        case "delete":
-	        	hotel = request.getParameter("hotel");
-	        	zimmerNummer = Integer.parseInt(request.getParameter("zimmer"));
-	        	
-	        	this.deleteZimmer(hotel, zimmerNummer);
-	        	
+	        	deleteZimmer(hotelName, zimmerNummer);
 	        	response.sendRedirect("zimmerverwalten.jsp");
 	        	break;
 	        case "set":
-	        	hotel = request.getParameter("hotel");
-	        	kategorie = request.getParameter("kategorie");
-	        	zimmerNummer = Integer.parseInt(request.getParameter("zimmer"));
-	        	
-	        	setZimmerKategorie(hotel, kategorie, zimmerNummer);
-	        	
+	        	setZimmerKategorie(hotelName, katName, zimmerNummer);
 	        	out.write("Kategorie geaendert\n");
-	        	/*out.write("fuer Hotel: '" + hotel.getName() + "'\n");
-	        	out.write("Zimmer Nr " + zimmerNummer + "\n");
-	        	out.write("neue Kategorie: '" + kategorie.getName() + "'");*/
+	        	break;
+	        default:
+	        	out.write("Ungueltige Aktion");
 	        }
+	        
         } else {
         	out.write("<p>No action. Nothing to do. Will display test data instead.</p>");
         	
@@ -83,16 +77,13 @@ public class ZimmerManagement extends HttpServlet {
         		out.write(h.toString());
         		out.write("</div>");
         	}
-        	
-        	//out.write(this.getServletContext().getRealPath("/"));
-
         }
 	}
 	
-	public void createZimmer(Hotel hotel, int nummer){
-		
+	public void createZimmer(String hotelName, int nummer){
+		Hotel hotel = dao.getHotelByName(hotelName);
 		hotel.addZimmer(new Zimmer(nummer));
-		
+		dao.saveHotel(hotel);
 	}
 	
 	public void deleteZimmer(String hotelName, int nummer){

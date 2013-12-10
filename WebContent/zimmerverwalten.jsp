@@ -22,7 +22,7 @@
 	<script src="js/jquery.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$("select").change(function() {
+			$("select.set-kategorie").change(function() {
 				$.get(
 					"ZimmerManagement",
 					{
@@ -44,8 +44,8 @@
 
 	<h1>Zimmer verwalten</h1>
 
-	<textarea rows="6" cols="50" id="response"></textarea>
-
+	<textarea rows="1" cols="20" id="response"></textarea>
+	
 	<table>
 		<tr>
 			<th>Zimmer</th>
@@ -55,9 +55,11 @@
 
 		<% for (Zimmer z : zList) { %>
 		<tr>
-			<td><%= z.getNummer() %></td>
 			<td>
-				<select size="1" data-zimmer="<%= z.getNummer() %>">
+				<input type="text" value="<%= z.getNummer() %>" size="4" readonly="readonly">
+			</td>
+			<td>
+				<select size="1" class="set-kategorie" data-zimmer="<%= z.getNummer() %>">
 					<% for (Kategorie k : kList) {
 						String selected = (k.hasZimmer(z.getNummer())) ? "selected=\"selected\"" : "";
 					%>
@@ -76,8 +78,33 @@
 			</td>
 		</tr>
 		<% } %>
+		</table>
+		
+		
+		<form action="ZimmerManagement" method="get">
+			<table>
+				<tr>
+					<td>
+						<input type="hidden" name="action" value="create">
+						<input type="hidden" name="hotel" value="CrazySharkyFish">
+						<input type="text" name="zimmer" size="4">
+					</td>
+					<td>
+						<select name="kategorie" size="1">
+							<option>- Kategorie -</option>
+							<% for (Kategorie k : kList) { %>
+							<option value="<%= k.getName() %>"><%= k.getName() %></option>
+							<% } %>
+						</select>
+					</td>
+					<td>
+						<input type="submit" value="+">
+					</td>
+				</tr>
+			</table>
+		</form>
 
-	</table>
+	
 
 </body>
 
