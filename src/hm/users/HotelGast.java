@@ -1,4 +1,6 @@
-package hm;
+package hm.users;
+
+import hm.Buchung;
 
 public class HotelGast extends AbstractUser{
 

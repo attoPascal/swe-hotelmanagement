@@ -2,11 +2,10 @@ package hm.servlets;
 
 import hm.Hotel;
 import hm.Kategorie;
-import hm.ManagementDAO;
+import hm.dao.ManagementDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -62,7 +61,7 @@ public class KategorieManagement extends HttpServlet {
 			} else if (action.equals("delete")) {
 				this.removeKategorie(hotel, name);
 
-				out.write("Kategorie erfolgreich gelöscht\n");
+				out.write("Kategorie erfolgreich geloescht\n");
 
 			} else if (action.equals("edit")) {
 				String newName = request.getParameter("newname");
@@ -70,7 +69,7 @@ public class KategorieManagement extends HttpServlet {
 				this.editCategory(hotel, name, newName, preis, ausstattung);
 
 				out.write("Kategorie bearbeitet\n");
-				out.write("Für Hotel: " + hotel + "\n");
+				out.write("Fuer Hotel: " + hotel + "\n");
 				out.write("Neuer Name: " + newName + "\n");
 				out.write("Preis " + preis + "\n");
 				out.write("Ausstattung: " + ausstattung);

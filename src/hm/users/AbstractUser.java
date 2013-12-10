@@ -1,4 +1,4 @@
-package hm;
+package hm.users;
 
 public abstract class AbstractUser {
 

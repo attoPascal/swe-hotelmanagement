@@ -1,4 +1,6 @@
-package hm;
+package hm.users;
+
+import hm.Hotel;
 
 import java.util.ArrayList;
 

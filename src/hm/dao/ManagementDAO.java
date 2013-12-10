@@ -1,7 +1,10 @@
 /**
  * "Model"-Klasse
  */
-package hm;
+package hm.dao;
+
+import hm.Hotel;
+import hm.Kategorie;
 
 import java.util.*;
 
@@ -9,7 +12,7 @@ import java.util.*;
  * @author philipp
  *
  */
-public class ManagementDAO {
+public class ManagementDAO implements DAO {
 	
 	public ManagementDAO() {
 		
