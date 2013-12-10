@@ -31,7 +31,9 @@ public class Buchung implements Serializable {
 	private int id;
 	
 	
-	
+	/**
+	 * @return Nummer der Buchung
+	 */
 	public int getId() {
 		return id;
 	}
@@ -40,6 +42,9 @@ public class Buchung implements Serializable {
 		this.id = id;
 	}
 
+	/**
+	 * @return gebuchte Kategorie
+	 */
 	public Kategorie getKategorie() {
 		return kategorie;
 	}
@@ -48,6 +53,9 @@ public class Buchung implements Serializable {
 		this.kategorie = kategorie;
 	}
 
+	/**
+	 * @return gebuchtes Zimmer
+	 */
 	public Zimmer getZimmer() {
 		return zimmer;
 	}
@@ -56,6 +64,9 @@ public class Buchung implements Serializable {
 		this.zimmer = zimmer;
 	}
 
+	/**
+	 * @return Zeitraum einer Buchung
+	 */
 	public Aufenthalt getAufenthalt() {
 		return aufenthalt;
 	}
@@ -64,6 +75,9 @@ public class Buchung implements Serializable {
 		this.aufenthalt = aufenthalt;
 	}
 
+	/**
+	 * @return Kosten einer Buchung
+	 */
 	public int getKosten() {
 		return kosten;
 	}
@@ -80,6 +94,13 @@ public class Buchung implements Serializable {
 		
 	}
 	*/
+	/**
+	 * Buchung anhand von Kategorie, Datum und Tage
+	 * 
+	 * @param kategorie der Buchung
+	 * @param d Datum des Anfangs der Buchung
+	 * @param tage Anzahl der Tage der Buchung
+	 */
 	public Buchung(Kategorie kategorie, Date d, int tage){
 		
 		this.kategorie = kategorie;
@@ -90,6 +111,12 @@ public class Buchung implements Serializable {
 		
 	}
 	
+	/**
+	 * Buchung anhand von Kategorie und Aufenthalt
+	 * 
+	 * @param kategorie der Buchung
+	 * @param aufenthalt Zeitraum der Buchung
+	 */
 	public Buchung(Kategorie kategorie, Aufenthalt aufenthalt){
 		
 		this.kategorie = kategorie;
