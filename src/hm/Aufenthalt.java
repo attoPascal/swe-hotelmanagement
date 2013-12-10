@@ -17,6 +17,9 @@ public class Aufenthalt implements Serializable {
 		this.ende = new Date(anfang.getTime() + tage * (1000 * 60 * 60 * 24));
 	}
 
+	/**
+	 * @return Anfang des Aufenthalts
+	 */
 	public Date getAnfang() {
 		return anfang;
 	}
@@ -24,7 +27,10 @@ public class Aufenthalt implements Serializable {
 	public void setAnfang(Date anfang) {
 		this.anfang = anfang;
 	}
-
+	
+	/**
+	 * @return Ende des Aufenthalts
+	 */
 	public Date getEnde() {
 		return ende;
 	}
@@ -33,11 +39,20 @@ public class Aufenthalt implements Serializable {
 		this.ende = ende;
 	}
 
+	/**
+	 * @return Anzahl der Tage eines Aufenthalts
+	 */
 	public int getDays() {
 		return (int) (anfang.getTime() - ende.getTime())
 				/ (1000 * 60 * 60 * 24);
 	}
 
+	/**
+	 * Ueberprueft, ob es zu einem bestimmten zeitraum eine Ueberlappung gibt (fuer die Buchung eines Zimmers)
+	 * 
+	 * @param aufenthalt Zeitraum, der auf Ueberlappung geprueft wird
+	 * @return true, wenn es eine ueberlappung gibt, d.h. es schon verbucht ist; false wenn das Zimmer noch frei ist
+	 */
 	public boolean overlaps(Aufenthalt aufenthalt) {
 		
 		long a1 = this.anfang.getTime();
@@ -70,11 +85,9 @@ public class Aufenthalt implements Serializable {
 			return false;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Aufenthalt [anfang=" + anfang + ", ende=" + ende + "]";
 	}
-	
-	
-	
 }
