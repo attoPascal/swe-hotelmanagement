@@ -60,11 +60,6 @@
 			<input type="submit" name= "submit" value="submit" tabindex="2">						
 		</form>	
 		
-		<form action="BuchungsManagement">			
-			 Please enter a Hotel <br>
-			<input type="text" name="name" size="20px">
-			<input type="submit" value="submit">						
-		</form>	
 		
 	</body>	
 </html>

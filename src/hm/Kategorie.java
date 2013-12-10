@@ -96,7 +96,6 @@ public class Kategorie implements Serializable {
 		while (it.hasNext()) {
 			Map.Entry<Integer, Zimmer> zimmers = (Map.Entry<Integer, Zimmer>) it.next();// TODO variable name
 			zimmer = (Zimmer) zimmers.getValue();
-			it.remove();
 			
 			ArrayList<Buchung> buchungen = zimmer.getBuchungen();
 			
@@ -106,12 +105,11 @@ public class Kategorie implements Serializable {
 				
 			}
 			
-			/* wirklich?? */
 			if (!Zimmer.isBooked(zimmer, aufenthalt)) {
 				return zimmer;
 			}
 		}
-
+		//TODO nullPointerException
 		return null;
 	}
 
