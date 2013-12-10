@@ -22,12 +22,15 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ZimmerManagement")
 public class ZimmerManagement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	DAO dao;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ZimmerManagement() {
         super();
+        dao = new SerializedDAO("/Users/pascal/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/LittleSharkyFish/data.ser");
     }
 
 	/**
@@ -59,8 +62,6 @@ public class ZimmerManagement extends HttpServlet {
         } else {
         	out.write("<p>No action. Nothing to do. Will display test data instead.</p>");
         	
-        	DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
-        	
         	ArrayList<Hotel> list = dao.getHotelList();
         	out.write("Number of Hotels: " + list.size() + "<br>");
         	
@@ -91,7 +92,7 @@ public class ZimmerManagement extends HttpServlet {
 		
 	}
 	
-	/*public Hotel getHotelByName(String name) {
-		return dao.getHotelByName(name);
-	}*/
+	public DAO getDAO() {
+		return dao;
+	}
 }
