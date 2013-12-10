@@ -6,17 +6,18 @@
 <%@ page import="hm.servlets.ZimmerManagement" %>
 <%@ page import="hm.dao.DAO" %>
 
-<%
-	int hNummer;
-	if (request.getParameter("hotel") != null) {
-		hNummer = Integer.parseInt(request.getParameter("hotel"));
-	} else {
-		hNummer = 0;
-	}
-
+<%	
 	ZimmerManagement zm = new ZimmerManagement();
 	ArrayList<Hotel> hList = zm.getDAO().getHotelList();
-	Hotel hotel = hList.get(hNummer);
+	
+	String hotelName = request.getParameter("hotel");
+	Hotel hotel;
+	if (hotelName != null) {
+		hotel = zm.getDAO().getHotelByName(hotelName);
+	} else {
+		hotel = hList.get(0);
+	}
+
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
 	ArrayList<Kategorie> kList = hotel.getKategorien();
 %>
@@ -44,16 +45,19 @@
 					}
 				);
 			});
+			$("select.set-hotel").change(function() {
+				$("#managerooms").load(
+					"zimmerverwalten.jsp?hotel=" + $(this).val() +" #managerooms");
+			});
 		});
 	</script>
 </head>
 
 <body>
-
 	<h1>Zimmer verwalten</h1>
 	
 	<p>Hotel ausw&auml;hlen:
-		<select size="1" name="hotel">
+		<select size="1" name="hotel" class="set-hotel">
 			<% for (Hotel h : hList) { %>
 			<option value="<%= h.getName() %>"><%= h.getName() %></option>
 			<% } %>
@@ -62,63 +66,65 @@
 
 	<textarea rows="1" cols="20" id="response"></textarea>
 	
-	<table>
-		<tr>
-			<th>Zimmer</th>
-			<th>Kategorie</th>
-			<th></th>
-		</tr>
-
-		<% for (Zimmer z : zList) { %>
-		<tr>
-			<td>
-				<input type="text" value="<%= z.getNummer() %>" size="4" readonly="readonly">
-			</td>
-			<td>
-				<select size="1" class="set-kategorie" data-zimmer="<%= z.getNummer() %>">
-					<% for (Kategorie k : kList) {
-						String selected = (k.hasZimmer(z.getNummer())) ? "selected=\"selected\"" : "";
-					%>
-					<option value="<%= k.getName() %>"<%= selected %>><%= k.getName() %></option>
-					<% } %>
-
-				</select>
-			</td>
-			<td>
-				<form action="ZimmerManagement" method="get">
-					<input type="hidden" name="action" value="delete">
-					<input type="hidden" name="hotel" value="CrazySharkyFish">
-					<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
-					<input type="submit" value="-">
-				</form>
-			</td>
-		</tr>
-		<% } %>
-	</table>
-	
-	
-	<form action="ZimmerManagement" method="get">
+	<div id="managerooms">
 		<table>
 			<tr>
+				<th>Zimmer</th>
+				<th>Kategorie</th>
+				<th></th>
+			</tr>
+	
+			<% for (Zimmer z : zList) { %>
+			<tr>
 				<td>
-					<input type="hidden" name="action" value="create">
-					<input type="hidden" name="hotel" value="CrazySharkyFish">
-					<input type="text" name="zimmer" size="4">
+					<input type="text" value="<%= z.getNummer() %>" size="4" readonly="readonly">
 				</td>
 				<td>
-					<select name="kategorie" size="1">
-						<option>- Kategorie -</option>
-						<% for (Kategorie k : kList) { %>
-						<option value="<%= k.getName() %>"><%= k.getName() %></option>
+					<select size="1" class="set-kategorie" data-zimmer="<%= z.getNummer() %>">
+						<% for (Kategorie k : kList) {
+							String selected = (k.hasZimmer(z.getNummer())) ? "selected=\"selected\"" : "";
+						%>
+						<option value="<%= k.getName() %>"<%= selected %>><%= k.getName() %></option>
 						<% } %>
+	
 					</select>
 				</td>
 				<td>
-					<input type="submit" value="+">
+					<form action="ZimmerManagement" method="get">
+						<input type="hidden" name="action" value="delete">
+						<input type="hidden" name="hotel" value="CrazySharkyFish">
+						<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
+						<input type="submit" value="-">
+					</form>
 				</td>
 			</tr>
+			<% } %>
 		</table>
-	</form>
+		
+		
+		<form action="ZimmerManagement" method="get">
+			<table>
+				<tr>
+					<td>
+						<input type="hidden" name="action" value="create">
+						<input type="hidden" name="hotel" value="CrazySharkyFish">
+						<input type="text" name="zimmer" size="4">
+					</td>
+					<td>
+						<select name="kategorie" size="1">
+							<option>- Kategorie -</option>
+							<% for (Kategorie k : kList) { %>
+							<option value="<%= k.getName() %>"><%= k.getName() %></option>
+							<% } %>
+						</select>
+					</td>
+					<td>
+						<input type="submit" value="+">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 
 </html>
