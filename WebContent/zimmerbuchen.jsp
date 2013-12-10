@@ -36,7 +36,7 @@
 
 				</select>
 				<br>
-			<input type="text" name="day" size="5px">
+			<input type="text" name="day">
 			
 	  <select name="months" size="1"  tabindex="1">
         <option value="1">Jänner</option>
@@ -53,8 +53,8 @@
         <option value="12">Dezember</option>
       </select>
       
-      <input type="text" name="year" size="7px">
-      
+      <input type="text" name="year">
+            
 
 
 			<input type="submit" name= "submit" value="submit" tabindex="2">						
