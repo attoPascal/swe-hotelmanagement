@@ -109,8 +109,7 @@ public class Hotel implements Serializable {
 		
 		for (Kategorie kategorie : kategorien){
 			
-			s += "<br>" + "Name: " + kategorie.getName() + "<br />" + "<br>"+ "Preis: " + kategorie.getPreis() +  "<br />" + "<br>" + "Ausstattung: "+kategorie.getAusstattung() + "<br />";
-			
+			s += kategorie.toString();
 		}
 		
 		return s;
