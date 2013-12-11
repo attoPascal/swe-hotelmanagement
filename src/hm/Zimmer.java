@@ -37,7 +37,8 @@ public class Zimmer implements Serializable {
 	}
 
 	/**
-	 * @param initialisiert die buchungen
+	 * initialisiert die buchungen
+	 * @param buchungen Liste mit Buchungen die dem Zimmer zugeteilt werden sollen
 	 */
 	public void setBuchungen(ArrayList<Buchung> buchungen) {
 		this.buchungen = buchungen;
