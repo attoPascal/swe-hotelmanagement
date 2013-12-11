@@ -39,9 +39,8 @@ public class BuchungsManagement extends HttpServlet {
     	
     	Hotel hotel = dao.getHotelByName(hotelName);
     	Calendar c = new GregorianCalendar ();
-    	c.set(day, year, month-1, 0, 0);
+    	c.set(year, month-1, day, 0, 0, 0);
     	PrintWriter out = response.getWriter();
-
     	try{
     	
     		int zimmernummer = neueBuchung(hotel.getKategorie(katName), new Aufenthalt(new Date(c.getTimeInMillis()), duration));
