@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class KategorieManagement
+ * Servlet-Klasse zur Verwaltung von Kategorien
  */
 @WebServlet("/KategorieManagement")
 public class KategorieManagement extends HttpServlet {

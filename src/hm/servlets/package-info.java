@@ -1,8 +1,4 @@
 /**
- * 
- */
-/**
- * Stellt Servlets zur Verfügung, die die Funktionalität der Website implementieren.
- *
+ * Stellt Servlets zur Verfuegung, die die Funktionalitaet der Website implementieren.
  */
 package hm.servlets;

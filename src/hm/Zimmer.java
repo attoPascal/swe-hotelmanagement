@@ -3,6 +3,9 @@ package hm;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Eindeutiges Zimmer mit zugeordneten Buchungen
+ */
 public class Zimmer implements Serializable {
 
 	/**

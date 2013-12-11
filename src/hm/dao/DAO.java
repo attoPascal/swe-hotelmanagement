@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import hm.Hotel;
 
+/**
+ * Generisches Interface zur konsistenten Datenspeicherung
+ */
 public interface DAO {
 	
 	/**

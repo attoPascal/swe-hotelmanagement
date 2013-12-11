@@ -7,6 +7,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * Kategorie, die mehrere Zimmer mit gleichen Eigenschaften zusammenfasst
+ */
 public class Kategorie implements Serializable {
 
 	/**

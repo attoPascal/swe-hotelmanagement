@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+/**
+ * DAO-Implementierung, die Serialisierung zur persistenten Datenspeicherung benutzt
+ */
 public class SerializedDAO implements DAO {
 	private File file;
 	

@@ -1,8 +1,4 @@
 /**
- * 
- */
-/**
- * Stellt die Basisklassen zur Verfügung, die essenziell sind für die Funktionalität des Programms
- *
+ * Stellt die Basisklassen zur Verfuegung, die essenziell fuer die Funktionalitaet des Programms sind
  */
 package hm;

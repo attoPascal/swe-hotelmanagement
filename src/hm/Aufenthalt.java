@@ -3,6 +3,9 @@ package hm;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Zeichnet einen zeitlichen Aufenthalt mit Beginn- und Enddatum aus
+ */
 public class Aufenthalt implements Serializable {
 
 	/**
@@ -11,7 +14,12 @@ public class Aufenthalt implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Date anfang;
 	private Date ende;
-
+	
+	/**
+	 * Konstruiert einen Aufenthalt
+	 * @param anfang
+	 * @param tage
+	 */
 	public Aufenthalt(Date anfang, int tage) {
 		this.anfang = anfang;
 		this.ende = new Date(anfang.getTime() + tage * (1000 * 60 * 60 * 24));
