@@ -9,13 +9,11 @@ import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
-import hm.dao.SerializedDAO;
 import hm.servlets.BuchungsManagement;
 import hm.servlets.KategorieManagement;
 import hm.servlets.ZimmerManagement;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -42,7 +40,7 @@ public class UnitTest {
 	@Test
 	public void buchungsTest() {
 		
-		//löscht alte daten
+		//luescht alte daten
 		try {
 		    Files.delete(Paths.get("data.ser"));
 		} catch (NoSuchFileException x) {
@@ -62,7 +60,7 @@ public class UnitTest {
 		Zimmer z3 = new Zimmer(103);
 		Zimmer z4 = new Zimmer(104);
 		Zimmer z5 = new Zimmer(105);
-		//fügt zimmer zu hotel hinzu
+		//fuegt zimmer zu hotel hinzu
 		h1.addZimmer(z1);
 		h1.addZimmer(z2);
 		h1.addZimmer(z3);
@@ -72,13 +70,13 @@ public class UnitTest {
 		Kategorie kat1 = new Kategorie("Einzel", 50, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 100, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 200, "Bad & Klo, Affenbutler");
-		//fügt zimmer zu kategorien hinzu
+		//fuegt zimmer zu kategorien hinzu
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);
 		kat2.addZimmer(z3);
 		kat2.addZimmer(z4);
 		kat3.addZimmer(z5);
-		//fügt kategorien zu hotel hinzu
+		//fuegt kategorien zu hotel hinzu
 		h1.addKategorie(kat1);
 		h1.addKategorie(kat2);
 		h1.addKategorie(kat3);
@@ -87,12 +85,12 @@ public class UnitTest {
 		Calendar c = new GregorianCalendar ();
 		c.set(2014, 5, 23, 0, 0, 0);
 		
-		//erstellt neue buchung für kategorie einzel am 25.5.2014
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		int zimmernummer = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
 
 		assertEquals(102,zimmernummer);
 		
-		//erstellt neue buchung für kategorie einzel am 25.5.2014
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		int zimmernummer2 = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
 
 		assertEquals(101,zimmernummer2);
@@ -101,12 +99,12 @@ public class UnitTest {
 	
 
 	/**
-	 * Testet ob erfolgreich abgebrochen wird wenn überbucht
+	 * Testet ob erfolgreich abgebrochen wird wenn ueberbucht
 	 */
 	@Test (expected = NullPointerException.class)
 	public void BuchungsExceptionTest() {
 		
-		//löscht alte daten
+		//luescht alte daten
 		try {
 		    Files.delete(Paths.get("data.ser"));
 		} catch (NoSuchFileException x) {
@@ -126,7 +124,7 @@ public class UnitTest {
 		Zimmer z3 = new Zimmer(103);
 		Zimmer z4 = new Zimmer(104);
 		Zimmer z5 = new Zimmer(105);
-		//fügt zimmer zu hotel hinzu
+		//fuegt zimmer zu hotel hinzu
 		h1.addZimmer(z1);
 		h1.addZimmer(z2);
 		h1.addZimmer(z3);
@@ -136,13 +134,13 @@ public class UnitTest {
 		Kategorie kat1 = new Kategorie("Einzel", 50, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 100, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 200, "Bad & Klo, Affenbutler");
-		//fügt zimmer zu kategorien hinzu
+		//fuegt zimmer zu kategorien hinzu
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);
 		kat2.addZimmer(z3);
 		kat2.addZimmer(z4);
 		kat3.addZimmer(z5);
-		//fügt kategorien zu hotel hinzu
+		//fuegt kategorien zu hotel hinzu
 		h1.addKategorie(kat1);
 		h1.addKategorie(kat2);
 		h1.addKategorie(kat3);
@@ -151,18 +149,18 @@ public class UnitTest {
 		Calendar c = new GregorianCalendar ();
 		c.set(2014, 5, 23, 0, 0, 0);
 		
-		//erstellt neue buchung für kategorie einzel am 25.5.2014
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		int zimmernummer = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
 
 		assertEquals(102,zimmernummer);
 		
-		//erstellt neue buchung für kategorie einzel am 25.5.2014
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		int zimmernummer2 = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
 
 		assertEquals(101,zimmernummer2);
 		
-		//erstellt neue buchung für kategorie einzel am 25.5.2014
-		int zimmernummer3 = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
+		bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
 
 		
 	}
@@ -173,7 +171,7 @@ public class UnitTest {
 	@Test 
 	public void ZimmerErstellungsTest() {
 		
-		//löscht alte daten
+		//luescht alte daten
 		try {
 		    Files.delete(Paths.get("data.ser"));
 		} catch (NoSuchFileException x) {
@@ -197,7 +195,7 @@ public class UnitTest {
 		Zimmer z3 = new Zimmer(103);
 		Zimmer z4 = new Zimmer(104);
 		Zimmer z5 = new Zimmer(105);
-		//fügt zimmer zu hotel hinzu
+		//fuegt zimmer zu hotel hinzu
 		h1.addZimmer(z1);
 		h1.addZimmer(z2);
 		h1.addZimmer(z3);
@@ -207,13 +205,13 @@ public class UnitTest {
 		Kategorie kat1 = new Kategorie("Einzel", 50, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 100, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 200, "Bad & Klo, Affenbutler");
-		//fügt zimmer zu kategorien hinzu
+		//fuegt zimmer zu kategorien hinzu
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);
 		kat2.addZimmer(z3);
 		kat2.addZimmer(z4);
 		kat3.addZimmer(z5);
-		//fügt kategorien zu hotel hinzu
+		//fuegt kategorien zu hotel hinzu
 		h1.addKategorie(kat1);
 		h1.addKategorie(kat2);
 		h1.addKategorie(kat3);
@@ -236,12 +234,12 @@ public class UnitTest {
 
 
 	/**
-	 * Testet ob die Zimmerkategorie eines Zimmers erfolgreich geändert wird
+	 * Testet ob die Zimmerkategorie eines Zimmers erfolgreich geuendert wird
 	 */
 	@Test 
 	public void ZimmerKategorieTest() {
 		
-		//löscht alte daten
+		//luescht alte daten
 		try {
 		    Files.delete(Paths.get("data.ser"));
 		} catch (NoSuchFileException x) {
@@ -265,7 +263,7 @@ public class UnitTest {
 		Zimmer z3 = new Zimmer(103);
 		Zimmer z4 = new Zimmer(104);
 		Zimmer z5 = new Zimmer(105);
-		//fügt zimmer zu hotel hinzu
+		//fuegt zimmer zu hotel hinzu
 		h1.addZimmer(z1);
 		h1.addZimmer(z2);
 		h1.addZimmer(z3);
@@ -275,13 +273,13 @@ public class UnitTest {
 		Kategorie kat1 = new Kategorie("Einzel", 50, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 100, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 200, "Bad & Klo, Affenbutler");
-		//fügt zimmer zu kategorien hinzu
+		//fuegt zimmer zu kategorien hinzu
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);
 		kat2.addZimmer(z3);
 		kat2.addZimmer(z4);
 		kat3.addZimmer(z5);
-		//fügt kategorien zu hotel hinzu
+		//fuegt kategorien zu hotel hinzu
 		h1.addKategorie(kat1);
 		h1.addKategorie(kat2);
 		h1.addKategorie(kat3);
@@ -317,7 +315,7 @@ public class UnitTest {
 	@Test
 	public void KategorieErstellenTest() {
 		
-		//löscht alte daten
+		//luescht alte daten
 		try {
 		    Files.delete(Paths.get("data.ser"));
 		} catch (NoSuchFileException x) {
@@ -337,7 +335,7 @@ public class UnitTest {
 		Zimmer z3 = new Zimmer(103);
 		Zimmer z4 = new Zimmer(104);
 		Zimmer z5 = new Zimmer(105);
-		//fügt zimmer zu hotel hinzu
+		//fuegt zimmer zu hotel hinzu
 		h1.addZimmer(z1);
 		h1.addZimmer(z2);
 		h1.addZimmer(z3);
@@ -347,13 +345,13 @@ public class UnitTest {
 		Kategorie kat1 = new Kategorie("Einzel", 50, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 100, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 200, "Bad & Klo, Affenbutler");
-		//fügt zimmer zu kategorien hinzu
+		//fuegt zimmer zu kategorien hinzu
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);
 		kat2.addZimmer(z3);
 		kat2.addZimmer(z4);
 		kat3.addZimmer(z5);
-		//fügt kategorien zu hotel hinzu
+		//fuegt kategorien zu hotel hinzu
 		h1.addKategorie(kat1);
 		h1.addKategorie(kat2);
 		h1.addKategorie(kat3);
@@ -374,12 +372,12 @@ public class UnitTest {
 	
 
 	/**
-	 * Testet ob Kategorien erfolgreich geändert werden
+	 * Testet ob Kategorien erfolgreich geuendert werden
 	 */
 	@Test
 	public void KategorieAendernTest() {
 		
-		//löscht alte daten
+		//luescht alte daten
 		try {
 		    Files.delete(Paths.get("data.ser"));
 		} catch (NoSuchFileException x) {
@@ -399,7 +397,7 @@ public class UnitTest {
 		Zimmer z3 = new Zimmer(103);
 		Zimmer z4 = new Zimmer(104);
 		Zimmer z5 = new Zimmer(105);
-		//fügt zimmer zu hotel hinzu
+		//fuegt zimmer zu hotel hinzu
 		h1.addZimmer(z1);
 		h1.addZimmer(z2);
 		h1.addZimmer(z3);
@@ -409,13 +407,13 @@ public class UnitTest {
 		Kategorie kat1 = new Kategorie("Einzel", 50, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 100, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 200, "Bad & Klo, Affenbutler");
-		//fügt zimmer zu kategorien hinzu
+		//fuegt zimmer zu kategorien hinzu
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);
 		kat2.addZimmer(z3);
 		kat2.addZimmer(z4);
 		kat3.addZimmer(z5);
-		//fügt kategorien zu hotel hinzu
+		//fuegt kategorien zu hotel hinzu
 		h1.addKategorie(kat1);
 		h1.addKategorie(kat2);
 		h1.addKategorie(kat3);
