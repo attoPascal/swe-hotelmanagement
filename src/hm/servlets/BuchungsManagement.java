@@ -19,7 +19,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+/**
+ * Servlet-Klasse zur Verwaltung von Buchungen
+ */
 public class BuchungsManagement extends HttpServlet {
+	
 	/**
 	 * Servlet implementation class BuchungsManagement
 	 */

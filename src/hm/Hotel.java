@@ -3,6 +3,9 @@ package hm;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Zeichnet ein Hotel-Objekt aus. Beinhaltet Zimmer und Kategorien
+ */
 public class Hotel implements Serializable {
 
 	/**

@@ -4,6 +4,9 @@ import hm.Hotel;
 
 import java.util.ArrayList;
 
+/**
+ * Benutzer Hotelier, kann seine zugeordneten Hotels verwalten
+ */
 public class Hotelier extends AbstractUser{
 
 	private boolean  canCreateCategory, canEditCategory,canRemoveCategory,canCreateRoom,canDeleteRoom;

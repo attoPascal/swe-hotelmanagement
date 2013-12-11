@@ -2,6 +2,9 @@ package hm.users;
 
 import hm.Buchung;
 
+/**
+ * Benutzer Hotelgast, kann Buchungen vornehmen
+ */
 public class HotelGast extends AbstractUser{
 
 	private Buchung buchung;

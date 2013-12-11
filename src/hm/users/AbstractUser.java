@@ -1,5 +1,8 @@
 package hm.users;
 
+/**
+ * Generischer Benutzer
+ */
 public abstract class AbstractUser {
 
 	/**

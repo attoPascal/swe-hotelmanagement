@@ -1,8 +1,5 @@
 /**
- * 
- */
-/**
- * Stellt Klassen zur Verfügung, die notwendig sind um Daten persisten zu speicher.
+ * Stellt Klassen zur Verfuegung, die notwendig sind um Daten persistent zu speichern.
  *
  */
 package hm.dao;

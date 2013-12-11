@@ -3,7 +3,9 @@ package hm;
 import java.io.Serializable;
 import java.util.Date;
 
-
+/**
+ * Buchung. Weist ein Zimmer einem Aufenthalt zu
+ */
 public class Buchung implements Serializable {
 
 	/**

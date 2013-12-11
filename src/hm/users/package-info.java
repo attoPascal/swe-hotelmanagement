@@ -1,8 +1,5 @@
 /**
- * 
- */
-/**
- * Stellt Klassen zur Verfügung, die die Benutzer des Systems repräsentieren.
+ * Stellt Klassen zur Verfuegung, die die Benutzer des Systems repraesentieren.
  *
  */
 package hm.users;
