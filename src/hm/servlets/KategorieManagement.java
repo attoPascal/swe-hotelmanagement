@@ -100,7 +100,7 @@ public class KategorieManagement extends HttpServlet {
 		kat.setPreis(preis);
 		kat.setAusstattung(ausstattung);
 
-		//hotel.setKategorie(kat);
+		management.saveHotel(hotel);
 	}
 
 	/**
@@ -130,5 +130,10 @@ public class KategorieManagement extends HttpServlet {
 		hotel.removeKategorie(kat);
 
 		management.saveHotel(hotel);
+	}
+	
+	public DAO getDAO(){
+		
+		return management;
 	}
 }

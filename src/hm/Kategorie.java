@@ -113,14 +113,7 @@ public class Kategorie implements Serializable {
 		while (it.hasNext()) {
 			Map.Entry<Integer, Zimmer> zimmers = (Map.Entry<Integer, Zimmer>) it.next();// TODO variable name
 			zimmer = (Zimmer) zimmers.getValue();
-			
-			ArrayList<Buchung> buchungen = zimmer.getBuchungen();
-			
-			for(Buchung buchung : buchungen){
-				
-				buchung.getAufenthalt().toString();
-				
-			}
+		
 			
 			if (!Zimmer.isBooked(zimmer, aufenthalt)) {
 				return zimmer;

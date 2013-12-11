@@ -104,6 +104,8 @@ public class ZimmerManagement extends HttpServlet {
 	 * @param zimmerNummer Nummer zur Identifizierung des Zimmers
 	 */
 	public void setZimmerKategorie(String hotelName, String katName, int zimmerNummer){
+		
+		
 		Hotel hotel = dao.getHotelByName(hotelName);
 		Kategorie kategorie = hotel.getKategorie(katName);
 		Zimmer zimmer = hotel.getZimmer(zimmerNummer);
