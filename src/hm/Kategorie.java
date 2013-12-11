@@ -105,7 +105,7 @@ public class Kategorie implements Serializable {
 	/**
 	 * Sucht ein Zimmer, das zu einem gegebenen Zeitraum(Aufenthalt) nicht besetzt ist(mit getBuchungen())
 	 * @param aufenthalt Zeitraum der Buchung fuer das Zimmer
-	 * @return
+	 * @return Ein freies Zimmer 
 	 */
 	public Zimmer getZimmer(Aufenthalt aufenthalt) {
 		Zimmer zimmer;
