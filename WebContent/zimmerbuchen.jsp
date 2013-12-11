@@ -23,7 +23,7 @@
 		<form action="BuchungsManagement">			
 			 <h2>Bitte suchen sie eine Kategorien aus</h2> <br>
 				<label>Kategorie:</label>
-				<select name= "select" size="1" >
+				<select name= "kategorie" size="1" >
 					<% for (Kategorie k : klist) { %>
 					<option value="<%= k.getName() %>"><%= k.getName() %></option>
 					<% } %>
@@ -51,7 +51,7 @@
       
       <input type="text" name="year" title="Jahr" style="color:#888;" 
     value="Jahr" onfocus="inputFocus(this)" onblur="inputBlur(this)" />      
-            
+            <input type="hidden" name="hotel" value="<%= hotel.getName() %>">
 			<input type="submit" name= "submit" value="submit" tabindex="2">						
 		</form>	
 		

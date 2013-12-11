@@ -1,7 +1,6 @@
 package hm.servlets;
 
 import hm.Aufenthalt;
-import hm.Buchung;
 import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
@@ -16,10 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
 
 public class BuchungsManagement extends HttpServlet {
@@ -28,30 +25,29 @@ public class BuchungsManagement extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 4L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// reading the user input
-				
-		String name = request.getParameter("select");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		DAO dao = new SerializedDAO("data.ser");
+		
+		//// reading the user input
+		String hotelName = request.getParameter("hotel");
+		String katName   = request.getParameter("kategorie");
 		
 		int day = Integer.parseInt(request.getParameter("day"));
 		int month = Integer.parseInt(request.getParameter("months"));
 		int year = Integer.parseInt(request.getParameter("year"));
-		
-		DAO dao = new SerializedDAO("data.ser");
     	
-    	Hotel hotel = dao.getHotelByName("CrazySharkyFish");
+    	Hotel hotel = dao.getHotelByName(hotelName);
     	Calendar c = new GregorianCalendar ();
     	c.set(day, year, month-1, 0, 0);
     	PrintWriter out = response.getWriter();
 
     	try{
     	
-    		int zimmernummer = neueBuchung(hotel.getKategorie(name), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+    		int zimmernummer = neueBuchung(hotel.getKategorie(katName), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
     		
     		out.println("Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + zimmernummer);
     		
-    		out.println(hotel.getKategorie(name).toString());
+    		out.println(hotel.getKategorie(katName).toString());
     			
     		dao.saveHotel(hotel);
     		
@@ -69,7 +65,7 @@ public class BuchungsManagement extends HttpServlet {
 	 * 
 	 * @param kategorie Kategorie des Zimmers
 	 * @param aufenthalt Zeitraum, der gebucht wurde
-	 * @return gibt die Nummer des Zimmers zurück, das gebucht wurde.
+	 * @return gibt die Nummer des Zimmers zurueck, das gebucht wurde.
 	 */
 	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
 
