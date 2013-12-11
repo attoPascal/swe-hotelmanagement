@@ -135,7 +135,7 @@ public class Kategorie implements Serializable {
 	 */
 	public String toString(){
 		
-		String s = "<br>" + "Name: " + this.getName() + "<br>"+ "Preis: " + this.getPreis() + "<br>" + "Ausstattung: "+this.getAusstattung() ;
+		String s = "<br>" + "Name: " + this.getName() + "<br>"+ "Preis pro Nacht: " + this.getPreis() + "<br>" + "Ausstattung: "+this.getAusstattung() ;
 
 		return s;
 	}

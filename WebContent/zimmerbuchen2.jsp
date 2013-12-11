@@ -44,6 +44,10 @@
 			<option value="12">Dezember</option>
 		</select>
 	    <input type="text" name="year" title="Jahr" style="color:#888;" value="Jahr" onfocus="inputFocus(this)" onblur="inputBlur(this)" />      
+	    <br><label>Aufenthaltsdauer</label>
+	    <input type="text" name="duration" title="Tage" style="color:#888;" value="Tage" onfocus="inputFocus(this)" onblur="inputBlur(this)" />      
+	    
+	    
 	    <input type="submit" name="submit" value="submit" tabindex="2">						
 	</form>	
 	
