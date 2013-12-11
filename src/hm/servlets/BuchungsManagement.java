@@ -35,6 +35,7 @@ public class BuchungsManagement extends HttpServlet {
 		int day = Integer.parseInt(request.getParameter("day"));
 		int month = Integer.parseInt(request.getParameter("months"));
 		int year = Integer.parseInt(request.getParameter("year"));
+		int duration = Integer.parseInt(request.getParameter("duration"));
     	
     	Hotel hotel = dao.getHotelByName(hotelName);
     	Calendar c = new GregorianCalendar ();
@@ -43,9 +44,13 @@ public class BuchungsManagement extends HttpServlet {
 
     	try{
     	
-    		int zimmernummer = neueBuchung(hotel.getKategorie(katName), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+    		int zimmernummer = neueBuchung(hotel.getKategorie(katName), new Aufenthalt(new Date(c.getTimeInMillis()), duration));
     		
     		out.println("Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + zimmernummer);
+    		
+    		out.println("<br>Datum ihrer Buchung: "+ new Date(c.getTimeInMillis()).toString());
+    		
+    		out.println("<br>Gesamtkosten: " + hotel.getKategorie(katName).getPreis()*duration);
     		
     		out.println(hotel.getKategorie(katName).toString());
     			
