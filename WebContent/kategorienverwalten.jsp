@@ -20,12 +20,12 @@
 
 	<h1>Kategorien verwalten</h1>
 
-	<p>Kategorie:<br>
+	<!--  <p>Kategorie:<br>
   		<select>
     		<option>Presidential Suite</option>
     		<option>Economy Room </option>
-  		</select>
-	</p>
+  		</select> 
+	</p> -->
 	
 	<form action="http://localhost:8080/LittleSharkyFish/KategorieManagement" method="get">
 	
@@ -40,7 +40,7 @@
   			</tr>
   			<tr>
     			<td>Preis:</td>
-    			<td><input type="text" name="preis" value="50"></td>
+    			<td><input type="text" name="preis" value=""></td>
   			</tr>
   			<tr>
     			<td>Neuer Name:</td>
@@ -49,7 +49,7 @@
 		</table>
 
 		<div>Ausstattung:<br>
-  			<textarea cols="50" rows="5" name="ausstattung">Sauna, Bad mit Whirlpool, 3 TVs mit Flatscreens, Affenbutler</textarea>
+  			<textarea cols="50" rows="5" name="ausstattung"></textarea>
 		</div>
 
 	
