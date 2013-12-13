@@ -65,14 +65,14 @@ public class CreateTestData extends HttpServlet {
 		h2.addZimmer(z9);
 
 		
-		Kategorie kat1 = new Kategorie("Einzel", 50, "Bad");
-		Kategorie kat2 = new Kategorie("Doppel", 100, "Bad & Klo");
-		Kategorie kat3 = new Kategorie("Suite", 200, "Bad & Klo, Affenbutler");
+		Kategorie kat1 = new Kategorie("Einzel", 5000, "Bad");
+		Kategorie kat2 = new Kategorie("Doppel", 10000, "Bad & Klo");
+		Kategorie kat3 = new Kategorie("Suite", 20000, "Bad & Klo, Affenbutler");
 		
-		Kategorie kat4 = new Kategorie("Einzel", 60, "nix");
-		Kategorie kat5 = new Kategorie("Doppel", 80, "nix");
-		Kategorie kat6 = new Kategorie("Tripel", 120, "nix");
-		Kategorie kat7 = new Kategorie("Quadrupel", 150, "nix");
+		Kategorie kat4 = new Kategorie("Einzel", 6000, "nix");
+		Kategorie kat5 = new Kategorie("Doppel", 8000, "nix");
+		Kategorie kat6 = new Kategorie("Tripel", 12000, "nix");
+		Kategorie kat7 = new Kategorie("Quadrupel", 15000, "nix");
 		
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);

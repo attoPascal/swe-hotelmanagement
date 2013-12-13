@@ -1,0 +1,29 @@
+body {
+	padding-top: 50px;
+}
+
+table.hotel {
+	width: 100%;
+}
+
+table.hotel th.kategorie,
+table.hotel td.kategorie {
+	width: 20%;
+}
+
+table.hotel th.preis,
+table.hotel td.preis {
+	width: 10%;
+	text-align: right;
+}
+
+table.hotel th.ausstattung,
+table.hotel td.ausstattung {
+	width: 50%;
+}
+
+table.hotel th.buchen,
+table.hotel td.buchen {
+	width: 20%;
+	text-align: right;
+}
