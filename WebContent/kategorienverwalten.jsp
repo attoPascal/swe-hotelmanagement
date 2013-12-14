@@ -2,7 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Kategorie" %>
-<%@ page import="hm.servlets.KategorieManagement" %>
+<%@ page import="hm.servlets.KategorieServlet" %>
 <%@ page import="hm.dao.DAO" %>
 
 

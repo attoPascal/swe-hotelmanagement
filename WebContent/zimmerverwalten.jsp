@@ -3,18 +3,23 @@
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Zimmer" %>
 <%@ page import="hm.Kategorie" %>
-<%@ page import="hm.servlets.ZimmerManagement" %>
+<%@ page import="hm.servlets.ZimmerServlet" %>
 <%@ page import="hm.dao.DAO" %>
 
-<%	
-	ZimmerManagement zm = new ZimmerManagement();
-	ArrayList<Hotel> hList = zm.getDAO().getHotelList();
+<%
+	ZimmerServlet zm = new ZimmerServlet();
+	zm.getManagement().instantiateDAO("data.ser");
+	ArrayList<Hotel> hList = zm.getManagement().getDAO().getHotelList();
 	
 	String hotelName = request.getParameter("hotel");
 	Hotel hotel;
+	
 	if (hotelName != null) {
-		hotel = zm.getDAO().getHotelByName(hotelName);
+		hotel = zm.getManagement().getDAO().getHotelByName(hotelName);
 	} else {
+		/*
+		* Wenn es keine Testdaten gibt, kommt hier eine IndexOutOfBoundsException
+		*/
 		hotel = hList.get(0);
 	}
 

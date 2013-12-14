@@ -109,7 +109,7 @@ public class Kategorie implements Serializable {
 	 * @param aufenthalt Zeitraum der Buchung fuer das Zimmer
 	 * @return Ein freies Zimmer 
 	 */
-	public Zimmer getZimmer(Aufenthalt aufenthalt) {
+	public Zimmer getZimmer(Aufenthalt aufenthalt) throws NullPointerException {
 		Zimmer zimmer;
 		Iterator<Entry<Integer, Zimmer>> it = zimmerMap.entrySet().iterator();
 		while (it.hasNext()) {

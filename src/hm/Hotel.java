@@ -104,7 +104,7 @@ public class Hotel implements Serializable {
 	 * @param name gesuchte Kategorie
 	 * @return gibt gesuchte kategorie des Hotels zurueck; Null wenn es nicht gefunden wird.
 	 */
-	public Kategorie getKategorie(String name) {
+	public Kategorie getKategorie(String name) throws NullPointerException {
 
 		for (Kategorie kategorie : kategorien) {
 			if (kategorie.getName().equals(name))
@@ -119,6 +119,7 @@ public class Hotel implements Serializable {
 	 * @param nummer des gesuchten Zimmers
 	 * @return gibt gesuchtes Zimmer zurueck, wenn es gefunden wird; sonst null
 	 */
+	// TODO
 	public Zimmer getZimmer(int nummer) {
 
 		for (Zimmer zimmer : zimmerList) {

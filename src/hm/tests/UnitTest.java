@@ -9,9 +9,10 @@ import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
-import hm.servlets.BuchungsManagement;
-import hm.servlets.KategorieManagement;
-import hm.servlets.ZimmerManagement;
+import hm.servlets.BuchungsServlet;
+import hm.servlets.KategorieServlet;
+import hm.servlets.ZimmerServlet;
+import hm.managers.*;
 
 import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;
