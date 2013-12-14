@@ -9,11 +9,9 @@ import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
-import hm.servlets.BuchungsServlet;
-import hm.servlets.KategorieServlet;
-import hm.servlets.ZimmerServlet;
 import hm.managers.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
@@ -217,15 +215,48 @@ public class UnitTest {
 		h1.addKategorie(kat2);
 		h1.addKategorie(kat3);
 		
-		dao.saveHotel(h1);
+		try {
+			dao.saveHotel(h1);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		boolean hasZimmer = false;
 		
-		zm.createZimmer("CrazySharkyFish", 909);
+		try {
+			zm.createZimmer("CrazySharkyFish", 909);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		Hotel h2 = dao.getHotelByName("CrazySharkyFish");
-		
-		if (h2.getZimmer(909) != null) hasZimmer = true;
+		Hotel h2;
+		try {
+			h2 = dao.getHotelByName("CrazySharkyFish");
+			if (h2.getZimmer(909) != null) hasZimmer = true;
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			
 		assertEquals(true,hasZimmer);
 		
@@ -285,24 +316,62 @@ public class UnitTest {
 		h1.addKategorie(kat2);
 		h1.addKategorie(kat3);
 		
-		dao.saveHotel(h1);
+		try {
+			dao.saveHotel(h1);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		boolean hasZimmer = false;
 		
-		zm.setZimmerKategorie("CrazySharkyFish", "Doppel", 101);
+		try {
+			zm.setZimmerKategorie("CrazySharkyFish", "Doppel", 101);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
-		HashMap<Integer, Zimmer> zimmerMap = dao.getHotelByName("CrazySharkyFish").getKategorie("Doppel").getZimmerMap();
-		Zimmer zimmer;
-		Iterator<Entry<Integer, Zimmer>> it = zimmerMap.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry<Integer, Zimmer> zimmers = (Map.Entry<Integer, Zimmer>) it.next();// TODO variable name
-			zimmer = (Zimmer) zimmers.getValue();
-					
-			if (zimmer.getNummer() == 101) {
-				hasZimmer = true;
+		HashMap<Integer, Zimmer> zimmerMap;
+		try {
+			zimmerMap = dao.getHotelByName("CrazySharkyFish").getKategorie("Doppel").getZimmerMap();
+			Zimmer zimmer;
+			Iterator<Entry<Integer, Zimmer>> it = zimmerMap.entrySet().iterator();
+			while (it.hasNext()) {
+				Map.Entry<Integer, Zimmer> zimmers = (Map.Entry<Integer, Zimmer>) it.next();// TODO variable name
+				zimmer = (Zimmer) zimmers.getValue();
+						
+				if (zimmer.getNummer() == 101) {
+					hasZimmer = true;
+				}
 			}
-		}		
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 		assertEquals(true,hasZimmer);
 		
 
@@ -360,11 +429,35 @@ public class UnitTest {
 		
 		KategorieManagement km = new KategorieManagement();
 
-		km.createCategority(h1, "Absteige", "Heu, Eimer zum Waschen ", 5);
+		try {
+			km.createCategority(h1, "Absteige", "Heu, Eimer zum Waschen ", 5);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		DAO dao = km.getDAO();
 		
-		Hotel h2 = dao.getHotelByName("CrazySharkyFish");
+		Hotel h2 = new Hotel();
+		
+		try {
+			h2 = dao.getHotelByName("CrazySharkyFish");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		assertEquals(5, h2.getKategorie("Absteige").getPreis());
 		assertEquals("Heu, Eimer zum Waschen ", h2.getKategorie("Absteige").getAusstattung());
@@ -422,11 +515,37 @@ public class UnitTest {
 		
 		KategorieManagement km = new KategorieManagement();
 
-		km.editCategory(h1, "Einzel", "Loft", 5,"Heu, Eimer zum Waschen ");
+		try {
+			km.editCategory(h1, "Einzel", "Loft", 5,"Heu, Eimer zum Waschen ");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		DAO dao = km.getDAO();
 		
-		Hotel h2 = dao.getHotelByName("CrazySharkyFish");
+		Hotel h2 = new Hotel();
+		try {
+			h2 = dao.getHotelByName("CrazySharkyFish");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		assertEquals(5, h2.getKategorie("Loft").getPreis());
 		assertEquals("Heu, Eimer zum Waschen ", h2.getKategorie("Loft").getAusstattung());
