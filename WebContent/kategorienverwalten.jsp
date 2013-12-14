@@ -21,7 +21,7 @@
   		</select> 
 	</p> -->
 	
-	<form action="http://localhost:8080/LittleSharkyFish/KategorieManagement" method="get">
+	<form action="http://localhost:8080/LittleSharkyFish/KategorieServlet" method="get">
 	
 		<table>
 			<tr>

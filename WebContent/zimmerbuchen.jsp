@@ -25,13 +25,13 @@
 		Kategorie kategorie = hotel.getKategorie(katName);
 	%>
 	
-	<form action="BuchungsManagement" method="get">	
+	<form action="BuchungsServlet" method="get">	
 		<input type="text" name="hotel" value="<%= hotelName %>" readonly="readonly">
 		<input type="text" name="kategorie" value="<%= katName %>" readonly="readonly"><br>
 	    <input type="text" name="day" title="Tag" style="color:#888;" value="Tag" onfocus="inputFocus(this)" onblur="inputBlur(this)"> 
 		<select name="months" size="1"  tabindex="1">
 			<option value="1">Jänner</option>
-			<option value="2">Feber</option>
+			<option value="2">Februar</option>
 			<option value="3">März</option>
 			<option value="4">April</option>
 			<option value="5">Mai</option>
