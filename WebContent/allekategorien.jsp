@@ -2,21 +2,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Kategorie" %>
-<%@ page import="hm.dao.DAO" %>
 <%@ page import="hm.dao.SerializedDAO" %>
-
-<%	
-	DAO dao = new SerializedDAO("data.ser");
-	ArrayList<Hotel> hList = dao.getHotelList();
-%>
-
-<!DOCTYPE html>
-
-<html>
-<head>
-	<title>Zimmer buchen</title>
-	<%@ include file="inc/head.jsp" %>
-</head>
+<%@ include file="inc/head.jsp" %>
+<% ArrayList<Hotel> hList = (new SerializedDAO("data.ser")).getHotelList(); %>
 
 <body>
 	<%@ include file="inc/nav.jsp" %>
@@ -32,7 +20,7 @@
 		<% for (Hotel h : hList) { %>
 			<h2>Hotel '<%= h.getName() %>'</h2>
 			
-			<table class="table hotel">
+			<table class="table table-striped hotel">
 				<thead>
 					<tr>
 						<th class="kategorie">Kategorie</th>
