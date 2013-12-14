@@ -2,6 +2,7 @@ package hm.tests;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
+import java.io.*;
 
 import hm.Hotel;
 import hm.Kategorie;
@@ -44,22 +45,30 @@ public class DAOTest1 {
 		katList.add(kat3);
 		hotel.setKategorien(katList);
 		
-		DAO dao = new SerializedDAO("testdata.ser");
-		dao.saveHotel(hotel);
+		try {
+			DAO dao = new SerializedDAO("testdata.ser");
+			dao.saveHotel(hotel);
 		
-		Hotel h2 = dao.getHotelByName("CrazySharkyFish");
-		ArrayList<Kategorie> katList2 = h2.getKategorien();
+			Hotel h2 = dao.getHotelByName("CrazySharkyFish");
+			ArrayList<Kategorie> katList2 = h2.getKategorien();
 		
-		for (Kategorie k : katList2) {
-			System.out.print(k.getName() + ": ");
+			for (Kategorie k : katList2) {
+				System.out.print(k.getName() + ": ");
 			
-			for (Entry<Integer, Zimmer> e : k.getZimmerMap().entrySet()) {
-				System.out.print(e.getKey() + " ");
+				for (Entry<Integer, Zimmer> e : k.getZimmerMap().entrySet()) {
+					System.out.print(e.getKey() + " ");
+				}
+			
+				System.out.println();
 			}
 			
-			System.out.println();
+		} catch (ClassNotFoundException e) {
+			
+		} catch (FileNotFoundException f) {
+			
+		} catch (IOException e) {
+			
 		}
-		
 	}
 
 }

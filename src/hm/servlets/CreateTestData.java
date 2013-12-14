@@ -6,6 +6,7 @@ import hm.Zimmer;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -94,24 +95,34 @@ public class CreateTestData extends HttpServlet {
 		h2.addKategorie(kat6);
 		h2.addKategorie(kat7);
 		
+		try {
+			//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
+			DAO dao = new SerializedDAO("data.ser");
+			//DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
+			dao.saveHotel(h1);
+			dao.saveHotel(h2);
 		
-		//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
-		DAO dao = new SerializedDAO("data.ser");
-		//DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
-		dao.saveHotel(h1);
-		dao.saveHotel(h2);
+			Hotel h3 = dao.getHotelByName("CrazySharkyFish");
+			ArrayList<Kategorie> katList = h3.getKategorien();
 		
-		Hotel h3 = dao.getHotelByName("CrazySharkyFish");
-		ArrayList<Kategorie> katList = h3.getKategorien();
-		
-		for (Kategorie k : katList) {
-			out.write(k.getName() + ": ");
+			for (Kategorie k : katList) {
+				out.write(k.getName() + ": ");
 			
-			for (Entry<Integer, Zimmer> e : k.getZimmerMap().entrySet()) {
-				out.write(e.getKey() + " ");
+				for (Entry<Integer, Zimmer> e : k.getZimmerMap().entrySet()) {
+					out.write(e.getKey() + " ");
+				}
+			
+				out.write("<br>");
 			}
-			
-			out.write("<br>");
+		
+		} catch (ClassNotFoundException e) {
+			out.write(e.getMessage());
+
+		} catch (FileNotFoundException e) {
+			out.write(e.getMessage());
+
+		} catch (IOException e) {
+			out.write(e.getMessage());
 		}
 	}
 }
