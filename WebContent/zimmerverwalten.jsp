@@ -38,7 +38,7 @@
 		$(document).ready(function() {
 			$(document).on("change", "select.set-kategorie", function() {
 				$.get(
-					"ZimmerManagement",
+					"ZimmerServlet",
 					{
 						action: "set",
 						zimmer: $(this).attr("data-zimmer"),
@@ -98,7 +98,7 @@
 					</select>
 				</td>
 				<td>
-					<form action="ZimmerManagement" method="get">
+					<form action="ZimmerServlet" method="get">
 						<input type="hidden" name="action" value="delete">
 						<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
 						<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
@@ -110,7 +110,7 @@
 		</table>
 		
 		
-		<form action="ZimmerManagement" method="get">
+		<form action="ZimmerServlet" method="get">
 			<table>
 				<tr>
 					<td>
