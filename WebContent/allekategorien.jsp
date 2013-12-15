@@ -4,7 +4,7 @@
 <%@ page import="hm.Kategorie" %>
 <%@ page import="hm.dao.SerializedDAO" %>
 
-<% ArrayList<Hotel> hList = (new SerializedDAO("data.ser")).getHotelList(); %>
+<% ArrayList<Hotel> hList = SerializedDAO.getInstance().getHotelList(); %>
 
 <!DOCTYPE html>
 <html>

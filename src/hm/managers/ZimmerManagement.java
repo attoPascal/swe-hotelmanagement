@@ -22,8 +22,8 @@ public class ZimmerManagement {
 	 * werden können, gibt es eine eigene Methode, die die Membervariable dao
 	 * instanziert
 	 */
-	public void instantiateDAO(String filename) throws IOException {
-		dao = new SerializedDAO(filename);
+	public void instantiateDAO() throws IOException {
+		dao = SerializedDAO.getInstance();
 	}
 
 	/**

@@ -97,7 +97,7 @@ public class CreateTestData extends HttpServlet {
 		
 		try {
 			//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
-			DAO dao = new SerializedDAO("data.ser");
+			DAO dao = SerializedDAO.getInstance();
 			//DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
 			dao.saveHotel(h1);
 			dao.saveHotel(h2);

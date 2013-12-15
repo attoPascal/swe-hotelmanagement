@@ -21,7 +21,7 @@ public class BuchungsManagement {
 	 * instanziert
 	 */
 	public void instantiateDAO(String filename) throws IOException {
-		dao = new SerializedDAO(filename);
+		dao = SerializedDAO.getInstance();
 	}
 
 	/**

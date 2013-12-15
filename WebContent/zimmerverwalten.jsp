@@ -8,7 +8,7 @@
 
 <%
 	ZimmerServlet zm = new ZimmerServlet();
-	zm.getManagement().instantiateDAO("data.ser");
+	zm.getManagement().instantiateDAO();
 	ArrayList<Hotel> hList = zm.getManagement().getDAO().getHotelList();
 	
 	String hotelName = request.getParameter("hotel");
