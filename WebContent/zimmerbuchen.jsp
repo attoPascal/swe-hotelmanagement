@@ -16,7 +16,7 @@
 
 <body>			
 	<%
-		DAO dao = new SerializedDAO("data.ser");
+		DAO dao = SerializedDAO.getInstance();
 		
 		String hotelName = request.getParameter("hotel");
 		String katName   = request.getParameter("kategorie");

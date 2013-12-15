@@ -8,7 +8,7 @@
 
 <%
 	KategorieServlet km = new KategorieServlet();
-	km.getManagement().instantiateDAO("data.ser");
+	km.getManagement().instantiateDAO();
 	ArrayList<Hotel> hList = km.getManagement().getDAO().getHotelList();
 %>
 

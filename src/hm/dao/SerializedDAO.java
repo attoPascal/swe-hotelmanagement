@@ -18,10 +18,15 @@ import java.util.Iterator;
  * benutzt
  */
 public class SerializedDAO implements DAO {
-	
+	private static SerializedDAO instance = null;
 	private File file;
-
-	public SerializedDAO(String filename) throws IOException {
+	
+	/**
+	 * Privater Konstruktor laut Singleton Pattern
+	 * @param filename Dateiname der Serialisierungsdatei
+	 * @throws IOException Bei Fehlern im Dateizugriff
+	 */
+	private SerializedDAO(String filename) throws IOException {
 
 		try {
 			file = new File(filename);
@@ -32,9 +37,25 @@ public class SerializedDAO implements DAO {
 			}
 
 		} catch (IOException e) {
-			throw new IOException(
-					"Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.constructor");
+			throw new IOException("Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.constructor");
 		}
+	}
+	
+	/**
+	 * GetInstance-Methode laut Singleton Pattern
+	 * @return SerializedDAO über Datei "data.ser"
+	 * @throws IOException Bei Fehlern im Dateizugriff
+	 */
+	public static SerializedDAO getInstance() throws IOException {
+		if (instance == null) {
+			try {
+				instance = new SerializedDAO("data.ser");
+			} catch (IOException e) {
+				throw new IOException("Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.getInstance");
+			}
+		}
+		
+		return instance;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -159,9 +180,7 @@ public class SerializedDAO implements DAO {
 
 	/**
 	 * Speichern in File
-	 * 
-	 * @param map
-	 *            HashMap, die in Datei gespeichert wird
+	 * @param map HashMap, die in Datei gespeichert wird
 	 */
 	void saveMap(HashMap<String, ArrayList<?>> map)
 			throws FileNotFoundException, IOException {

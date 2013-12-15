@@ -42,7 +42,7 @@ public class KategorieServlet extends HttpServlet {
 			 * hier wird instantiateDAO innerhalb des try-catch Blocks
 			 * aufgerufen
 			 */
-			management.instantiateDAO("data.ser");
+			management.instantiateDAO();
 
 			String action = request.getParameter("action");
 			String name = request.getParameter("name");

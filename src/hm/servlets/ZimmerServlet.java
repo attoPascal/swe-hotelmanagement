@@ -39,7 +39,7 @@ public class ZimmerServlet extends HttpServlet {
 			 * hier wird instantiateDAO innerhalb des try-catch Blocks
 			 * aufgerufen
 			 */
-			management.instantiateDAO("data.ser");
+			management.instantiateDAO();
 
 			String hotelName = request.getParameter("hotel");
 			String katName = request.getParameter("kategorie");
