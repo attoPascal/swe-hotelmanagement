@@ -1,38 +1,71 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="hm.Hotel" %>
+<%@ page import="hm.Kategorie" %>
+<%@ page import="hm.servlets.KategorieServlet" %>
+<%@ page import="hm.dao.DAO" %>
+
+<%
+	KategorieServlet km = new KategorieServlet();
+	km.getManagement().instantiateDAO("data.ser");
+	ArrayList<Hotel> hList = km.getManagement().getDAO().getHotelList();
+%>
 
 <!DOCTYPE html>
 
 <html>
 
 <head>
-  <title>UI Kategorien verwalten</title>
-  <meta name="description" content="Little Sharky Fish - SWE Projekt Hotelmanagement">
-  <meta charset="UTF-8">
+	<title>Kategorien verwalten</title>
+	<meta charset="UTF-8">
 </head>
 
 <body>
 
 	<h1>Kategorien verwalten</h1>
 
-	<!--  <p>Kategorie:<br>
-  		<select>
-    		<option>Presidential Suite</option>
-    		<option>Economy Room </option>
-  		</select> 
-	</p> -->
+	<% for (Hotel h : hList) { 
+			ArrayList<Kategorie> kList = h.getKategorien(); 
+	%>
+	<h3> <%= h.getName() %> </h3>
 	
+	<table>
+		<thead>
+			<tr>
+				<th class="kategorie">Name</th>
+				<th class="preis">Preis/Nacht</th>
+				<th class="ausstattung">Ausstattung</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<% for (Kategorie k : kList) { %>
+			<tr>
+				<td class="kategorie"><%= k.getName() %></td>
+				<td class="preis"><%= String.format("%.2f", k.getPreis()/100.0) %> &euro;</td>
+				<td class="ausstattung"><%= k.getAusstattung() %></td>
+				<td>
+					<form action="http://localhost:8080/LittleSharkyFish/KategorieServlet" method="get">
+						<input type="submit" name="action" value="delete">
+						<input type="hidden" name="name" value="<%= k.getName() %>">
+						<input type="hidden" name="hotel" value="<%= h.getName() %>">
+					</form>
+				</td>
+			</tr>
+			<% } %>
+		</tbody>
+	</table>	
+	<br><br>
+	<% } %>
+	
+	
+	
+	<!--
 	<form action="http://localhost:8080/LittleSharkyFish/KategorieServlet" method="get">
 	
 		<table>
 			<tr>
-    			<td>Hotel:</td>
-    			<td><input type="text" name="hotel"></td>
-  			</tr>
-  			<tr>
-    			<td>Name:</td>
-    			<td><input type="text" name="name"></td>
-  			</tr>
-  			<tr>
     			<td>Preis:</td>
     			<td><input type="text" name="preis" value=""></td>
   			</tr>
@@ -49,9 +82,10 @@
 	
     	<input type="submit" name="action" value="create">
 		<input type="submit" name="action" value="edit">
-		<input type="submit" name="action" value="delete">
+		
 	
 	</form>
+	-->
 
 </body>
 
