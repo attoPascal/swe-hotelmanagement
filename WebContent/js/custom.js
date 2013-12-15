@@ -9,7 +9,7 @@ $(document).ready(function() {
 				hotel: $("select.set-hotel").val()
 			},
 			function(response) {
-				$("textarea").text(response);
+				$("#response").text(response).slideDown().delay(2000).slideUp();
 			}
 		);
 	});
@@ -18,4 +18,6 @@ $(document).ready(function() {
 		$("#managerooms").load(
 			"zimmerverwalten.jsp?hotel=" + $(this).val() +" #managerooms");
 	});
+	
+	$("#response").hide();
 });

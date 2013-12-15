@@ -27,3 +27,11 @@ table.hotel td.buchen {
 	width: 20%;
 	text-align: right;
 }
+
+table.zimmer td.zimmer {
+	width: 75px;
+}
+
+table.zimmer td.button {
+	width: 50px;
+}
