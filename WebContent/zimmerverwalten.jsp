@@ -50,7 +50,7 @@
   			</div>
 		</form>
 		
-		<p id="response" class="text-success"></p>
+		<p id="response" class="alert alert-success"></p>
 		
 		<div id="manage">
 			<table class="zimmer table">
@@ -88,7 +88,6 @@
 				</tr>
 				<% } %>
 			</table>
-			
 			
 			<form action="ZimmerServlet" method="get">
 				<table class="zimmer table">
