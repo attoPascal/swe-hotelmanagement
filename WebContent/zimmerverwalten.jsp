@@ -79,7 +79,10 @@
 							<input type="hidden" name="action" value="delete">
 							<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
 							<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
-							<input type="submit" class="form-control btn btn-danger" value="-">
+							
+							<button type="submit" class="btn btn-danger">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
 						</form>
 					</td>
 				</tr>
@@ -104,7 +107,9 @@
 							</select>
 						</td>
 						<td class="button">
-							<input type="submit" value="+" class="form-control btn btn-success">
+							<button type="submit" class="btn btn-success">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
 						</td>
 					</tr>
 				</table>
