@@ -18,15 +18,22 @@ import java.util.Iterator;
  * benutzt
  */
 public class SerializedDAO implements DAO {
+	
 	private File file;
 
 	public SerializedDAO(String filename) throws IOException {
 
-		file = new File(filename);
-		if (!file.exists()) {
-			file.createNewFile();
+		try {
+			file = new File(filename);
 
-			this.saveMap(new HashMap<String, ArrayList<?>>());
+			if (!file.exists()) {
+				file.createNewFile();
+				this.saveMap(new HashMap<String, ArrayList<?>>());
+			}
+
+		} catch (IOException e) {
+			throw new IOException(
+					"Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.constructor");
 		}
 	}
 
@@ -34,8 +41,25 @@ public class SerializedDAO implements DAO {
 	@Override
 	public ArrayList<Hotel> getHotelList() throws FileNotFoundException,
 			IOException, ClassNotFoundException {
-		HashMap<String, ArrayList<?>> map = getMap();
-		ArrayList<Hotel> list = (ArrayList<Hotel>) map.get("hotels");
+		ArrayList<Hotel> list = null;
+		HashMap<String, ArrayList<?>> map = null;
+
+		try {
+			map = this.getMap();
+			list = (ArrayList<Hotel>) map.get("hotels");
+
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException(
+					"Derzeit sind keine Hotels gespeichert (SerializedDAO.getHotelList())");
+
+		} catch (IOException e) {
+			throw new IOException(
+					"Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.getHotelList())");
+
+		} catch (ClassNotFoundException e) {
+			throw new ClassNotFoundException(
+					"Die angeforderte Klasse wurde nicht gefunden (SerializedDAO.getHotelList())");
+		}
 
 		return (list != null) ? list : new ArrayList<Hotel>();
 	}
@@ -43,12 +67,25 @@ public class SerializedDAO implements DAO {
 	@Override
 	public Hotel getHotelByName(String name) throws FileNotFoundException,
 			IOException, ClassNotFoundException {
-		ArrayList<Hotel> list = this.getHotelList();
 
-		for (Hotel hotel : list) {
-			if (hotel.getName().equals(name)) {
-				return hotel;
-			}
+		try {
+			ArrayList<Hotel> list = this.getHotelList();
+
+			for (Hotel hotel : list)
+				if (hotel.getName().equals(name))
+					return hotel;
+
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException(
+					"Derzeit sind keine Hotels gespeichert (SerializedDAO.getHotelByName())");
+
+		} catch (IOException e) {
+			throw new IOException(
+					"Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.getHotelByName())");
+
+		} catch (ClassNotFoundException e) {
+			throw new ClassNotFoundException(
+					"Die angeforderte Klasse wurde nicht gefunden (SerializedDAO.getHotelByName())");
 		}
 
 		return null;
@@ -57,36 +94,65 @@ public class SerializedDAO implements DAO {
 	@Override
 	public void saveHotel(Hotel hotel) throws FileNotFoundException,
 			IOException, ClassNotFoundException {
-		HashMap<String, ArrayList<?>> map = getMap();
-		ArrayList<Hotel> list = this.getHotelList();
 
-		// altes Hotel aus Liste entfernen
-		Iterator<Hotel> it = list.iterator();
-		while (it.hasNext()) {
-			Hotel h = it.next();
-			if (h.getName().equals(hotel.getName())) {
-				it.remove();
+		try {
+			HashMap<String, ArrayList<?>> map = getMap();
+			ArrayList<Hotel> list = this.getHotelList();
+			// altes Hotel aus Liste entfernen
+			Iterator<Hotel> it = list.iterator();
+
+			while (it.hasNext()) {
+				Hotel h = it.next();
+				if (h.getName().equals(hotel.getName()))
+					it.remove();
 			}
+			// neues Hotel zu Liste hinzufuegen
+			list.add(hotel);
+
+			map.put("hotels", list);
+			this.saveMap(map);
+
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException(
+					"Derzeit sind keine Hotels gespeichert (SerializedDAO.saveHotel(Hotel hotel))");
+
+		} catch (IOException e) {
+			throw new IOException(
+					"Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.saveHotel(Hotel hotel))");
+
+		} catch (ClassNotFoundException e) {
+			throw new ClassNotFoundException(
+					"Die angeforderte Klasse wurde nicht gefunden (SerializedDAO.saveHotel(Hotel hotel))");
 		}
-
-		// neues Hotel zu Liste hinzufuegen
-		list.add(hotel);
-
-		map.put("hotels", list);
-		this.saveMap(map);
 	}
 
 	@SuppressWarnings("unchecked")
 	HashMap<String, ArrayList<?>> getMap() throws FileNotFoundException,
 			IOException, ClassNotFoundException {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
-		Object o = ois.readObject();
 
-		if (o instanceof HashMap<?, ?>) {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(
+					file));
+			Object o = ois.readObject();
+
+			if (o instanceof HashMap<?, ?>) {
+				ois.close();
+				return (HashMap<String, ArrayList<?>>) o;
+			}
 			ois.close();
-			return (HashMap<String, ArrayList<?>>) o;
+
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException(
+					"Derzeit sind keine Hotels gespeichert (SerializedDAO.getMap()");
+
+		} catch (IOException e) {
+			throw new IOException(
+					"Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.getMap()");
+
+		} catch (ClassNotFoundException e) {
+			throw new ClassNotFoundException(
+					"Die angeforderte Klasse wurde nicht gefunden (SerializedDAO.getMap()");
 		}
-		ois.close();
 
 		return null;
 	}
@@ -97,16 +163,22 @@ public class SerializedDAO implements DAO {
 	 * @param map
 	 *            HashMap, die in Datei gespeichert wird
 	 */
-	void saveMap(HashMap<String, ArrayList<?>> map) {
+	void saveMap(HashMap<String, ArrayList<?>> map)
+			throws FileNotFoundException, IOException {
+
 		try {
 			ObjectOutputStream oos = new ObjectOutputStream(
 					new FileOutputStream(file));
 			oos.writeObject(map);
 			oos.close();
+
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			throw new FileNotFoundException(
+					"Derzeit sind keine Hotels gespeichert (SerializedDAO.saveMap()");
+
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new IOException(
+					"Es gab ein Problem beim Zugriff auf die Datenbank (SerializedDAO.saveMap())");
 		}
 	}
 }

@@ -12,17 +12,15 @@
 	ArrayList<Hotel> hList = zm.getManagement().getDAO().getHotelList();
 	
 	String hotelName = request.getParameter("hotel");
-	Hotel hotel;
+	Hotel hotel = null;
 	
 	if (hotelName != null) {
 		hotel = zm.getManagement().getDAO().getHotelByName(hotelName);
+		
 	} else {
-		/*
-		* Wenn es keine Testdaten gibt, kommt hier eine IndexOutOfBoundsException
-		*/
-		hotel = hList.get(0);
+		hotel = new Hotel();
 	}
-
+	
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
 	ArrayList<Kategorie> kList = hotel.getKategorien();
 %>

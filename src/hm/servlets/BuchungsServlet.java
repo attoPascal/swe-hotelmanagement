@@ -78,6 +78,9 @@ public class BuchungsServlet extends HttpServlet {
 
 		} catch (IOException e) {
 			out.write(e.getMessage());
+			
+		} catch (NumberFormatException e) {
+			out.write(e.getMessage());
 		}
 	}
 }

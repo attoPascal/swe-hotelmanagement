@@ -81,6 +81,12 @@ public class ZimmerServlet extends HttpServlet {
 
 		} catch (IOException e) {
 			out.write(e.getMessage());
+			
+		} catch (NullPointerException e) {
+			out.write("Bitte wählen Sie eine Kategorie");
+			
+		} catch (NumberFormatException e) {
+			out.write("Bitte geben Sie eine Zimmernummer ein");
 		}
 	}
 

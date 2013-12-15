@@ -46,8 +46,6 @@ public class KategorieServlet extends HttpServlet {
 
 			String action = request.getParameter("action");
 			String name = request.getParameter("name");
-			int preis = Integer.parseInt(request.getParameter("preis"));
-			String ausstattung = request.getParameter("ausstattung");
 
 			/**
 			 * Hotel-Objekt aus dem Speicher holen
@@ -57,28 +55,33 @@ public class KategorieServlet extends HttpServlet {
 
 			if (action != null) {
 
-				if (action.equals("create")) {
-					management
-							.createCategority(hotel, name, ausstattung, preis);
-
-					out.write("Neue Kategorie erstellt\n");
-
-				} else if (action.equals("delete")) {
+				if (action.equals("delete")) {
 					management.removeKategorie(hotel, name);
 
 					out.write("Kategorie erfolgreich geloescht\n");
+				
+				} else {
+					int preis = Integer.parseInt(request.getParameter("preis"));
+					String ausstattung = request.getParameter("ausstattung");
+					
+					if (action.equals("create")) {
+						management
+								.createCategority(hotel, name, ausstattung, preis);
 
-				} else if (action.equals("edit")) {
-					String newName = request.getParameter("newname");
+						out.write("Neue Kategorie erstellt\n");
 
-					management.editCategory(hotel, name, newName, preis,
-							ausstattung);
+					} else if (action.equals("edit")) {
+						String newName = request.getParameter("newname");
 
-					out.write("Kategorie bearbeitet\n");
-					out.write("Fuer Hotel: " + hotel + "\n");
-					out.write("Neuer Name: " + newName + "\n");
-					out.write("Preis " + preis + "\n");
-					out.write("Ausstattung: " + ausstattung);
+						management.editCategory(hotel, name, newName, preis,
+								ausstattung);
+
+						out.write("Kategorie bearbeitet\n");
+						out.write("Fuer Hotel: " + hotel + "\n");
+						out.write("Neuer Name: " + newName + "\n");
+						out.write("Preis " + preis + "\n");
+						out.write("Ausstattung: " + ausstattung);
+					}
 				}
 
 			} else {
@@ -98,8 +101,12 @@ public class KategorieServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 			out.write("Bitte geben Sie eine Zahl im Preisfeld ein");
 
-		} catch (NullPointerException e) {
+		} /*catch (NullPointerException e) {
 			out.write("Hotel nicht vorhanden");
-		}
+		}*/
+	}
+	
+	public KategorieManagement getManagement() {
+		return management;
 	}
 }
