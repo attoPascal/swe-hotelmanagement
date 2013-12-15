@@ -100,7 +100,7 @@
 						</td>
 						<td class="kategorie">
 							<select name="kategorie" class="form-control">
-								<option>- Kategorie -</option>
+								<option value="" selected disabled>Bitte auswählen:</option>
 								<% for (Kategorie k : kList) { %>
 								<option value="<%= k.getName() %>"><%= k.getName() %></option>
 								<% } %>
