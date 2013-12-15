@@ -50,19 +50,15 @@ public class ZimmerServlet extends HttpServlet {
 				switch (action) {
 				case "create":
 					management.createZimmer(hotelName, zimmerNummer);
-					management.setZimmerKategorie(hotelName, katName,
-							zimmerNummer);
-					response.sendRedirect("zimmerverwalten.jsp?hotel="
-							+ hotelName);
+					management.setZimmerKategorie(hotelName, katName, zimmerNummer);
+					response.sendRedirect("zimmerverwalten.jsp?hotel=" + hotelName);
 					break;
 				case "delete":
 					management.deleteZimmer(hotelName, zimmerNummer);
-					response.sendRedirect("zimmerverwalten.jsp?hotel="
-							+ hotelName);
+					response.sendRedirect("zimmerverwalten.jsp?hotel=" + hotelName);
 					break;
 				case "set":
-					management.setZimmerKategorie(hotelName, katName,
-							zimmerNummer);
+					management.setZimmerKategorie(hotelName, katName, zimmerNummer);
 					out.write("Kategorie geaendert\n");
 					break;
 				default:

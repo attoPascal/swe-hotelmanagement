@@ -10,6 +10,19 @@
 	KategorieServlet km = new KategorieServlet();
 	km.getManagement().instantiateDAO();
 	ArrayList<Hotel> hList = km.getManagement().getDAO().getHotelList();
+	
+	String hotelName = request.getParameter("hotel");
+	Hotel hotel = null;
+	
+	if (hotelName != null) {
+		hotel = km.getManagement().getDAO().getHotelByName(hotelName);
+		
+	} else {
+		//wenn kein Hotel spezifiziert: erstes aus Liste wählen
+		hotel = hList.get(0);
+	}
+	
+	ArrayList<Kategorie> kList = hotel.getKategorien();
 %>
 
 <!DOCTYPE html>
@@ -24,69 +37,89 @@
 	<main class="container">
 		<h1>Kategorien verwalten</h1>
 	
-		<% for (Hotel h : hList) { 
-				ArrayList<Kategorie> kList = h.getKategorien(); 
-		%>
-		<h3> <%= h.getName() %> </h3>
+		<form>
+			<div class="form-group">
+    			<label for="setHotel">Hotel auswählen:</label>
+    			<select name="hotel" class="set-hotel form-control" id="setHotel">
+    				<% for (Hotel h : hList) { 
+					String selected = (h.getName().equals(hotel.getName())) ? "selected=\"selected\"" : "";
+					%>
+					<option value="<%= h.getName() %>"<%= selected %>><%= h.getName() %></option>
+					<% } %>
+				</select>
+  			</div>
+		</form>
 		
-		<table>
-			<thead>
-				<tr>
-					<th class="kategorie">Name</th>
-					<th class="preis">Preis/Nacht</th>
-					<th class="ausstattung">Ausstattung</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<% for (Kategorie k : kList) { %>
-				<tr>
-					<td class="kategorie"><%= k.getName() %></td>
-					<td class="preis"><%= String.format("%.2f", k.getPreis()/100.0) %> &euro;</td>
-					<td class="ausstattung"><%= k.getAusstattung() %></td>
-					<td>
-						<form action="http://localhost:8080/LittleSharkyFish/KategorieServlet" method="get">
-							<input type="submit" name="action" value="delete">
-							<input type="hidden" name="name" value="<%= k.getName() %>">
-							<input type="hidden" name="hotel" value="<%= h.getName() %>">
+		<div id="manage">	
+			<table class="kategorie table">
+				<thead>
+					<tr>
+						<th class="kategorie">Name</th>
+						<th class="preis">Preis/Nacht</th>
+						<th class="ausstattung">Ausstattung</th>
+						<th class="button1"></th>
+						<th class="button2"></th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<% for (Kategorie k : kList) { %>
+					<tr>
+						<form action="KategorieServlet" method="get">
+							<td class="kategorie">
+								<input type="hidden" name="name"  value="<%= k.getName() %>">
+								<input type="text" name="newname" value="<%= k.getName() %>" class="form-control">
+							</td>
+							<td class="preis">
+								<input type="number" name="preis" value="<%= k.getPreis() %>" class="form-control">
+							</td>
+							<td class="ausstattung">
+								<input type="text" name="ausstattung" value="<%= k.getAusstattung() %>" class="form-control">
+							</td>
+							<td class="button1">
+								<button type="submit" name="action" value="edit" class="btn btn-primary">
+									<span class="glyphicon glyphicon-ok"></span>
+								</button>
+							</td>
+							<td class="button2">
+								<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
+								<button type="submit" name="action" value="delete" class="btn btn-danger">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+	
+							</td>
 						</form>
-					</td>
-				</tr>
-				<% } %>
-			</tbody>
-		</table>	
-		<br><br>
-		<% } %>
-	</main>
-	
-	
-	
-	<!--
-	<form action="http://localhost:8080/LittleSharkyFish/KategorieServlet" method="get">
-	
-		<table>
-			<tr>
-    			<td>Preis:</td>
-    			<td><input type="text" name="preis" value=""></td>
-  			</tr>
-  			<tr>
-    			<td>Neuer Name:</td>
-    			<td><input type="text" name="newname"></td>
-  			</tr>
-		</table>
-
-		<div>Ausstattung:<br>
-  			<textarea cols="50" rows="5" name="ausstattung"></textarea>
+					</tr>
+					<% } %>
+				</tbody>
+			</table>
+			
+			<form action="KategorieServlet" method="get" accept-charset="UTF-8">
+				<table class="kategorie table">
+					<tbody>
+						<tr>
+							<td class="name">
+								<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
+								<input type="text" name="name" class="form-control" placeholder="Name">
+							</td>
+							<td class="preis">
+								<input type="number" name="preis" value="" class="form-control" placeholder="Preis/Nacht">
+							</td>
+							<td class="ausstattung">
+								<input type="text" name="ausstattung" value="" class="form-control" placeholder="Ausstattung">
+							</td>
+							<td class="button1">
+								<button type="submit" name="action" value="create" class="btn btn-success">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+							</td>
+							<td class="button2"></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 		</div>
-
-	
-    	<input type="submit" name="action" value="create">
-		<input type="submit" name="action" value="edit">
-		
-	
-	</form>
-	-->
-
+	</main>
 </body>
 
 </html>
