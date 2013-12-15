@@ -18,7 +18,8 @@
 		hotel = zm.getManagement().getDAO().getHotelByName(hotelName);
 		
 	} else {
-		hotel = new Hotel();
+		//wenn kein Hotel spezifiziert: erstes aus Liste wählen
+		hotel = hList.get(0);
 	}
 	
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
@@ -39,7 +40,7 @@
 		<form>
 			<div class="form-group">
     			<label for="setHotel">Hotel auswählen:</label>
-    			<select size="1" name="hotel" class="set-hotel form-control input-lg" id="setHotel">
+    			<select name="hotel" class="set-hotel form-control" id="setHotel">
     				<% for (Hotel h : hList) { 
 					String selected = (h.getName().equals(hotel.getName())) ? "selected=\"selected\"" : "";
 					%>
@@ -47,38 +48,38 @@
 					<% } %>
 				</select>
   			</div>
-  			
-  			<textarea class="form-control" rows="1" id="response"></textarea>
 		</form>
 		
+		<p id="response" class="text-success"></p>
+		
 		<div id="managerooms">
-			<table class="table">
+			<table class="zimmer table">
 				<tr>
-					<th>Zimmer</th>
-					<th>Kategorie</th>
-					<th></th>
+					<th class="zimmer">Zimmer</th>
+					<th class="kategorie">Kategorie</th>
+					<th class="button"></th>
 				</tr>
 		
 				<% for (Zimmer z : zList) { %>
 				<tr>
-					<td>
-						<input type="text" class="form-control" value="<%= z.getNummer() %>" size="4" readonly="readonly">
+					<td class="zimmer">
+						<input type="text" class="form-control" value="<%= z.getNummer() %>" readonly>
 					</td>
-					<td>
-						<select size="1" class="set-kategorie form-control" data-zimmer="<%= z.getNummer() %>">
+					<td class="kategorie">
+						<select class="set-kategorie form-control" data-zimmer="<%= z.getNummer() %>">
 							<% for (Kategorie k : kList) {
-								String selected = (k.hasZimmer(z.getNummer())) ? "selected=\"selected\"" : "";
+								String selected = (k.hasZimmer(z.getNummer())) ? " selected" : "";
 							%>
 							<option value="<%= k.getName() %>"<%= selected %>><%= k.getName() %></option>
 							<% } %>
 						</select>
 					</td>
-					<td>
+					<td class="button">
 						<form action="ZimmerServlet" method="get">
 							<input type="hidden" name="action" value="delete">
 							<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
 							<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
-							<input type="submit" class="form-control btn btn-primary" value="-">
+							<input type="submit" class="form-control btn btn-danger" value="-">
 						</form>
 					</td>
 				</tr>
@@ -87,23 +88,23 @@
 			
 			
 			<form action="ZimmerServlet" method="get">
-				<table>
+				<table class="zimmer table">
 					<tr>
-						<td>
+						<td class="zimmer">
 							<input type="hidden" name="action" value="create">
 							<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
-							<input type="text" name="zimmer" size="4">
+							<input type="text" name="zimmer" class="form-control">
 						</td>
-						<td>
-							<select name="kategorie" size="1">
+						<td class="kategorie">
+							<select name="kategorie" class="form-control">
 								<option>- Kategorie -</option>
 								<% for (Kategorie k : kList) { %>
 								<option value="<%= k.getName() %>"><%= k.getName() %></option>
 								<% } %>
 							</select>
 						</td>
-						<td>
-							<input type="submit" value="+">
+						<td class="button">
+							<input type="submit" value="+" class="form-control btn btn-success">
 						</td>
 					</tr>
 				</table>
