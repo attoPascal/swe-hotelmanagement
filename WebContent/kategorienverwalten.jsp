@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="hm.Hotel" %>
@@ -16,48 +16,48 @@
 
 <html>
 
-<head>
-	<title>Kategorien verwalten</title>
-	<meta charset="UTF-8">
-</head>
+<%@ include file="inc/head.jsp" %>
 
 <body>
-
-	<h1>Kategorien verwalten</h1>
-
-	<% for (Hotel h : hList) { 
-			ArrayList<Kategorie> kList = h.getKategorien(); 
-	%>
-	<h3> <%= h.getName() %> </h3>
+	<%@ include file="inc/nav.jsp" %>
 	
-	<table>
-		<thead>
-			<tr>
-				<th class="kategorie">Name</th>
-				<th class="preis">Preis/Nacht</th>
-				<th class="ausstattung">Ausstattung</th>
-			</tr>
-		</thead>
+	<main class="container">
+		<h1>Kategorien verwalten</h1>
+	
+		<% for (Hotel h : hList) { 
+				ArrayList<Kategorie> kList = h.getKategorien(); 
+		%>
+		<h3> <%= h.getName() %> </h3>
 		
-		<tbody>
-			<% for (Kategorie k : kList) { %>
-			<tr>
-				<td class="kategorie"><%= k.getName() %></td>
-				<td class="preis"><%= String.format("%.2f", k.getPreis()/100.0) %> &euro;</td>
-				<td class="ausstattung"><%= k.getAusstattung() %></td>
-				<td>
-					<form action="http://localhost:8080/LittleSharkyFish/KategorieServlet" method="get">
-						<input type="submit" name="action" value="delete">
-						<input type="hidden" name="name" value="<%= k.getName() %>">
-						<input type="hidden" name="hotel" value="<%= h.getName() %>">
-					</form>
-				</td>
-			</tr>
-			<% } %>
-		</tbody>
-	</table>	
-	<br><br>
-	<% } %>
+		<table>
+			<thead>
+				<tr>
+					<th class="kategorie">Name</th>
+					<th class="preis">Preis/Nacht</th>
+					<th class="ausstattung">Ausstattung</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<% for (Kategorie k : kList) { %>
+				<tr>
+					<td class="kategorie"><%= k.getName() %></td>
+					<td class="preis"><%= String.format("%.2f", k.getPreis()/100.0) %> &euro;</td>
+					<td class="ausstattung"><%= k.getAusstattung() %></td>
+					<td>
+						<form action="http://localhost:8080/LittleSharkyFish/KategorieServlet" method="get">
+							<input type="submit" name="action" value="delete">
+							<input type="hidden" name="name" value="<%= k.getName() %>">
+							<input type="hidden" name="hotel" value="<%= h.getName() %>">
+						</form>
+					</td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>	
+		<br><br>
+		<% } %>
+	</main>
 	
 	
 	
