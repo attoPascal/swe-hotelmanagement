@@ -46,19 +46,20 @@ public class KategorieServlet extends HttpServlet {
 
 			String action = request.getParameter("action");
 			String name = request.getParameter("name");
+			String hotelName = request.getParameter("hotel");
 
 			/**
 			 * Hotel-Objekt aus dem Speicher holen
 			 */
-			Hotel hotel = management.getDAO().getHotelByName(
-					request.getParameter("hotel"));
+			Hotel hotel = management.getDAO().getHotelByName(hotelName);
 
 			if (action != null) {
 
 				if (action.equals("delete")) {
 					management.removeKategorie(hotel, name);
 
-					out.write("Kategorie erfolgreich geloescht\n");
+					//out.write("Kategorie erfolgreich geloescht\n");
+					response.sendRedirect("kategorienverwalten.jsp?hotel=" + hotelName);
 				
 				} else {
 					int preis = Integer.parseInt(request.getParameter("preis"));
@@ -68,7 +69,8 @@ public class KategorieServlet extends HttpServlet {
 						management
 								.createCategority(hotel, name, ausstattung, preis);
 
-						out.write("Neue Kategorie erstellt\n");
+						//out.write("Neue Kategorie erstellt\n");
+						response.sendRedirect("kategorienverwalten.jsp?hotel=" + hotelName);
 
 					} else if (action.equals("edit")) {
 						String newName = request.getParameter("newname");
@@ -76,11 +78,12 @@ public class KategorieServlet extends HttpServlet {
 						management.editCategory(hotel, name, newName, preis,
 								ausstattung);
 
-						out.write("Kategorie bearbeitet\n");
-						out.write("Fuer Hotel: " + hotel + "\n");
-						out.write("Neuer Name: " + newName + "\n");
-						out.write("Preis " + preis + "\n");
-						out.write("Ausstattung: " + ausstattung);
+						//out.write("Kategorie bearbeitet\n");
+						//out.write("Fuer Hotel: " + hotel + "\n");
+						//out.write("Neuer Name: " + newName + "\n");
+						//out.write("Preis " + preis + "\n");
+						//out.write("Ausstattung: " + ausstattung);
+						response.sendRedirect("kategorienverwalten.jsp?hotel=" + hotelName);
 					}
 				}
 

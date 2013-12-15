@@ -15,8 +15,8 @@ $(document).ready(function() {
 	});
 	
 	$("select.set-hotel").change(function() {
-		$("#managerooms").load(
-			"zimmerverwalten.jsp?hotel=" + $(this).val() +" #managerooms");
+		$("#manage").load(
+			"?hotel=" + $(this).val() +" #manage");
 	});
 	
 	$("#response").hide();
