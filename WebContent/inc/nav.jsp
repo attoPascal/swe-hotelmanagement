@@ -11,9 +11,15 @@
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Gäste</a></li>
-				<li><a href="admin.html">Hoteliers</a></li>
-				<li><a href="#contact">Analysten</a></li>
+				<li><a href="allekategorien.jsp">Gäste</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hoteliers <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="kategorienverwalten.jsp">Kategorien verwalten</a></li>
+						<li><a href="zimmerverwalten.jsp">Zimmer verwalten</a></li>
+					</ul>
+				</li>
+				<li><a href="#">Analysten</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Debugging <b class="caret"></b></a>
 					<ul class="dropdown-menu">

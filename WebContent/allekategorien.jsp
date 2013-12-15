@@ -3,8 +3,13 @@
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Kategorie" %>
 <%@ page import="hm.dao.SerializedDAO" %>
-<%@ include file="inc/head.jsp" %>
+
 <% ArrayList<Hotel> hList = (new SerializedDAO("data.ser")).getHotelList(); %>
+
+<!DOCTYPE html>
+<html>
+
+<%@ include file="inc/head.jsp" %>
 
 <body>
 	<%@ include file="inc/nav.jsp" %>
