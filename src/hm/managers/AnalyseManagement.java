@@ -28,6 +28,11 @@ public class AnalyseManagement {
 	}
 
 	
+	
+	public int getNumberOfRooms(Hotel hotel){
+		return hotel.getZimmerList().size();
+	}
+	
 	/**
 	 * Gibt einem eine Liste mit gebuchten Zimmern in einer gewissen Zeitspanne zurück
 	 * 
@@ -72,6 +77,13 @@ public class AnalyseManagement {
 		return fzlist;
 	}
 	
+	/**
+	 * Gibt eine ArrayListe mit allen Buchungen zu einem gewissen Zeitraum in einem Hotel zurück
+	 * 
+	 * @param hotel
+	 * @param aufenthalt
+	 * @return
+	 */
 	public ArrayList<Buchung> getBookings(Hotel hotel, Aufenthalt aufenthalt){
 
 		ArrayList<Zimmer> zlist = getBookedRooms(hotel, aufenthalt);
@@ -85,6 +97,13 @@ public class AnalyseManagement {
 		return buchungen;
 	}
 	
+	/**
+	 * Gibt die Anzahl der Buchungen zu einem gewissen Zeitraum in einem Hotel zurück
+	 * 
+	 * @param hotel
+	 * @param aufenthalt
+	 * @return
+	 */
 	public int getNumberOfBookings(Hotel hotel, Aufenthalt aufenthalt){
 		int buchungen = 0;
 	
@@ -93,4 +112,46 @@ public class AnalyseManagement {
 		return buchungen;
 	}
 	
+	/**
+	 * Gibt die Einkünfte eines Hotels über einen gewissen Zeitraum zurück
+	 * @param hotel
+	 * @param aufenthalt
+	 * @return
+	 */
+	public int getTotalRevenue(Hotel hotel, Aufenthalt aufenthalt){
+		int revenue = 0;
+		
+		ArrayList<Buchung> buchungen = getBookings(hotel, aufenthalt);
+		
+		for (Buchung buchung : buchungen){
+			
+			revenue += buchung.getKosten();
+			
+		}
+		
+		return revenue;
+	}
+	
+	/**
+	 * Gibt die Anzahl an möglichen Buchungen einer gewissen Dauer zu einem gewissen Zeitpunkt für ein Hotel zurück
+	 * 
+	 * @param hotel
+	 * @param aufenthalt
+	 * @param dauer
+	 * @return
+	 */
+	public int getPossibleBookings(Hotel hotel, Aufenthalt aufenthalt, int dauer){
+		int gebucht = 0;
+		ArrayList<Buchung> blist = getBookings(hotel, aufenthalt);
+		
+		for(Buchung buchung : blist){
+			
+			gebucht += buchung.getAufenthalt().getDays();
+			
+		}
+		
+		int days = getNumberOfRooms(hotel) * aufenthalt.getDays();
+		
+		return (days-gebucht)/dauer;
+	}
 }
