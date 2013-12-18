@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import hm.Hotel;
+import hm.users.AbstractUser;
 
 /**
  * Generisches Interface zur konsistenten Datenspeicherung
@@ -12,27 +13,39 @@ import hm.Hotel;
 public interface DAO {
 	
 	/**
-	 * @return Arraylist, in der die Hotels gespeichert werden
-	 */
-	public ArrayList<Hotel> getHotelList() throws FileNotFoundException, IOException, ClassNotFoundException;
-	
-	/**
 	 * Sucht ein Hotel anhand des Namens
-	 * @param name des Hotels
-	 * @return true, wenn Hotel gefunden wird
+	 * @param Name des Hotels
+	 * @return das Hotel, wenn es gefunden wurde
 	 */
 	public Hotel getHotelByName(String name) throws FileNotFoundException, IOException, ClassNotFoundException;
 	
 	/**
+	 * Gibt alle Hotels aus der konstistenten Datenspeicherung in Form einer ArrayList zurück
+	 * @return ArrayList mit allen Hotels
+	 */
+	public ArrayList<Hotel> getHotelList() throws FileNotFoundException, IOException, ClassNotFoundException;
+	
+	/**
+	 * Gibt alle User aus der konstistenten Datenspeicherung in Form einer ArrayList zurück
+	 * @return ArrayList mit allen Usern
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	ArrayList<AbstractUser> getUserList() throws FileNotFoundException, IOException, ClassNotFoundException;
+	
+	/**
+	 * Speichert ein Hotel
 	 * @param hotel Hotel-Objekt, das gespeichert wird
 	 */
 	public void saveHotel(Hotel hotel) throws FileNotFoundException, IOException, ClassNotFoundException;
 	
-	/*
-	public ArrayList<Kategorie> getKatList();
-
-	public Kategorie getKatByName();
-	
-	public void saveKategorie(Kategorie kat);
-	*/
+	/**
+	 * Speichert einen User 
+	 * @param user AbstractUser-Object, das gespeichert wird
+	 * @throws ClassNotFoundException 
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 */
+	public void saveUser(AbstractUser user) throws FileNotFoundException, IOException, ClassNotFoundException;
 }
