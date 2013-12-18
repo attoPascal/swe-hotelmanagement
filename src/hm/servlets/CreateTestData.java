@@ -5,6 +5,7 @@ import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
+import hm.users.Hotelier;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,14 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/CreateTestData")
 public class CreateTestData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CreateTestData() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -95,12 +88,17 @@ public class CreateTestData extends HttpServlet {
 		h2.addKategorie(kat6);
 		h2.addKategorie(kat7);
 		
+		Hotelier u1 = new Hotelier("Franz", "pwd1", true, true);
+		u1.addHotel(h1);
+		u1.addHotel(h2);
+		
 		try {
 			//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
 			DAO dao = SerializedDAO.getInstance();
 			//DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
 			dao.saveHotel(h1);
 			dao.saveHotel(h2);
+			dao.saveUser(u1);
 		
 			Hotel h3 = dao.getHotelByName("CrazySharkyFish");
 			ArrayList<Kategorie> katList = h3.getKategorien();
@@ -113,6 +111,13 @@ public class CreateTestData extends HttpServlet {
 				}
 			
 				out.write("<br>");
+			}
+			
+			Hotelier u2 = (Hotelier) dao.getUserList().get(0);
+			out.write("Hotelier '" + u2.getUsername() + "' verwaltet folgende Hotels:<br>");
+			
+			for (String s : u2.getHotels()) {
+				out.write(s + " ");
 			}
 		
 		} catch (ClassNotFoundException e) {

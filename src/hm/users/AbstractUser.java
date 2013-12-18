@@ -1,19 +1,35 @@
 package hm.users;
 
+import java.io.Serializable;
+
 /**
  * Generischer Benutzer
  */
-public abstract class AbstractUser {
+public abstract class AbstractUser implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Benutzername des Benutzers
 	 */
-	protected String username;
+	private String username;
 	
 	/**
 	 * Passwort des Benutzers
 	 */
-	protected String password;
+	private String password;
+	
+	/**
+	 * Konstruiert einen neuen User
+	 * @param username Username
+	 * @param password Passwort
+	 */
+	public AbstractUser(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 
 	/**
 	 * @return Name (username) des Benutzers

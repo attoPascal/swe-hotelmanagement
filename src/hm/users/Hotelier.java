@@ -7,42 +7,42 @@ import java.util.ArrayList;
 /**
  * Benutzer Hotelier, kann seine zugeordneten Hotels verwalten
  */
-public class Hotelier extends AbstractUser{
+public class Hotelier extends AbstractUser {
 
-	private boolean  canCreateCategory, canEditCategory,canRemoveCategory,canCreateRoom,canDeleteRoom;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private boolean canManageCategories;
+	private boolean canManageRooms;
 
-	private ArrayList<Hotel> hotels = new ArrayList<Hotel>();
+	private ArrayList<String> hotels = new ArrayList<String>();
 
-	public Hotelier(boolean canCreateCategory, boolean canEditCategory,
-			boolean canRemoveCategory, boolean canCreateRoom,
-			boolean canDeleteRoom) {
-		super();
-		this.canCreateCategory = canCreateCategory;
-		this.canEditCategory = canEditCategory;
-		this.canRemoveCategory = canRemoveCategory;
-		this.canCreateRoom = canCreateRoom;
-		this.canDeleteRoom = canDeleteRoom;
-		hotels.add(new Hotel());
+	public Hotelier(String username, String password, boolean canManageCategories, boolean canManageRooms) {
+		super(username, password);
+		this.canManageCategories = canManageCategories;
+		this.canManageRooms = canManageRooms;
 	}
 	
 	/**
 	 * @param hotel Hotel, das dem Hotelier-Objekt hinzugefuegt wird
 	 */
 	public void addHotel(Hotel hotel){	
-		hotels.add(hotel);
+		hotels.add(hotel.getName());
 	}
 	
 	/**
 	 * @param hotel Hotel, das entfernt wird
 	 */
 	public void removeHotel(Hotel hotel){	
-		hotels.remove(hotel);	
+		hotels.remove(hotel.getName());	
 	}
 	
 	/**
 	 * @return Gibt ArrayList an Hotels zurueck, die dem Hotelier zugewiesen sind
 	 */
-	public ArrayList<Hotel> getHotels() {
+	public ArrayList<String> getHotels() {
 		return hotels;
 	}
 
@@ -50,78 +50,38 @@ public class Hotelier extends AbstractUser{
 	 * @param hotels
 	 */
 	public void setHotels(ArrayList<Hotel> hotels) {
-		this.hotels = hotels;
+		this.hotels = new ArrayList<String>();
+		
+		for (Hotel h : hotels) {
+			this.hotels.add(h.getName());
+		}
 	}
 
 	/**
-	 * @return Berechtigung, Kategorien zu erstellen
+	 * @return Berechtigung, Kategorien zu verwalten
 	 */
-	public boolean isCanCreateCategory() {
-		return canCreateCategory;
+	public boolean isCanManageCategories() {
+		return canManageCategories;
 	}
 
 	/**
 	 * @param canCreateCategory this
 	 */
-	public void setCanCreateCategory(boolean canCreateCategory) {
-		this.canCreateCategory = canCreateCategory;
+	public void setCanManageCategories(boolean canManageCategories) {
+		this.canManageCategories = canManageCategories;
 	}
-
-	/**
-	 * @return Berechtigung, Kategorien zu veraendern
-	 */
-	public boolean isCanEditCategory() {
-		return canEditCategory;
-	}
-
-	/**
-	 * @param canEditCategory this
-	 */
-	public void setCanEditCategory(boolean canEditCategory) {
-		this.canEditCategory = canEditCategory;
-	}
-
-	/**
-	 * @return Berechtigung, Kategorien zu loeschen
-	 */
-	public boolean isCanRemoveCategory() {
-		return canRemoveCategory;
-	}
-
-	/**
-	 * @param canRemoveCategory this
-	 */
-	public void setCanRemoveCategory(boolean canRemoveCategory) {
-		this.canRemoveCategory = canRemoveCategory;
-	}
-
-	/**
-	 * @return Berechtigung, Zimmer zu erstellen
-	 */
-	public boolean isCanCreateRoom() {
-		return canCreateRoom;
-	}
-
-	/**
-	 * @param canCreateRoom this
-	 */
-	public void setCanCreateRoom(boolean canCreateRoom) {
-		this.canCreateRoom = canCreateRoom;
-	}
-
-	/**
-	 * @return Berechtigung, Zimmer zu loeschen
-	 */
-	public boolean isCanDeleteRoom() {
-		return canDeleteRoom;
-	}
-
-	/**
-	 * @param canDeleteRoom this
-	 */
-	public void setCanDeleteRoom(boolean canDeleteRoom) {
-		this.canDeleteRoom = canDeleteRoom;
-	}
-
 	
+	/**
+	 * @return Berechtigung, Räume zu verwalten
+	 */
+	public boolean isCanManageRooms() {
+		return canManageRooms;
+	}
+
+	/**
+	 * @param canCreateCategory this
+	 */
+	public void setCanManageRooms(boolean canManageRooms) {
+		this.canManageRooms = canManageRooms;
+	}
 }

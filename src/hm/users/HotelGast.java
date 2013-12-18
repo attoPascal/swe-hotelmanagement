@@ -6,12 +6,16 @@ import hm.Buchung;
  * Benutzer Hotelgast, kann Buchungen vornehmen
  */
 public class HotelGast extends AbstractUser{
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Buchung buchung;
 	private String zahlungsdaten;
 	
-	public HotelGast(Buchung buchung, String zahlungsdaten) {
-		super();
+	public HotelGast(String username, String password, Buchung buchung, String zahlungsdaten) {
+		super(username, password);
 		this.buchung = buchung;
 		this.zahlungsdaten = zahlungsdaten;
 	}
