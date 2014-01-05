@@ -3,10 +3,20 @@
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Zimmer" %>
 <%@ page import="hm.Kategorie" %>
+<%@ page import="hm.users.Hotelier" %>
 <%@ page import="hm.servlets.ZimmerServlet" %>
 <%@ page import="hm.dao.DAO" %>
 
 <%
+	//Rechte überprüfen:
+	//Hotelier mit canManageRooms
+	Object user = session.getAttribute("user");
+	if (!(user instanceof Hotelier) || !((Hotelier) user).isCanManageRooms()) {
+		session.setAttribute("alert", "Zugriff verweigert. Bitte melden Sie sich als Hotelier mit den nötigen Rechten an, um auf diese Seite zuzugreifen.");
+		session.setAttribute("redirect", "zimmerverwalten.jsp");
+		response.sendRedirect("login.jsp");
+	}
+
 	ZimmerServlet zm = new ZimmerServlet();
 	zm.getManagement().instantiateDAO();
 	ArrayList<Hotel> hList = zm.getManagement().getDAO().getHotelList();

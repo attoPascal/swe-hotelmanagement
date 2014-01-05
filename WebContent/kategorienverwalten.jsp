@@ -3,10 +3,20 @@
 <%@ page import="java.io.PrintWriter" %>
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Kategorie" %>
+<%@ page import="hm.users.Hotelier" %>
 <%@ page import="hm.servlets.KategorieServlet" %>
 <%@ page import="hm.dao.DAO" %>
 
 <%
+	//Rechte überprüfen:
+	//Hotelier mit canManageCategories
+	Object user = session.getAttribute("user");
+	if (!(user instanceof Hotelier) || !((Hotelier) user).isCanManageCategories()) {
+		session.setAttribute("alert", "Zugriff verweigert. Bitte melden Sie sich als Hotelier mit den nötigen Rechten an, um auf diese Seite zuzugreifen.");
+		session.setAttribute("redirect", "kategorienverwalten.jsp");
+		response.sendRedirect("login.jsp");
+	}
+
 	KategorieServlet km = new KategorieServlet();
 	km.getManagement().instantiateDAO();
 	ArrayList<Hotel> hList = km.getManagement().getDAO().getHotelList();
