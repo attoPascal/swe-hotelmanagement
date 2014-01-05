@@ -1,3 +1,5 @@
+<%@ page import="hm.users.AbstractUser" %>
+
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
@@ -24,9 +26,21 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Debugging <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="CreateTestData" target="_blank">Testdaten erstellen</a></li>
+						<li><a href="login.jsp">Login</a></li>
 					</ul>
 				</li>
 			</ul>
+			<p class="navbar-text navbar-right">
+				<%
+				AbstractUser u = (AbstractUser) session.getAttribute("user");
+				if (u != null) {
+					out.print(u.getUsername());
+					out.print(" <a href='UserServlet?action=logout'>(logout)</a>");
+				} else {
+					out.print("Nicht eingeloggt");
+				}
+				%>
+			</p>
 		</div>
 	</div>
 </nav>

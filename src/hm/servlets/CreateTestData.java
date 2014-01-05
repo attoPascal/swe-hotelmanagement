@@ -5,6 +5,8 @@ import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
+import hm.users.AbstractUser;
+import hm.users.HotelGast;
 import hm.users.Hotelier;
 
 import java.io.FileNotFoundException;
@@ -88,9 +90,11 @@ public class CreateTestData extends HttpServlet {
 		h2.addKategorie(kat6);
 		h2.addKategorie(kat7);
 		
-		Hotelier u1 = new Hotelier("Franz", "pwd1", true, true);
+		Hotelier u1 = new Hotelier("Hotelier1", "h1", true, true);
 		u1.addHotel(h1);
 		u1.addHotel(h2);
+		
+		HotelGast u2 = new HotelGast("Gast1", "g1", null, "12345");
 		
 		try {
 			//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
@@ -99,6 +103,7 @@ public class CreateTestData extends HttpServlet {
 			dao.saveHotel(h1);
 			dao.saveHotel(h2);
 			dao.saveUser(u1);
+			dao.saveUser(u2);
 		
 			Hotel h3 = dao.getHotelByName("CrazySharkyFish");
 			ArrayList<Kategorie> katList = h3.getKategorien();
@@ -113,13 +118,20 @@ public class CreateTestData extends HttpServlet {
 				out.write("<br>");
 			}
 			
-			Hotelier u2 = (Hotelier) dao.getUserList().get(0);
-			out.write("Hotelier '" + u2.getUsername() + "' verwaltet folgende Hotels:<br>");
-			
-			for (String s : u2.getHotels()) {
-				out.write(s + " ");
-			}
-		
+			for (AbstractUser u : dao.getUserList()) {
+				if (u instanceof Hotelier) {
+					Hotelier h = (Hotelier) u;
+					out.write("Hotelier '" + h.getUsername() + "' verwaltet folgende Hotels:<br>");
+					
+					for (String s : h.getHotels()) {
+						out.write(s + " ");
+					}
+					out.write("<br>");
+					
+				} else if (u instanceof HotelGast) {
+					out.write(u.getUsername() + " ist ein Gast.<br>");
+				}
+			}		
 		} catch (ClassNotFoundException e) {
 			out.write(e.getMessage());
 
