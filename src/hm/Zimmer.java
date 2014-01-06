@@ -80,7 +80,7 @@ public class Zimmer implements Serializable {
 	 * @param kategorie
 	 * @param aufenthalt
 	 */
-	public void removeBuchung(Kategorie kategorie, Aufenthalt aufenthalt){
+	public void removeBuchung(Kategorie kategorie, Aufenthalt aufenthalt, Zimmer nummer){
 		
 		buchungen.remove(new Buchung(kategorie, aufenthalt));
 
