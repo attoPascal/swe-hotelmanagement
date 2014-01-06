@@ -40,6 +40,11 @@ public class BuchungsManagement {
 		return zimmer.getNummer();
 	}
 
+	public void BuchungStornieren(Kategorie kategorie, Aufenthalt aufenthalt, Zimmer nummer) {
+		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
+		zimmer.removeBuchung(kategorie, aufenthalt, nummer);
+	}
+	
 	public DAO getDAO() {
 		return dao;
 	}
