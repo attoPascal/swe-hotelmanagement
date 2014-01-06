@@ -7,12 +7,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
+	String hotelName = request.getParameter("hotel");
+	String katName   = request.getParameter("kategorie");
+
 	//Rechte überprüfen:
 	//Hotelgast
 	Object user = session.getAttribute("user");
 	if (!(user instanceof HotelGast)) {
 		session.setAttribute("alert", "Zugriff verweigert. Bitte melden Sie sich als HotelGast an, um auf diese Seite zuzugreifen.");
-		session.setAttribute("redirect", "allekategorien.jsp");
+		session.setAttribute("redirect", "zimmerbuchen.jsp?hotel=" + hotelName + "&kategorie=" + katName);
 		response.sendRedirect("login.jsp");
 	}
 %>
@@ -29,9 +32,6 @@
 		<h1>Zimmer buchen</h1>		
 		<%
 			DAO dao = SerializedDAO.getInstance();
-			
-			String hotelName = request.getParameter("hotel");
-			String katName   = request.getParameter("kategorie");
 		   	
 		   	Hotel hotel = dao.getHotelByName(hotelName);		
 			Kategorie kategorie = hotel.getKategorie(katName);
