@@ -75,6 +75,18 @@ public class Zimmer implements Serializable {
 	}
 	
 	/**
+	 * Loescht ein Buchung-Objekt
+	 * 
+	 * @param kategorie
+	 * @param aufenthalt
+	 */
+	public void removeBuchung(Kategorie kategorie, Aufenthalt aufenthalt){
+		
+		buchungen.remove(new Buchung(kategorie, aufenthalt));
+
+	}
+	
+	/**
 	 * Ueberprueft, ob ein Zimmer zu einem Zeitraum(Aufenthalt) gebucht ist
 	 * 
 	 * @param zimmer Zimmer-Objekt, das ueberprueft wird
