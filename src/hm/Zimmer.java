@@ -74,9 +74,9 @@ public class Zimmer implements Serializable {
 
 	}
 	
-	public String removeBuchung(Kategorie kat, Aufenthalt aufenthalt, Zimmer zimmernummer) {
+	/*public String removeBuchung(Kategorie kat, Aufenthalt aufenthalt, Zimmer zimmernummer) {
 		return null;
-	}
+	}*/
 	
 	/**
 	 * Loescht ein Buchung-Objekt
