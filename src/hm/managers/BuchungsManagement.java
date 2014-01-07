@@ -5,6 +5,7 @@ import java.io.IOException;
 import hm.Aufenthalt;
 import hm.Kategorie;
 import hm.Zimmer;
+import hm.Buchung;
 import hm.dao.*;
 
 public class BuchungsManagement {
@@ -38,6 +39,18 @@ public class BuchungsManagement {
 		zimmer.addBuchung(kategorie, aufenthalt);
 
 		return zimmer.getNummer();
+	}
+	
+	public String stornoBuchung(Buchung buchung) {
+		return null;
+	}
+	
+	public String changeAufenthalt(Buchung buchung, Aufenthalt newAufenthalt) {
+		return null;
+	}
+	
+	public void changeZimmernummer(Buchung buchung, Zimmer newroom) {
+		
 	}
 
 	public DAO getDAO() {
