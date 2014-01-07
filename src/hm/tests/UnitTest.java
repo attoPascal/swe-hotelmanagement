@@ -444,7 +444,7 @@ public class UnitTest {
 		
 		DAO dao = km.getDAO();
 		
-		Hotel h2 = new Hotel();
+		Hotel h2 = new Hotel("Test1");
 		
 		try {
 			h2 = dao.getHotelByName("CrazySharkyFish");
@@ -533,7 +533,7 @@ public class UnitTest {
 		
 		DAO dao = km.getDAO();
 		
-		Hotel h2 = new Hotel();
+		Hotel h2 = new Hotel("Test2");
 		try {
 			h2 = dao.getHotelByName("CrazySharkyFish");
 		} catch (FileNotFoundException e) {

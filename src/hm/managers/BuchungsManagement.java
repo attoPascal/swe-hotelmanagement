@@ -53,6 +53,21 @@ public class BuchungsManagement {
 		
 	}
 
+	/**
+	 * Storniert eine bestehende Buchung; Buchung-Objekt wird entfernt
+	 * 
+	 * @param kategorie
+	 * 				des zu loeschenden Zimmers
+	 * @param aufenthalt
+	 * 				Zeitraum der Buchung, die storniert wird
+	 * @param nummer
+	 * 				Nummer zur Identifikation des Zimmers
+	 */
+	public void BuchungStornieren(Kategorie kategorie, Aufenthalt aufenthalt, Zimmer nummer) {
+		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
+		zimmer.removeBuchung(kategorie, aufenthalt, nummer);
+	}
+	
 	public DAO getDAO() {
 		return dao;
 	}
