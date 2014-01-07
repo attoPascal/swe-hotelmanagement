@@ -2,6 +2,7 @@ package hm;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Zeichnet ein Hotel-Objekt aus. Beinhaltet Zimmer und Kategorien
@@ -24,11 +25,8 @@ public class Hotel implements Serializable {
 	 * Liste der Zimmer, die das Hotel zur Verfuegung hat
 	 */
 	private ArrayList<Zimmer> zimmerList = new ArrayList<Zimmer>();
-
-	public Hotel() {
-		super();
-		this.name = "default";
-	}
+	
+	private HashMap<String,Service> services = new HashMap<String,Service>();
 
 	public Hotel(String name) {
 		super();
@@ -126,6 +124,35 @@ public class Hotel implements Serializable {
 			if (zimmer.getNummer() == nummer)
 				return zimmer;
 		}
+		return null;
+	}
+	
+	public Service addService(Service service) {
+		//TODO
+		return null;
+	}
+	
+	public Service deleteService(String name) {
+		//TODO
+		return null;
+	}
+	
+	public Service getServiceByName(String name) {
+		//TODO
+		return null;
+	}
+	
+	public Service editService(Service oldService, Service newService) {
+		//TODO
+		return null;
+	}
+	
+	public HashMap<String,Service> getServices() {
+		return services;
+	}
+	
+	public ArrayList<Service> getServiceList() {
+		//TODO
 		return null;
 	}
 	

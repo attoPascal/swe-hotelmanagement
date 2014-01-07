@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import hm.Aufenthalt;
 import hm.Buchung;
 import hm.Hotel;
+import hm.Kategorie;
+import hm.Service;
 import hm.Zimmer;
 
 /**
@@ -15,7 +17,7 @@ import hm.Zimmer;
  *
  */
 /**
- * @author Elisabeth Reiner
+ * @author 
  *
  */
 public class AnalyseManagement {
@@ -34,7 +36,7 @@ public class AnalyseManagement {
 	}
 	
 	/**
-	 * Gibt einem eine Liste mit gebuchten Zimmern in einer gewissen Zeitspanne zurück
+	 * Gibt einem eine Liste mit gebuchten Zimmern in einer gewissen Zeitspanne zurï¿½ck
 	 * 
 	 * @param hotel
 	 * @param aufenthalt
@@ -56,7 +58,7 @@ public class AnalyseManagement {
 	}
 	
 	/**
-	 * Gibt einem eine Liste mit freien Zimmern zu einer gewissen Zeitdauer zurück
+	 * Gibt einem eine Liste mit freien Zimmern zu einer gewissen Zeitdauer zurï¿½ck
 	 * 
 	 * @param hotel
 	 * @param aufenthalt
@@ -78,7 +80,7 @@ public class AnalyseManagement {
 	}
 	
 	/**
-	 * Gibt eine ArrayListe mit allen Buchungen zu einem gewissen Zeitraum in einem Hotel zurück
+	 * Gibt eine ArrayListe mit allen Buchungen zu einem gewissen Zeitraum in einem Hotel zurï¿½ck
 	 * 
 	 * @param hotel
 	 * @param aufenthalt
@@ -98,7 +100,7 @@ public class AnalyseManagement {
 	}
 	
 	/**
-	 * Gibt die Anzahl der Buchungen zu einem gewissen Zeitraum in einem Hotel zurück
+	 * Gibt die Anzahl der Buchungen zu einem gewissen Zeitraum in einem Hotel zurï¿½ck
 	 * 
 	 * @param hotel
 	 * @param aufenthalt
@@ -113,7 +115,7 @@ public class AnalyseManagement {
 	}
 	
 	/**
-	 * Gibt die Einkünfte eines Hotels über einen gewissen Zeitraum zurück
+	 * Gibt die Einkï¿½nfte eines Hotels ï¿½ber einen gewissen Zeitraum zurï¿½ck
 	 * @param hotel
 	 * @param aufenthalt
 	 * @return
@@ -133,7 +135,7 @@ public class AnalyseManagement {
 	}
 	
 	/**
-	 * Gibt die Anzahl an möglichen Buchungen einer gewissen Dauer zu einem gewissen Zeitpunkt für ein Hotel zurück
+	 * Gibt die Anzahl an mï¿½glichen Buchungen einer gewissen Dauer zu einem gewissen Zeitpunkt fï¿½r ein Hotel zurï¿½ck
 	 * 
 	 * @param hotel
 	 * @param aufenthalt
@@ -154,4 +156,57 @@ public class AnalyseManagement {
 		
 		return (days-gebucht)/dauer;
 	}
+	
+	/**
+	 * Berechnet den Durchschnittspreis fÃ¼r Zimmer in einem Hotel
+	 * @param hotel Das Hotel fÃ¼r die der Durschnittspreis berechnet werden soll
+	 * @return Durchschnittspreis der Zimmer
+	 */
+	public int getAverageRoomPrice(Hotel hotel){
+		//TODO Preis zu einem gewissen Zeitraum
+		int preis = 0;
+		ArrayList<Kategorie> kategorien = hotel.getKategorien();
+		for (Kategorie kategorie : kategorien){
+			
+			preis += kategorie.getPreis();
+			}
+		return preis/kategorien.size();
+		}
+	
+	
+	/**
+	 * Berechnet den Durchschnittspreis fÃ¼r Services in einem bestimmten Hotel
+	 * @param hotel Hotel fÃ¼r das die Durchschnittspreise ermittelt werden sollen
+	 * @return Durchschnittspreis der Services
+	 */
+	public int getAverageServicePrice(Hotel hotel){
+		//TODO Preis zu einem gewissen Zeitraum
+		int preis = 0;
+		ArrayList<Service> services = hotel.getServiceList();
+		for (Service service : services){
+			
+			preis += service.getPreis();
+			}
+		return preis/services.size();
+		}
+	
+	public String getMostBookedMonth(Hotel hotel, Aufenthalt aufenthalt){
+		ArrayList<Buchung> buchungen = getBookings(hotel, aufenthalt);
+		
+		
+		return null;
+		}
+	
+	public String getBestCategory(Hotel hotel, Aufenthalt aufenthalt){
+		return null;
+		}
+	
+	public int getServiceRevenue(Hotel hotel, Aufenthalt aufenthalt){
+		return 0;
+		}
+	
+	public String getBestService(Hotel hotel, Aufenthalt aufenthalt){
+		return null;
+		}
+
 }
