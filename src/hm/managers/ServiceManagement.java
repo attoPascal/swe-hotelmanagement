@@ -64,6 +64,13 @@ public class ServiceManagement {
 	}
 	
 	/**
+	 * Weist das übergebene Service zum übergebenen Zeitpunkt dem übergebenen Gast zu
+	 */
+	public void serviceBuchen(HotelGast gast, Service service, Date date) {
+		//TODO
+	}
+	
+	/**
 	 * Instanziert das DAO
 	 */
 	public void instantiateDAO() throws IOException {
