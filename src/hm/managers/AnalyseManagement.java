@@ -3,6 +3,8 @@
  */
 package hm.managers;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import hm.Aufenthalt;
@@ -11,17 +13,16 @@ import hm.Hotel;
 import hm.Kategorie;
 import hm.Service;
 import hm.Zimmer;
+import hm.dao.DAO;
+import hm.dao.SerializedDAO;
 
-/**
- * @author 
- *
- */
-/**
- * @author 
- *
- */
+
+
 public class AnalyseManagement {
 
+	private DAO dao;
+	
+	
 	/**
 	 * 
 	 */
@@ -30,9 +31,33 @@ public class AnalyseManagement {
 	}
 
 	
+	/**
+	 * Instanziiert das DAO
+	 * @param filename Datei-Name in dem die Daten gespeichert werden
+	 * @throws IOException
+	 */
+	public void instantiateDAO(String filename) throws IOException {
+		dao = SerializedDAO.getInstance();
+	}
 	
-	public int getNumberOfRooms(Hotel hotel){
-		return hotel.getZimmerList().size();
+	
+	/**
+	 * Gibt das DAO das verwendet wird um die Daten zu speichern
+	 * @return DAO das verwendet wird um die Daten zu speichern
+	 */
+	public DAO getDAO(){
+		return dao;
+	}
+	
+	
+	/**
+	 * Gibt die Anzahl der Zimmer in einem Hotel zurück
+	 * @param hotel
+	 * @return
+	 */
+	public int getNumberOfRooms(String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
+		return dao.getHotelByName(name).getZimmerList().size();
 	}
 	
 	/**
@@ -42,9 +67,10 @@ public class AnalyseManagement {
 	 * @param aufenthalt
 	 * @return
 	 */
-	public ArrayList<Zimmer> getBookedRooms(Hotel hotel, Aufenthalt aufenthalt){
+	public ArrayList<Zimmer> getBookedRooms(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		
-		ArrayList<Zimmer> zlist = hotel.getZimmerList();
+		ArrayList<Zimmer> zlist = dao.getHotelByName(name).getZimmerList();
 		
 		ArrayList<Zimmer> bzlist = new ArrayList<Zimmer>();
 		
@@ -86,9 +112,10 @@ public class AnalyseManagement {
 	 * @param aufenthalt
 	 * @return
 	 */
-	public ArrayList<Buchung> getBookings(Hotel hotel, Aufenthalt aufenthalt){
+	public ArrayList<Buchung> getBookings(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 
-		ArrayList<Zimmer> zlist = getBookedRooms(hotel, aufenthalt);
+		ArrayList<Zimmer> zlist = getBookedRooms(aufenthalt, name);
 		ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 		for (Zimmer zimmer : zlist){
 			
@@ -106,10 +133,11 @@ public class AnalyseManagement {
 	 * @param aufenthalt
 	 * @return
 	 */
-	public int getNumberOfBookings(Hotel hotel, Aufenthalt aufenthalt){
+	public int getNumberOfBookings(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		int buchungen = 0;
 	
-		buchungen = getBookings(hotel, aufenthalt).size();
+		buchungen = getBookings(aufenthalt, name).size();
 		
 		return buchungen;
 	}
@@ -120,10 +148,11 @@ public class AnalyseManagement {
 	 * @param aufenthalt
 	 * @return
 	 */
-	public int getTotalRevenue(Hotel hotel, Aufenthalt aufenthalt){
+	public int getTotalRevenue(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		int revenue = 0;
 		
-		ArrayList<Buchung> buchungen = getBookings(hotel, aufenthalt);
+		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
 		
 		for (Buchung buchung : buchungen){
 			
@@ -142,9 +171,10 @@ public class AnalyseManagement {
 	 * @param dauer
 	 * @return
 	 */
-	public int getPossibleBookings(Hotel hotel, Aufenthalt aufenthalt, int dauer){
+	public int getPossibleBookings(Aufenthalt aufenthalt, int dauer, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		int gebucht = 0;
-		ArrayList<Buchung> blist = getBookings(hotel, aufenthalt);
+		ArrayList<Buchung> blist = getBookings(aufenthalt, name);
 		
 		for(Buchung buchung : blist){
 			
@@ -152,7 +182,7 @@ public class AnalyseManagement {
 			
 		}
 		
-		int days = getNumberOfRooms(hotel) * aufenthalt.getDays();
+		int days = getNumberOfRooms(name) * aufenthalt.getDays();
 		
 		return (days-gebucht)/dauer;
 	}
@@ -162,10 +192,11 @@ public class AnalyseManagement {
 	 * @param hotel Das Hotel für die der Durschnittspreis berechnet werden soll
 	 * @return Durchschnittspreis der Zimmer
 	 */
-	public int getAverageRoomPrice(Hotel hotel){
+	public int getAverageRoomPrice(String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		//TODO Preis zu einem gewissen Zeitraum
 		int preis = 0;
-		ArrayList<Kategorie> kategorien = hotel.getKategorien();
+		ArrayList<Kategorie> kategorien = dao.getHotelByName(name).getKategorien();
 		for (Kategorie kategorie : kategorien){
 			
 			preis += kategorie.getPreis();
@@ -179,10 +210,11 @@ public class AnalyseManagement {
 	 * @param hotel Hotel für das die Durchschnittspreise ermittelt werden sollen
 	 * @return Durchschnittspreis der Services
 	 */
-	public int getAverageServicePrice(Hotel hotel){
+	public int getAverageServicePrice(String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		//TODO Preis zu einem gewissen Zeitraum
 		int preis = 0;
-		ArrayList<Service> services = hotel.getServiceList();
+		ArrayList<Service> services = dao.getHotelByName(name).getServiceList();
 		for (Service service : services){
 			
 			preis += service.getPreis();
@@ -190,22 +222,49 @@ public class AnalyseManagement {
 		return preis/services.size();
 		}
 	
-	public String getMostBookedMonth(Hotel hotel, Aufenthalt aufenthalt){
-		ArrayList<Buchung> buchungen = getBookings(hotel, aufenthalt);
+	/**
+	 * @param aufenthalt
+	 * @param name
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	public String getMostBookedMonth(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
+		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
 		
 		
 		return null;
 		}
 	
-	public String getBestCategory(Hotel hotel, Aufenthalt aufenthalt){
+	/**
+	 * @param hotel
+	 * @param aufenthalt
+	 * @return
+	 */
+	public String getBestCategory(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		return null;
 		}
 	
-	public int getServiceRevenue(Hotel hotel, Aufenthalt aufenthalt){
+	/**
+	 * @param hotel
+	 * @param aufenthalt
+	 * @return
+	 */
+	public int getServiceRevenue(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		return 0;
 		}
 	
-	public String getBestService(Hotel hotel, Aufenthalt aufenthalt){
+	/**
+	 * @param hotel
+	 * @param aufenthalt
+	 * @return
+	 */
+	public String getBestService(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
 		return null;
 		}
 
