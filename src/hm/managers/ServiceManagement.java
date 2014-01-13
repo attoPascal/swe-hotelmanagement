@@ -3,6 +3,7 @@
  */
 package hm.managers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,34 +24,47 @@ public class ServiceManagement {
 		
 	}
 	
+	
 	/**
-	 * Erstellt ein neues Service
+	 * Erstellt einen neuen Service
+	 * @param serName
+	 * @param beschreibung
+	 * @param preis
+	 * @param name Name des Hotels für das der Service erstellt werden soll
+	 * @return
 	 */
-	public Service createService(String hotelName, String name, String beschreibung, int preis) {
+	public Service createService(String serName, String beschreibung, int preis, String name) {
 		//TODO
 		return null;
 	}
 	
 	/**
 	 * Ändert die angegebenen Parameter des passenden Services
+	 * 	 
+	 * @param name Name des Hotels für das der Service verändert werden soll
 	 */
-	public Service editService(String hotelName, String oldName, String newName, String newBeschreibung, int newPreis) {
+	public Service editService(String oldName, String newName, String newBeschreibung, int newPreis, String Name) {
 		//TODO
 		return null;
 	}
 	
 	/**
 	 * Löscht das passende Service
+	 * @param name Name des Hotels für das der Service erstellt werden soll
 	 */
-	public Service deleteService(String hotelName, String serviceName) {
+	public Service deleteService(String serviceName, String Name) {
 		//TODO
 		return null;
 	}
 	
 	/**
 	 * Liefert alle angebotenen Services des spezifizierten Hotels zurück
+	 * 
+	 * @param name Name des Hotels für das alle Services zurückgegeben werden sollen
 	 */
-	public HashMap<String,Service> getServices(Hotel hotel) {
+	public HashMap<String,Service> getServices(String name) throws FileNotFoundException, IOException,
+	ClassNotFoundException{
+		Hotel hotel = dao.getHotelByName(name);
 		//TODO
 		return null;
 	}
