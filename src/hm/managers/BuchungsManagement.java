@@ -62,10 +62,12 @@ public class BuchungsManagement {
 	 * 				Zeitraum der Buchung, die storniert wird
 	 * @param nummer
 	 * 				Nummer zur Identifikation des Zimmers
+	 * @param id ID der zu loeschenden Buchung
 	 */
-	public void BuchungStornieren(Kategorie kategorie, Aufenthalt aufenthalt, Zimmer nummer) {
-		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
-		zimmer.removeBuchung(kategorie, aufenthalt, nummer);
+	public void BuchungStornieren(Buchung Buchung, int id) {
+		Zimmer zimmer = Buchung.getZimmer();
+		//int nummer=zimmer.getNummer();
+		zimmer.removeBuchung(Buchung, id);
 	}
 	
 	public DAO getDAO() {
