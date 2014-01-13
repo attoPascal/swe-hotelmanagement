@@ -74,7 +74,9 @@ public class BuchungsManagement {
 	 * 				Nummer zur Identifikation des Zimmers
 	 * @param name 
 	 * 				Name des Hotels für das eine Buchung storniert werden soll
-	 */
+	 * @param Buchung Buchung, die storniert wird			
+	 * @param id ID der zu loeschenden Buchung
+	*/
 	public void BuchungStornieren(Kategorie kategorie, Aufenthalt aufenthalt, Zimmer nummer, String name) {
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
 		zimmer.removeBuchung(kategorie, aufenthalt, nummer);
