@@ -55,7 +55,7 @@ public class BuchungsServlet extends HttpServlet {
 
 			int zimmernummer = management.neueBuchung(
 					hotel.getKategorie(katName),
-					new Aufenthalt(new Date(c.getTimeInMillis()), duration));
+					new Aufenthalt(new Date(c.getTimeInMillis()), duration),hotel.getName());
 
 			out.write("Ihre Buchung war erfolgreich, ihre Zimmernummer ist "
 					+ zimmernummer);

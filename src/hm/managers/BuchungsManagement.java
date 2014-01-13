@@ -32,24 +32,34 @@ public class BuchungsManagement {
 	 *            Kategorie des Zimmers
 	 * @param aufenthalt
 	 *            Zeitraum, der gebucht wurde
+	 *            
+	 * @param name Name das Hotels für das eine neue Buchung erstellt werden soll
 	 * @return gibt die Nummer des Zimmers zurueck, das gebucht wurde.
 	 */
-	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt) {
+	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt, String name) {
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
 		zimmer.addBuchung(kategorie, aufenthalt);
 
 		return zimmer.getNummer();
 	}
 	
-	public String stornoBuchung(Buchung buchung) {
+	
+	/**
+	 * @param buchung
+	 * @param aufenthalt
+	 * @param name Name des Hotes für das die Zeit einer Buchung verändert werden soll
+	 * @return
+	 */
+	public String changeAufenthalt(Buchung buchung, Aufenthalt aufenthalt, String name) {
 		return null;
 	}
 	
-	public String changeAufenthalt(Buchung buchung, Aufenthalt newAufenthalt) {
-		return null;
-	}
-	
-	public void changeZimmernummer(Buchung buchung, Zimmer newroom) {
+	/**
+	 * @param buchung
+	 * @param zimmer
+	 * @param name Name des Hotels für das die Zimmernummer einer Buchung geändert werden soll
+	 */
+	public void changeZimmernummer(Buchung buchung, Zimmer zimmer, String name) {
 		
 	}
 
@@ -62,8 +72,10 @@ public class BuchungsManagement {
 	 * 				Zeitraum der Buchung, die storniert wird
 	 * @param nummer
 	 * 				Nummer zur Identifikation des Zimmers
+	 * @param name 
+	 * 				Name des Hotels für das eine Buchung storniert werden soll
 	 */
-	public void BuchungStornieren(Kategorie kategorie, Aufenthalt aufenthalt, Zimmer nummer) {
+	public void BuchungStornieren(Kategorie kategorie, Aufenthalt aufenthalt, Zimmer nummer, String name) {
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
 		zimmer.removeBuchung(kategorie, aufenthalt, nummer);
 	}
