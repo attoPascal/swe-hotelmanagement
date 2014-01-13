@@ -1,5 +1,6 @@
 package hm.managers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import hm.Aufenthalt;
@@ -63,23 +64,19 @@ public class BuchungsManagement {
 		
 	}
 
+	
 	/**
-	 * Storniert eine bestehende Buchung; Buchung-Objekt wird entfernt
-	 * 
-	 * @param kategorie
-	 * 				des zu loeschenden Zimmers
-	 * @param aufenthalt
-	 * 				Zeitraum der Buchung, die storniert wird
-	 * @param nummer
-	 * 				Nummer zur Identifikation des Zimmers
-	 * @param name 
-	 * 				Name des Hotels für das eine Buchung storniert werden soll
-	 * @param Buchung Buchung, die storniert wird			
-	 * @param id ID der zu loeschenden Buchung
-	*/
-	public void BuchungStornieren(Kategorie kategorie, Aufenthalt aufenthalt, Zimmer nummer, String name) {
-		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
-		zimmer.removeBuchung(kategorie, aufenthalt, nummer);
+	 * Storniert eine bestehenede Buchung/ Buchung wird entfernt
+	 * @param aufenthalt Zeitspanne der Buchung
+	 * @param nummer Nummer des Zimmers von der die Buchung entfernt werden soll
+	 * @param name Name des Hotels von dem die Buchung entfernt werden soll
+	 * @throws FileNotFoundException
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	public void BuchungStornieren(Aufenthalt aufenthalt, int nummer, String name) throws FileNotFoundException, ClassNotFoundException, IOException {
+		Zimmer zimmer = dao.getHotelByName(name).getZimmer(nummer);
+		zimmer.removeBuchung(aufenthalt);
 	}
 	
 	public DAO getDAO() {
