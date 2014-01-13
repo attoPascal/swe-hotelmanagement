@@ -56,12 +56,7 @@ public class BuchungsManagement {
 	/**
 	 * Storniert eine bestehende Buchung; Buchung-Objekt wird entfernt
 	 * 
-	 * @param kategorie
-	 * 				des zu loeschenden Zimmers
-	 * @param aufenthalt
-	 * 				Zeitraum der Buchung, die storniert wird
-	 * @param nummer
-	 * 				Nummer zur Identifikation des Zimmers
+	 * @param Buchung Buchung, die storniert wird			
 	 * @param id ID der zu loeschenden Buchung
 	 */
 	public void BuchungStornieren(Buchung Buchung, int id) {
