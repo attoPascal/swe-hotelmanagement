@@ -80,7 +80,7 @@ public class Zimmer implements Serializable {
 	
 
 	/**
-	 * Entfernt ein Buchung-Objekt
+	 * Entfernt ein Buchung-Objekt 
 	 * 
 	 * @param Buchung Buchungs Objekt, das entfernt wird
 	 * @param id Nummer der zu entfernenden Buchung
