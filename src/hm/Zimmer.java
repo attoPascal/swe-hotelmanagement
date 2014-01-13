@@ -74,11 +74,33 @@ public class Zimmer implements Serializable {
 
 	}
 	
-	/*public String removeBuchung(Kategorie kat, Aufenthalt aufenthalt, Zimmer zimmernummer) {
-		return null;
-	}*/
+	/**
+	 * Entfernt die Buchung mit dem selben Aufenthalt
+	 * @param aufenthalt Aufenthalt der Buchung welche gelöscht werden soll
+	 */
+	public void removeBuchung(Aufenthalt aufenthalt) {
+		
+		for (Buchung buchung : buchungen){
+			
+			if (buchung.getAufenthalt().equals(aufenthalt)) buchungen.remove(buchung);
+			
+		}
+	}
 	
 
+	/**
+	 * Entfernt die Buchung mit der übergebenen ID
+	 * @param id ID der Buchung die gelöscht werden soll
+	 */
+	public void removeBuchung(int id) {
+		
+		for (Buchung buchung : buchungen){
+			
+			if (buchung.getId() == id) buchungen.remove(buchung);
+			
+		}
+	}
+	
 	/**
 	 * Entfernt ein Buchung-Objekt 
 	 * 
@@ -87,6 +109,7 @@ public class Zimmer implements Serializable {
 	 */
 	public void removeBuchung(Buchung Buchung, int id){	
 		//if(Buchung.getId() == id)
+		//TODO
 		buchungen.remove(Buchung);
 		
 	}
