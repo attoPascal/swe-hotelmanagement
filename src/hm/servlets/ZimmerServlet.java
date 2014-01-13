@@ -54,7 +54,7 @@ public class ZimmerServlet extends HttpServlet {
 					response.sendRedirect("zimmerverwalten.jsp?hotel=" + hotelName);
 					break;
 				case "delete":
-					management.deleteZimmer(hotelName, zimmerNummer);
+					management.removeZimmer(hotelName, zimmerNummer);
 					response.sendRedirect("zimmerverwalten.jsp?hotel=" + hotelName);
 					break;
 				case "set":

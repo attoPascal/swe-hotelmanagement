@@ -53,7 +53,7 @@ public class BuchungsServlet extends HttpServlet {
 			Calendar c = new GregorianCalendar();
 			c.set(year, month - 1, day, 0, 0, 0);
 
-			int zimmernummer = management.neueBuchung(
+			int zimmernummer = management.createBuchung(
 					hotel.getKategorie(katName),
 					new Aufenthalt(new Date(c.getTimeInMillis()), duration),hotel.getName());
 
