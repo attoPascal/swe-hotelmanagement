@@ -50,7 +50,7 @@ public class ZimmerManagement {
 	 * @param nummer
 	 *            Nummer des Zimmers, das entfernt wird
 	 */
-	public void deleteZimmer(String hotelName, int nummer)
+	public void removeZimmer(String hotelName, int nummer)
 			throws FileNotFoundException, IOException, ClassNotFoundException {
 
 		Hotel hotel = dao.getHotelByName(hotelName);

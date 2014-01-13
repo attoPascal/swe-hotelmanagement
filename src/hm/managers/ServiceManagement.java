@@ -52,7 +52,7 @@ public class ServiceManagement {
 	 * Löscht das passende Service
 	 * @param name Name des Hotels für das der Service erstellt werden soll
 	 */
-	public Service deleteService(String serviceName, String Name) {
+	public Service removeService(String serviceName, String Name) {
 		//TODO
 		return null;
 	}

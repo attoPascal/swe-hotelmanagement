@@ -37,7 +37,7 @@ public class BuchungsManagement {
 	 * @param name Name das Hotels für das eine neue Buchung erstellt werden soll
 	 * @return gibt die Nummer des Zimmers zurueck, das gebucht wurde.
 	 */
-	public int neueBuchung(Kategorie kategorie, Aufenthalt aufenthalt, String name) {
+	public int createBuchung(Kategorie kategorie, Aufenthalt aufenthalt, String name) {
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
 		zimmer.addBuchung(kategorie, aufenthalt);
 
@@ -51,7 +51,7 @@ public class BuchungsManagement {
 	 * @param name Name des Hotes für das die Zeit einer Buchung verändert werden soll
 	 * @return
 	 */
-	public String changeAufenthalt(Buchung buchung, Aufenthalt aufenthalt, String name) {
+	public String editAufenthalt(Buchung buchung, Aufenthalt aufenthalt, String name) {
 		return null;
 	}
 	
@@ -60,7 +60,7 @@ public class BuchungsManagement {
 	 * @param zimmer
 	 * @param name Name des Hotels für das die Zimmernummer einer Buchung geändert werden soll
 	 */
-	public void changeZimmernummer(Buchung buchung, Zimmer zimmer, String name) {
+	public void editZimmerNummer(Buchung buchung, Zimmer zimmer, String name) {
 		
 	}
 
@@ -74,7 +74,7 @@ public class BuchungsManagement {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public void BuchungStornieren(Aufenthalt aufenthalt, int nummer, String name) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public void removeBuchung(Aufenthalt aufenthalt, int nummer, String name) throws FileNotFoundException, ClassNotFoundException, IOException {
 		Zimmer zimmer = dao.getHotelByName(name).getZimmer(nummer);
 		zimmer.removeBuchung(aufenthalt);
 	}
