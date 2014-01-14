@@ -101,18 +101,6 @@ public class Zimmer implements Serializable {
 		}
 	}
 	
-	/**
-	 * Entfernt ein Buchung-Objekt 
-	 * 
-	 * @param Buchung Buchungs Objekt, das entfernt wird
-	 * @param id Nummer der zu entfernenden Buchung
-	 */
-	public void removeBuchung(Buchung Buchung, int id){	
-		//if(Buchung.getId() == id)
-		//TODO
-		buchungen.remove(Buchung);
-		
-	}
 	
 	/**
 	 * Ueberprueft, ob ein Zimmer zu einem Zeitraum(Aufenthalt) gebucht ist
