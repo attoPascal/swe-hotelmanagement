@@ -74,18 +74,18 @@ public class Zimmer implements Serializable {
 
 	}
 	
-	/**
-	 * Entfernt die Buchung mit dem selben Aufenthalt
-	 * @param aufenthalt Aufenthalt der Buchung welche gelöscht werden soll
-	 */
-	public void removeBuchung(Aufenthalt aufenthalt) {
-		
-		for (Buchung buchung : buchungen){
-			
-			if (buchung.getAufenthalt().equals(aufenthalt)) buchungen.remove(buchung);
-			
-		}
-	}
+//	/**
+//	 * Entfernt die Buchung mit dem selben Aufenthalt
+//	 * @param aufenthalt Aufenthalt der Buchung welche gelöscht werden soll
+//	 */
+//	public void removeBuchung(Aufenthalt aufenthalt) {
+//		
+//		for (Buchung buchung : buchungen){
+//			
+//			if (buchung.getAufenthalt().equals(aufenthalt)) buchungen.remove(buchung);
+//			
+//		}
+//	}
 	
 
 	/**
