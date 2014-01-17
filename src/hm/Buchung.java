@@ -54,6 +54,14 @@ public class Buchung implements Serializable {
 	public void setKategorie(Kategorie kategorie) {
 		this.kategorie = kategorie;
 	}
+	
+	/**
+	 * 
+	 * @return Nummer des gebuchten Zimmers
+	 */
+	public int getZimmernummer() {
+		return this.zimmer.getNummer();
+	}
 
 	/**
 	 * @return gebuchtes Zimmer
