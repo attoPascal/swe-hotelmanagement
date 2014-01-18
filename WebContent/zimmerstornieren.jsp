@@ -31,10 +31,8 @@
 	<main class="container">
 		<h1>Zimmer stornieren</h1>		
 		<%
-			DAO dao = SerializedDAO.getInstance();
-		   	
-		   	Hotel hotel = dao.getHotelByName(hotelName);		
-			
+			DAO dao = SerializedDAO.getInstance();	   	
+		   	Hotel hotel = dao.getHotelByName(hotelName);					
 		%>
 		
 		<form action="BuchungsStornierungsServlet" method="get" class="form-horizontal">
