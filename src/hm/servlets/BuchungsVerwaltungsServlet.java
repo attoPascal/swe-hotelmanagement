@@ -21,7 +21,7 @@ import java.util.GregorianCalendar;
 /**
  * Servlet-Klasse zur Verwaltung von Buchungen
  */
-@WebServlet("/BuchungsServlet")
+@WebServlet("/BuchungsVerwaltungsServlet")
 public class BuchungsVerwaltungsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6L;
