@@ -31,8 +31,7 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 
 		try {
 			/**
-			 * hier wird instantiateDAO innerhalb des try-catch Blocks
-			 * aufgerufen
+			 * hier wird instantiateDAO innerhalb des try-catch Blocks aufgerufen
 			 */
 			management.instantiateDAO("data.ser");
 
@@ -57,7 +56,8 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 			management.getDAO().saveHotel(hotel);
 
 		} catch (NullPointerException e) {
-			out.write("Ihre Stornierung konnte leider nicht abgeschlossen werden.\n Versuchen Sie es in 5 Minuten erneut.");
+			out.write("Ihre Stornierung konnte leider nicht abgeschlossen werden."
+					+ "\n Versuchen Sie es in 5 Minuten erneut.");
 
 		} catch (ClassNotFoundException e) {
 			out.write(e.getMessage());
