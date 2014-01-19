@@ -17,7 +17,7 @@ import java.io.PrintWriter;
 /**
  * Servlet-Klasse zur Stornierung von Buchungen
  */
-@WebServlet("/BuchungsServlet")
+@WebServlet("/BuchungsStornierungsServlet")
 public class BuchungsStornierungsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 4L;
