@@ -16,6 +16,10 @@ public class Hotelier extends AbstractUser {
 	
 	private boolean canManageCategories;
 	private boolean canManageRooms;
+	/**
+	 * Jeder Hotelier kann grundsätzlich Buchungen managen
+	 */
+	private boolean canManageBookings = true;
 
 	private ArrayList<String> hotels = new ArrayList<String>();
 
@@ -83,5 +87,13 @@ public class Hotelier extends AbstractUser {
 	 */
 	public void setCanManageRooms(boolean canManageRooms) {
 		this.canManageRooms = canManageRooms;
+	}
+	
+	public boolean isCanManageBookings() {
+		return canManageBookings;
+	}
+	
+	public void setCanManageBookings(boolean canManageBookings) {
+		this.canManageBookings = canManageBookings;
 	}
 }

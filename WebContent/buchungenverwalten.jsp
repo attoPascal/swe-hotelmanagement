@@ -5,27 +5,28 @@
 <%@ page import="hm.Kategorie" %>
 <%@ page import="hm.users.Hotelier" %>
 <%@ page import="hm.servlets.BuchungsVerwaltungsServlet" %>
+<%@ page import="hm.managers.BuchungsManagement" %>
 <%@ page import="hm.dao.DAO" %>
 
 <%
 	//Rechte überprüfen:
 	//Hotelier mit canManageRooms
 	Object user = session.getAttribute("user");
-	if (!(user instanceof Hotelier) || !((Hotelier) user).isCanManageRooms()) {
+	if (!(user instanceof Hotelier) || !((Hotelier) user).isCanManageBookings()) {
 		session.setAttribute("alert", "Zugriff verweigert. Bitte melden Sie sich als Hotelier mit den nötigen Rechten an, um auf diese Seite zuzugreifen.");
 		session.setAttribute("redirect", "zimmerverwalten.jsp");
 		response.sendRedirect("login.jsp");
 	}
 
 	BuchungsManagement bm = new BuchungsManagement();
-	bm.getManagement().instantiateDAO();
-	ArrayList<Hotel> hList = bm.getManagement().getDAO().getHotelList();
+	bm.instantiateDAO("data.ser");
+	ArrayList<Hotel> hList = bm.getDAO().getHotelList();
 	
 	String hotelName = request.getParameter("hotel");
-	Hotel hotel = null;
+	Hotel hotel = bm.getDAO().getHotelByName(hotelName);
 	
 	if (hotelName != null) {
-		hotel = zm.getManagement().getDAO().getHotelByName(hotelName);
+		hotel = bm.getDAO().getHotelByName(hotelName);
 		
 	} else {
 		//wenn kein Hotel spezifiziert: erstes aus Liste wählen
@@ -34,6 +35,7 @@
 	
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
 	ArrayList<Kategorie> kList = hotel.getKategorien();
+	
 %>
 
 <!DOCTYPE html>
@@ -45,7 +47,7 @@
 	<%@ include file="inc/nav.jsp" %>
 	
 	<main class="container">
-		<h1>Zimmer verwalten</h1>
+		<h1>Buchungen verwalten</h1>
 		
 		<form>
 			<div class="form-group">
@@ -55,6 +57,21 @@
 					String selected = (h.getName().equals(hotel.getName())) ? "selected=\"selected\"" : "";
 					%>
 					<option value="<%= h.getName() %>"<%= selected %>><%= h.getName() %></option>
+					<% } %>
+				</select>
+  			</div>
+		</form>
+		
+		<p id="response" class="alert alert-success"></p>
+		
+		<form>
+			<div class="form-group">
+    			<label for="setHotel">Zimmer auswählen:</label>
+    			<select name="zimmer" class="set-hotel form-control" id="setHotel">
+    				<% for (Zimmer z : zList) { %>
+					
+					
+					 <option value="<%= z.getNummer() %>"><%= z.getNummer() %></option>
 					<% } %>
 				</select>
   			</div>
