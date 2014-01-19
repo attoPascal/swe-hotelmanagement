@@ -67,7 +67,7 @@ public class KategorieServlet extends HttpServlet {
 					
 					if (action.equals("create")) {
 						management
-								.createCategority(katName, ausstattung, preis, hotel.getName());
+								.createKategorie(katName, ausstattung, preis, hotel.getName());
 
 						//out.write("Neue Kategorie erstellt\n");
 						response.sendRedirect("kategorienverwalten.jsp?hotel=" + hotelName);
@@ -75,7 +75,7 @@ public class KategorieServlet extends HttpServlet {
 					} else if (action.equals("edit")) {
 						String newName = request.getParameter("newname");
 
-						management.editCategory(katName, newName, preis,
+						management.editKategorie(katName, newName, preis,
 								ausstattung, hotel.getName());
 
 						//out.write("Kategorie bearbeitet\n");

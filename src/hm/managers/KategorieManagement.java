@@ -39,7 +39,7 @@ public class KategorieManagement {
 	 *            Beschreibung der Ausstattung von Zimmern der Kategorie; als
 	 *            String gespeichert
 	 */
-	public void editCategory(String katName, String newName,
+	public void editKategorie(String katName, String newName,
 			int preis, String ausstattung, String name) throws FileNotFoundException,
 			IOException, ClassNotFoundException, NullPointerException {
 
@@ -65,7 +65,7 @@ public class KategorieManagement {
 	 * @param preis
 	 *            Preis der Kategorie in Cent pro Nacht
 	 */
-	public void createCategority(String katName, String ausstattung,
+	public void createKategorie(String katName, String ausstattung,
 			int preis, String name) throws FileNotFoundException, IOException,
 			ClassNotFoundException {
 		
