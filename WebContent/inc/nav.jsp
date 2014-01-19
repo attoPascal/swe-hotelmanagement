@@ -9,19 +9,34 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Little Sharky Fish</a>
+			<a class="navbar-brand" href="allekategorien.jsp">Little Sharky Fish</a>
 		</div>
 		<div class="navbar-collapse collapse">
 			<ul class="nav navbar-nav">
-				<li><a href="allekategorien.jsp">Gäste</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Gäste <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="allekategorien.jsp">Zimmer buchen</a></li>
+						<li><a href="buchungstornieren.jsp">Buchung stornieren</a></li>
+						<li><a href="#">Services buchen</a></li>
+					</ul>
+				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Hoteliers <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="kategorienverwalten.jsp">Kategorien verwalten</a></li>
 						<li><a href="zimmerverwalten.jsp">Zimmer verwalten</a></li>
+						<li><a href="buchungenverwalten.jsp">Buchungen verwalten</a></li>
+						<li><a href="#">Services verwalten</a></li>
 					</ul>
 				</li>
-				<li><a href="#">Analysten</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Analysten <b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Hotels vergleichen</a></li>
+						<li><a href="#">Statistik erstellen</a></li>
+					</ul>
+				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Debugging <b class="caret"></b></a>
 					<ul class="dropdown-menu">
