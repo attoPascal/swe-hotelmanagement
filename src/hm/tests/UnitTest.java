@@ -85,12 +85,12 @@ public class UnitTest {
 		c.set(2014, 5, 23, 0, 0, 0);
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+		int zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
 
 		assertEquals(102,zimmernummer);
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer2 = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+		int zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
 
 		assertEquals(101,zimmernummer2);
 		
@@ -149,17 +149,17 @@ public class UnitTest {
 		c.set(2014, 5, 23, 0, 0, 0);
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+		int zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
 
 		assertEquals(102,zimmernummer);
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer2 = bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+		int zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
 
 		assertEquals(101,zimmernummer2);
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		bm.neueBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1));
+		bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
 
 		
 	}
@@ -430,7 +430,7 @@ public class UnitTest {
 		KategorieManagement km = new KategorieManagement();
 
 		try {
-			km.createCategority(h1, "Absteige", "Heu, Eimer zum Waschen ", 5);
+			km.createKategorie("Absteige", "Heu, Eimer zum Waschen ", 5, h1.getName());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -516,7 +516,7 @@ public class UnitTest {
 		KategorieManagement km = new KategorieManagement();
 
 		try {
-			km.editCategory(h1, "Einzel", "Loft", 5,"Heu, Eimer zum Waschen ");
+			km.editKategorie("Einzel", "Loft", 5,"Heu, Eimer zum Waschen", h1.getName());
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
