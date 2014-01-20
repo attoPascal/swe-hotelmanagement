@@ -9,6 +9,7 @@ import hm.Zimmer;
 import hm.Buchung;
 import hm.Hotel;
 import hm.dao.*;
+import hm.users.HotelGast;
 
 public class BuchungsManagement {
 
@@ -38,11 +39,16 @@ public class BuchungsManagement {
 	 * @param name
 	 *            Name das Hotels für das eine neue Buchung erstellt werden soll
 	 * @return gibt die Nummer des Zimmers zurueck, das gebucht wurde.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 * @throws FileNotFoundException 
 	 */
-	public int createBuchung(Kategorie kategorie, Aufenthalt aufenthalt,
-			String name) {
+	public int createBuchung(Kategorie kategorie, Aufenthalt aufenthalt, HotelGast gast) throws FileNotFoundException, ClassNotFoundException, IOException {
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
-		zimmer.addBuchung(kategorie, aufenthalt);
+		Buchung buchung = zimmer.addBuchung(kategorie, aufenthalt);
+		
+		gast.addBuchung(buchung);
+		dao.saveUser(gast);
 
 		return zimmer.getNummer();
 	}

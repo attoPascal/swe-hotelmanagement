@@ -2,7 +2,9 @@ package hm.servlets;
 
 import hm.Aufenthalt;
 import hm.Hotel;
+import hm.exceptions.UserException;
 import hm.managers.*;
+import hm.users.HotelGast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,9 +55,18 @@ public class BuchungsVerwaltungsServlet extends HttpServlet {
 			Calendar c = new GregorianCalendar();
 			c.set(year, month - 1, day, 0, 0, 0);
 
+			Object o = request.getSession().getAttribute("user");
+			HotelGast gast;
+			
+			if (o instanceof HotelGast) {
+				gast = (HotelGast) o;
+			} else {
+				throw new UserException("User ist kein HotelGast");
+			}
+			
 			int zimmernummer = management.createBuchung(
 					hotel.getKategorie(katName),
-					new Aufenthalt(new Date(c.getTimeInMillis()), duration),hotel.getName());
+					new Aufenthalt(new Date(c.getTimeInMillis()), duration), gast);
 
 			out.write("Ihre Buchung war erfolgreich, ihre Zimmernummer ist "
 					+ zimmernummer);
@@ -80,6 +91,9 @@ public class BuchungsVerwaltungsServlet extends HttpServlet {
 			out.write(e.getMessage());
 			
 		} catch (NumberFormatException e) {
+			out.write(e.getMessage());
+			
+		} catch (UserException e) {
 			out.write(e.getMessage());
 		}
 	}

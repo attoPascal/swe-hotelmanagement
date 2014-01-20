@@ -10,6 +10,7 @@ import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
 import hm.managers.*;
+import hm.users.HotelGast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -84,16 +85,28 @@ public class UnitTest {
 		Calendar c = new GregorianCalendar ();
 		c.set(2014, 5, 23, 0, 0, 0);
 		
-		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
-
-		assertEquals(102,zimmernummer);
+		HotelGast user = new HotelGast("Name", "pwd", "123");
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
+		int zimmernummer;
+		try {
+			zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
+			assertEquals(102,zimmernummer);
+		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		assertEquals(101,zimmernummer2);
 		
+		
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
+		int zimmernummer2;
+		try {
+			zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
+			assertEquals(101,zimmernummer2);
+		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -148,18 +161,32 @@ public class UnitTest {
 		Calendar c = new GregorianCalendar ();
 		c.set(2014, 5, 23, 0, 0, 0);
 		
-		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
-
-		assertEquals(102,zimmernummer);
+		HotelGast user = new HotelGast("Name", "pwd", "123");
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
+		int zimmernummer;
+		try {
+			zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
+			assertEquals(102,zimmernummer);
+		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			e.printStackTrace();
+		}
 
-		assertEquals(101,zimmernummer2);
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
+		int zimmernummer2;
+		try {
+			zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
+			assertEquals(101,zimmernummer2);
+		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			e.printStackTrace();
+		}
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), null);
+		try {
+			bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
+		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			e.printStackTrace();
+		}
 
 		
 	}
