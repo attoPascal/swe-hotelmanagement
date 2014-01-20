@@ -1,17 +1,18 @@
-/**
- * 
- */
 package hm.managers;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import hm.Hotel;
 import hm.Service;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
+import hm.exceptions.ServiceException;
 import hm.users.HotelGast;
 
 /**
@@ -19,69 +20,88 @@ import hm.users.HotelGast;
  */
 public class ServiceManagement {
 	private DAO dao;
-
-	public ServiceManagement() {
 		
-	}
-	
-	
 	/**
-	 * Erstellt einen neuen Service
-	 * @param serName
-	 * @param beschreibung
-	 * @param preis
-	 * @param name Name des Hotels für das der Service erstellt werden soll
-	 * @return
+	 * Erstellt ein neues Service
 	 */
-	public Service createService(String serName, String beschreibung, int preis, String name) {
-		//TODO
-		return null;
+	public void createService(String name, String beschreibung, int preis, String hotelName) throws FileNotFoundException, ClassNotFoundException, IOException, ServiceException {
+		Service service = new Service(name, beschreibung, preis);
+		Hotel hotel = dao.getHotelByName(hotelName);
+		hotel.addService(service);
+		dao.saveHotel(hotel);
 	}
 	
 	/**
-	 * Ändert die angegebenen Parameter des passenden Services
-	 * 	 
-	 * @param name Name des Hotels für das der Service verändert werden soll
+	 * Ändert die angegebenen Parameter des angegebenen Services
 	 */
-	public Service editService(String oldName, String newName, String newBeschreibung, int newPreis, String Name) {
-		//TODO
-		return null;
+	public void editService(String oldName, String newName, String newBeschreibung, int newPreis, String hotelName) throws FileNotFoundException, ClassNotFoundException, IOException, ServiceException {
+		Hotel hotel = dao.getHotelByName(hotelName);
+		Service oldService = hotel.getService(oldName);
+		
+		String name;
+		String beschreibung;
+		int preis;
+		
+		if (newName == null || newName.equals("")) {
+			name = oldName;
+		} else {
+			name = newName;
+		}
+		
+		if (newBeschreibung == null || newBeschreibung.equals("")) {
+			beschreibung = oldService.getBeschreibung();
+		} else {
+			beschreibung = newBeschreibung;
+		}
+		
+		if (newPreis <= 0) {
+			preis = oldService.getPreis();
+		} else {
+			preis = newPreis;
+		}
+		
+		Service newService = new Service(name, beschreibung, preis);
+		hotel.editService(oldService, newService);
+		dao.saveHotel(hotel);
 	}
 	
 	/**
-	 * Löscht das passende Service
-	 * @param name Name des Hotels für das der Service erstellt werden soll
+	 * Entfernt das angegebene Service
+	 * @return das entfernte Service
 	 */
-	public Service removeService(String serviceName, String Name) {
-		//TODO
-		return null;
+	public Service removeService(String name, String hotelName) throws FileNotFoundException, ClassNotFoundException, IOException, ServiceException {
+		Hotel hotel = dao.getHotelByName(hotelName);
+		Service service = hotel.removeService(name);
+		dao.saveHotel(hotel);
+		return service;
 	}
 	
 	/**
 	 * Liefert alle angebotenen Services des spezifizierten Hotels zurück
-	 * 
-	 * @param name Name des Hotels für das alle Services zurückgegeben werden sollen
 	 */
-	public HashMap<String,Service> getServices(String name) throws FileNotFoundException, IOException,
-	ClassNotFoundException{
-		Hotel hotel = dao.getHotelByName(name);
-		//TODO
-		return null;
+	public List<Service> getServices(String hotelName) throws FileNotFoundException, IOException, ClassNotFoundException{
+		Hotel hotel = dao.getHotelByName(hotelName);
+		return hotel.getServiceList();
 	}
 	
 	/**
 	 * Liefert alle gebuchten Services des spezifizierten Gasts zurück
 	 */
-	public HashMap<Date,Service> getServices(HotelGast gast) {
-		//TODO
-		return null;
+	public Map<Date,Service> getServices(HotelGast gast) {
+		return gast.getServices();
 	}
 	
 	/**
 	 * Weist das übergebene Service zum übergebenen Zeitpunkt dem übergebenen Gast zu
 	 */
-	public void serviceBuchen(HotelGast gast, Service service, Date date) {
-		//TODO
+	public void serviceBuchen(HotelGast gast, String serviceName, String hotelName, String dateString) throws FileNotFoundException, ClassNotFoundException, IOException, ServiceException, ParseException {
+		Hotel hotel = dao.getHotelByName(hotelName);
+		Service service = hotel.getService(serviceName);
+		
+		DateFormat df = DateFormat.getDateTimeInstance();
+		Date date = df.parse(dateString);
+		
+		gast.addService(service, date);
 	}
 	
 	/**
