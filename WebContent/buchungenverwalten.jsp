@@ -2,6 +2,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Zimmer" %>
+<%@ page import="hm.Buchung" %>
 <%@ page import="hm.Kategorie" %>
 <%@ page import="hm.users.Hotelier" %>
 <%@ page import="hm.servlets.BuchungsVerwaltungsServlet" %>
@@ -14,7 +15,7 @@
 	Object user = session.getAttribute("user");
 	if (!(user instanceof Hotelier) || !((Hotelier) user).isCanManageBookings()) {
 		session.setAttribute("alert", "Zugriff verweigert. Bitte melden Sie sich als Hotelier mit den nötigen Rechten an, um auf diese Seite zuzugreifen.");
-		session.setAttribute("redirect", "zimmerverwalten.jsp");
+		session.setAttribute("redirect", "buchungenverwalten.jsp");
 		response.sendRedirect("login.jsp");
 	}
 
@@ -62,25 +63,28 @@
   			</div>
 		</form>
 		
-		<p id="response" class="alert alert-success"></p>
-		
-		<form>
-			<div class="form-group">
-    			<label for="setHotel">Zimmer auswählen:</label>
-    			<select name="zimmer" class="set-hotel form-control" id="setHotel">
-    				<% for (Zimmer z : zList) { %>
-					
-					
-					 <option value="<%= z.getNummer() %>"><%= z.getNummer() %></option>
-					<% } %>
-				</select>
-  			</div>
-		</form>
-		
-		<p id="response" class="alert alert-success"></p>
-		
 		<div id="manage">
-			<table class="zimmer table">
+			<table>
+				<tr>
+					<th>ID</th>
+					<th>Zimmer</th>
+					<th>Anfang</th>
+					<th>Ende</th>
+				</tr>
+				<tr>
+			
+				<% for (Zimmer z : zList) { %>
+					<% for (Buchung b : z.getBuchungen()) { %>
+						<tr>
+							<td><%= b.getId() %></td>
+							<td><%= b.getZimmernummer() %></td>
+							<td><%= b.getAufenthalt().getAnfang() %></td>
+							<td><%= b.getAufenthalt().getEnde() %></td>
+						</tr>
+					<% } %>
+				<% } %>
+			</table>
+			<!--<table class="zimmer table">
 				<tr>
 					<th class="zimmer">Zimmer</th>
 					<th class="kategorie">Kategorie</th>
@@ -142,7 +146,7 @@
 						</td>
 					</tr>
 				</table>
-			</form>
+			</form>-->
 		</div>
 	</main>
 </body>
