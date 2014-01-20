@@ -68,7 +68,7 @@ public class BuchungsManagement {
 		if (zimmer == null) 
 			return "Das Zimmer existiert nicht";
 
-		if (Zimmer.isBooked(zimmer, aufenthalt)) {
+		if (zimmer.isBooked(aufenthalt)) {
 			return "Das Zimmer ist du diesem Zeitpunkt leider schon belegt";
 
 		} else {
@@ -101,7 +101,7 @@ public class BuchungsManagement {
 		if (room == null) 
 			return "Das Zimmer existiert nicht";
 		
-		if (Zimmer.isBooked(room, buchung.getAufenthalt())) {
+		if (room.isBooked(buchung.getAufenthalt())) {
 			return "Das Zimmer ist zu diesem Zeitpunkt schon belegt";
 		
 		} else {

@@ -109,9 +109,9 @@ public class Zimmer implements Serializable {
 	 * @param aufenthalt Zeitraum der gewuenschten Buchung
 	 * @return gibt true zurueck, wenn es eine ueberlappung gibt (d.h. das Zimmer bereits gebucht ist)
 	 */
-	public static boolean isBooked(Zimmer zimmer, Aufenthalt aufenthalt) {
+	public boolean isBooked(Aufenthalt aufenthalt) {
 
-		for (Buchung buchung : zimmer.getBuchungen()) {
+		for (Buchung buchung : this.getBuchungen()) {
 
 			if (buchung.getAufenthalt().overlaps(aufenthalt))
 				return true;

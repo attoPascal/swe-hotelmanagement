@@ -6,6 +6,7 @@ package hm.managers;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import hm.Aufenthalt;
 import hm.Buchung;
@@ -76,7 +77,7 @@ public class AnalyseManagement {
 		
 		for (Zimmer zimmer : zlist){
 			
-			if (Zimmer.isBooked(zimmer, aufenthalt)) bzlist.add(zimmer);
+			if (zimmer.isBooked(aufenthalt)) bzlist.add(zimmer);
 			
 		}
 		
@@ -98,7 +99,7 @@ public class AnalyseManagement {
 		
 		for (Zimmer zimmer : zlist){
 			
-			if (!Zimmer.isBooked(zimmer, aufenthalt)) fzlist.add(zimmer);
+			if (!zimmer.isBooked(aufenthalt)) fzlist.add(zimmer);
 			
 		}
 		
@@ -214,7 +215,7 @@ public class AnalyseManagement {
 	ClassNotFoundException{
 		//TODO Preis zu einem gewissen Zeitraum
 		int preis = 0;
-		ArrayList<Service> services = dao.getHotelByName(name).getServiceList();
+		List<Service> services = dao.getHotelByName(name).getServiceList();
 		for (Service service : services){
 			
 			preis += service.getPreis();
