@@ -24,6 +24,7 @@ public class HotelGast extends AbstractUser{
 		this.zahlungsdaten = zahlungsdaten;
 		this.services = new HashMap<Date,Service>();
 		
+		buchungen = new ArrayList<Buchung>();
 		buchungen.add(buchung);
 	}
 	
