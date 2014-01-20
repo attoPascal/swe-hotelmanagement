@@ -1,17 +1,17 @@
 package hm;
 
+import hm.exceptions.ServiceException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Zeichnet ein Hotel-Objekt aus. Beinhaltet Zimmer und Kategorien
  */
 public class Hotel implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -117,7 +117,6 @@ public class Hotel implements Serializable {
 	 * @param nummer des gesuchten Zimmers
 	 * @return gibt gesuchtes Zimmer zurueck, wenn es gefunden wird; sonst null
 	 */
-	// TODO
 	public Zimmer getZimmer(int nummer) {
 
 		for (Zimmer zimmer : zimmerList) {
@@ -127,33 +126,70 @@ public class Hotel implements Serializable {
 		return null;
 	}
 	
-	public Service addService(Service service) {
-		//TODO
-		return null;
+	/**
+	 * Fügt ein Service zum Hotel hinzu
+	 * @param service Das neue Service
+	 * @throws ServiceException wenn der angegebene Name bereits verwendet wird
+	 */
+	public void addService(Service service) throws ServiceException {
+		String name = service.getName();
+		
+		if (services.containsKey(name)) {
+			throw new ServiceException("Ein Service mit dem angegebenen Namen existiert bereits");
+		} else {
+			services.put(name, service);
+		}
 	}
 	
-	public Service deleteService(String name) {
-		//TODO
-		return null;
+	/**
+	 * Entfernt ein Service aus dem Hotel
+	 * @param name Name des Services, das entfernt werden soll
+	 * @return das Service, das entfernt wurde
+	 * @throws ServiceException wenn kein Service mit dem angegebenen Namen existiert
+	 */
+	public Service removeService(String name) throws ServiceException {
+		if (!services.containsKey(name)) {
+			throw new ServiceException("Es existiert kein Service mit dem angegebenen Namen");
+		} else {
+			return services.remove(name);
+		}
 	}
 	
-	public Service getServiceByName(String name) {
-		//TODO
-		return null;
+	/**
+	 * Gibt das Service mit dem angegebenen Namen zurück
+	 * @param name Name des Service
+	 * @return das Service
+	 * @throws ServiceException wenn kein Service mit dem angegebenen Namen existiert
+	 */
+	public Service getService(String name) throws ServiceException {
+		if (!services.containsKey(name)) {
+			throw new ServiceException("Es existiert kein Service mit dem angegebenen Namen");
+		} else {
+			return services.get(name);
+		}
 	}
 	
-	public Service editService(Service oldService, Service newService) {
-		//TODO
-		return null;
+	/**
+	 * Ersetzt das alte Service mit dem angegebenen Namen durch ein neues
+	 * @param oldName Name des alten Services
+	 * @param newService das neue Service
+	 * @throws ServiceException wenn kein Service mit dem angegebenen Namen existiert
+	 */
+	public void editService(Service oldName, Service newService) throws ServiceException {
+		if (!services.containsKey(oldName)) {
+			throw new ServiceException("Es existiert kein Service mit dem angegebenen Namen");
+		} else {
+			services.remove(oldName);
+			services.put(newService.getName(), newService);
+		}
 	}
 	
-	public HashMap<String,Service> getServices() {
+	public Map<String,Service> getServices() {
 		return services;
 	}
 	
-	public ArrayList<Service> getServiceList() {
-		//TODO
-		return null;
+	public List<Service> getServiceList() {
+		return new ArrayList<Service>(services.values());
 	}
 	
 	//TODO toHtml?
