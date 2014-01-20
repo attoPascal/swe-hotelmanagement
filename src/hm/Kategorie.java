@@ -117,7 +117,7 @@ public class Kategorie implements Serializable {
 			zimmer = (Zimmer) zimmers.getValue();
 		
 			
-			if (!Zimmer.isBooked(zimmer, aufenthalt)) {
+			if (!zimmer.isBooked(aufenthalt)) {
 				return zimmer;
 			}
 		}
