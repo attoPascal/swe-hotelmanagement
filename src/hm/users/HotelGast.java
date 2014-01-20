@@ -3,6 +3,7 @@ package hm.users;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import hm.Buchung;
@@ -14,32 +15,31 @@ import hm.Service;
 public class HotelGast extends AbstractUser{
 	private static final long serialVersionUID = 1L;
 	
-	private ArrayList<Buchung> buchungen;
+	private ArrayList<Integer> buchungen;
 	private String zahlungsdaten;
 	private HashMap<Date,Service> services;
 	
-	public HotelGast(String username, String password, Buchung buchung, String zahlungsdaten) {
+	public HotelGast(String username, String password, String zahlungsdaten) {
 		super(username, password);
 		
 		this.zahlungsdaten = zahlungsdaten;
 		this.services = new HashMap<Date,Service>();
-		
-		buchungen = new ArrayList<Buchung>();
-		buchungen.add(buchung);
+		this.buchungen = new ArrayList<Integer>();
+
 	}
 	
 	/**
-	 * @return bestehende Buchung des HotelGasts
+	 * @return bestehende Buchungen des HotelGasts
 	 */
-	public Buchung getBuchung() {
-		return buchungen.get(buchungen.size());
+	public List<Integer> getBuchungsIDs() {
+		return buchungen;
 	}
 	
 	/**
 	 * @param buchung
 	 */
-	public void setBuchung(Buchung buchung) {
-		buchungen.add(buchung);
+	public void addBuchung(Buchung buchung) {
+		buchungen.add(buchung.getId());
 	}
 	
 	/**

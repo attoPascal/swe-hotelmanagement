@@ -68,10 +68,10 @@ public class Zimmer implements Serializable {
 	 * @param kategorie Zimmer-Kategorie der Buchung
 	 * @param aufenthalt Zeitraum der Pruefung
 	 */
-	public void addBuchung(Kategorie kategorie, Aufenthalt aufenthalt){
-		
-		buchungen.add(new Buchung(kategorie, aufenthalt));
-
+	public Buchung addBuchung(Kategorie kategorie, Aufenthalt aufenthalt){
+		Buchung buchung = new Buchung(kategorie, aufenthalt);
+		buchungen.add(buchung);
+		return buchung;
 	}
 	
 //	/**

@@ -94,7 +94,7 @@ public class CreateTestData extends HttpServlet {
 		u1.addHotel(h1);
 		u1.addHotel(h2);
 		
-		HotelGast u2 = new HotelGast("Gast1", "g1", null, "12345");
+		HotelGast u2 = new HotelGast("Gast1", "g1", "12345");
 		
 		try {
 			//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
