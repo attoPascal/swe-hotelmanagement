@@ -33,8 +33,12 @@ public class BuchungsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
 
+		PrintWriter out = response.getWriter();
+		request.getRequestDispatcher("/inc/head.jsp").include(request, response);
+
+		request.getRequestDispatcher("/inc/nav.jsp").include(request, response);
 		try {
 			/**
 			 * hier wird instantiateDAO innerhalb des try-catch Blocks
