@@ -33,8 +33,8 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Analysten <b class="caret"></b></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Hotels vergleichen</a></li>
-						<li><a href="analyse.jsp">Statistik erstellen</a></li>
+						<li><a href="hotelsvergleichen.jsp">Hotels vergleichen</a></li>
+						<li><a href="statistikerstellen.jsp">Statistik erstellen</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

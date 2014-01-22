@@ -38,6 +38,7 @@ public class AnalyseServlet extends HttpServlet{
 		
 		String hotel = req.getParameter("hotel");
 
+		out.println("<h1>"+ hotel + "</h1>");
 		
 		int tage = Integer.parseInt(req.getParameter("tage"));
 		
@@ -45,6 +46,11 @@ public class AnalyseServlet extends HttpServlet{
 		out.println("<h1>"+ tage + "</h1>");
 		
 		out.println(viewRooms(hotel, date, tage));
+		
+		if (req.getParameter("hotel2") != null) {
+			String hotel2 = req.getParameter("hotel2");
+			out.println(viewRooms(hotel2, date, tage));
+		}
 		
 	}
 
