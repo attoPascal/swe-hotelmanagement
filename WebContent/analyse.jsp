@@ -70,7 +70,7 @@
 						<input type="number" name="tage">	
 						<button type="submit" name="action" value="create" class="btn btn-success">
 						
-						<span class="glyphicon glyphicon-plus"></span>
+						<span class="glyphicon glyphicon-search"></span>
 								</button>
 
 			</form>
