@@ -13,7 +13,7 @@
 	Object user = session.getAttribute("user");
 	if (!(user instanceof Analyst) || ((Analyst) user).hasNoRights()) {
 		session.setAttribute("alert", "Zugriff verweigert. Bitte melden Sie sich als Analyst mit den nötigen Rechten an, um auf diese Seite zuzugreifen.");
-		session.setAttribute("redirect", "analyse.jsp");
+		session.setAttribute("redirect", "statistikerstellen.jsp");
 		response.sendRedirect("login.jsp");
 	}
 
