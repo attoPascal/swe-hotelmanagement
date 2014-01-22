@@ -56,10 +56,17 @@
 			<form action="AnalyseServlet" method="post" accept-charset="UTF-8">
 						
 						<label for="hotel">Hotel 1</label>
-						<input type="text" name="hotel" placeholder="Hotel 1">
+						<select name="hotel">
+							<%for (Hotel h: hList) { %>
+ 								 <option value="<%= h.getName()%>"><%= h.getName()%></option>
+ 							<% } %>		
+						</select> 
 						<label for="hotel2">Hotel 2</label>
-						<input type="text" name="hotel2" placeholder="Hotel 2">
-						
+						<select name="hotel2">
+							<%for (Hotel h: hList) { %>
+ 								 <option value="<%= h.getName()%>"><%= h.getName()%></option>
+ 							<% } %>		
+						</select> 
 						<label for="anfang">Anfang</label>
 						<input type="date" name="anfang" value="" placeholder="yyyy-mm-dd">
 						<label for="tage">Tage</label>
