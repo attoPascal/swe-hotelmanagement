@@ -37,6 +37,9 @@ public class AnalyseServlet extends HttpServlet{
 		String date = req.getParameter("anfang");
 		
 		String hotel = req.getParameter("hotel");
+		req.getRequestDispatcher("/inc/head.jsp").include(req, res);
+
+		req.getRequestDispatcher("/inc/nav.jsp").include(req, res);
 
 		out.println("<h1>"+ hotel + "</h1>");
 		
