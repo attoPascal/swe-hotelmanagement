@@ -34,10 +34,9 @@ public class AnalyseManagement {
 	
 	/**
 	 * Instanziiert das DAO
-	 * @param filename Datei-Name in dem die Daten gespeichert werden
 	 * @throws IOException
 	 */
-	public void instantiateDAO(String filename) throws IOException {
+	public void instantiateDAO() throws IOException {
 		dao = SerializedDAO.getInstance();
 	}
 	
@@ -197,6 +196,7 @@ public class AnalyseManagement {
 	ClassNotFoundException{
 		//TODO Preis zu einem gewissen Zeitraum
 		int preis = 0;
+		
 		ArrayList<Kategorie> kategorien = dao.getHotelByName(name).getKategorien();
 		for (Kategorie kategorie : kategorien){
 			
