@@ -6,6 +6,7 @@ import hm.Zimmer;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
 import hm.users.AbstractUser;
+import hm.users.Analyst;
 import hm.users.HotelGast;
 import hm.users.Hotelier;
 
@@ -96,6 +97,8 @@ public class CreateTestData extends HttpServlet {
 		
 		HotelGast u2 = new HotelGast("Gast1", "g1", "12345");
 		
+		Analyst u3 = new Analyst("Analyst1", "a1", true, true, true);
+		
 		try {
 			//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
 			DAO dao = SerializedDAO.getInstance();
@@ -104,7 +107,8 @@ public class CreateTestData extends HttpServlet {
 			dao.saveHotel(h2);
 			dao.saveUser(u1);
 			dao.saveUser(u2);
-		
+			dao.saveUser(u3);
+
 			Hotel h3 = dao.getHotelByName("CrazySharkyFish");
 			ArrayList<Kategorie> katList = h3.getKategorien();
 		
