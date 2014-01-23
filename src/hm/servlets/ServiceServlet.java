@@ -40,7 +40,7 @@ public class ServiceServlet extends HttpServlet {
 					break;
 
 				case "edit":
-					newName = request.getParameter("newname");
+					newName = request.getParameter("newName");
 					preis = Integer.parseInt(request.getParameter("preis"));
 					beschreibung = request.getParameter("beschreibung");
 					ServiceManagement.editService(serviceName, newName, beschreibung, preis, hotelName);

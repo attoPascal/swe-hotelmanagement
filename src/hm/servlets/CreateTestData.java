@@ -2,9 +2,11 @@ package hm.servlets;
 
 import hm.Hotel;
 import hm.Kategorie;
+import hm.Service;
 import hm.Zimmer;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
+import hm.exceptions.ServiceException;
 import hm.users.AbstractUser;
 import hm.users.Analyst;
 import hm.users.HotelGast;
@@ -61,7 +63,6 @@ public class CreateTestData extends HttpServlet {
 		h2.addZimmer(z8);
 		h2.addZimmer(z9);
 
-		
 		Kategorie kat1 = new Kategorie("Einzel", 5000, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 10000, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 20000, "Bad & Klo, Affenbutler");
@@ -90,6 +91,22 @@ public class CreateTestData extends HttpServlet {
 		h2.addKategorie(kat5);
 		h2.addKategorie(kat6);
 		h2.addKategorie(kat7);
+		
+		Service s1 = new Service("Sauna", "30min, 2 Aufguesse", 5000);
+		Service s2 = new Service("Massage", "20min, ohne Happy End", 7500);
+		Service s3 = new Service("Massage extra", "20min, mit Happy End", 5000);
+		Service s4 = new Service("Fruehstueck", "Schinken, Kaese, Ei", 1500);
+		Service s5 = new Service("Kalte Platte", "Schinken, Kaese, Ei, Spargel", 3000);
+		
+		try {
+			h1.addService(s1);
+			h1.addService(s2);
+			h1.addService(s3);
+			h2.addService(s4);
+			h2.addService(s5);
+		} catch (ServiceException e1) {
+			e1.printStackTrace();
+		}
 		
 		Hotelier u1 = new Hotelier("Hotelier1", "h1");
 		u1.addHotel(h1);
