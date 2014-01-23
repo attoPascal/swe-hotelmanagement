@@ -16,19 +16,33 @@ public class Hotelier extends AbstractUser {
 	
 	private boolean canManageCategories;
 	private boolean canManageRooms;
-	/**
-	 * Jeder Hotelier kann grundsätzlich Buchungen managen
-	 */
-	private boolean canManageBookings = true;
+	private boolean canManageBookings;
+	private boolean canManageServices;
 
 	private ArrayList<String> hotels = new ArrayList<String>();
-
-	public Hotelier(String username, String password, boolean canManageCategories, boolean canManageRooms) {
+	
+	/**
+	 * Konstruktor mit expliziten Rechten
+	 */
+	public Hotelier(String username, String password, boolean canManageCategories, boolean canManageRooms, boolean canManageBookings, boolean canManageServices) {
 		super(username, password);
 		this.canManageCategories = canManageCategories;
 		this.canManageRooms = canManageRooms;
+		this.canManageBookings = canManageBookings;
+		this.canManageServices = canManageServices;
 	}
 	
+	/**
+	 * Konstruktor mit allen Rechten
+	 */
+	public Hotelier(String username, String password) {
+		super(username, password);
+		this.canManageCategories = true;
+		this.canManageRooms = true;
+		this.canManageBookings = true;
+		this.canManageServices = true;
+	}
+
 	/**
 	 * @param hotel Hotel, das dem Hotelier-Objekt hinzugefuegt wird
 	 */
@@ -95,5 +109,13 @@ public class Hotelier extends AbstractUser {
 	
 	public void setCanManageBookings(boolean canManageBookings) {
 		this.canManageBookings = canManageBookings;
+	}
+	
+	public boolean isCanManageServices() {
+		return canManageServices;
+	}
+
+	public void setCanManageServices(boolean canManageServices) {
+		this.canManageServices = canManageServices;
 	}
 }
