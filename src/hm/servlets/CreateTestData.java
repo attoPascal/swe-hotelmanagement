@@ -91,7 +91,7 @@ public class CreateTestData extends HttpServlet {
 		h2.addKategorie(kat6);
 		h2.addKategorie(kat7);
 		
-		Hotelier u1 = new Hotelier("Hotelier1", "h1", true, true);
+		Hotelier u1 = new Hotelier("Hotelier1", "h1");
 		u1.addHotel(h1);
 		u1.addHotel(h2);
 		
