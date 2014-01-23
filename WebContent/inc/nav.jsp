@@ -42,6 +42,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="CreateTestData" target="_blank">Testdaten erstellen</a></li>
 						<li><a href="login.jsp">Login</a></li>
+						<li><a href="buchungstest.jsp">Buchungs-Test</a></li>
 					</ul>
 				</li>
 			</ul>
