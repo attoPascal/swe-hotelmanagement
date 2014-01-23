@@ -36,10 +36,9 @@ table.zimmer td.button {
 	width: 60px;
 }
 
-table.kategorie td.button1 {
-	width: 60px;
-}
-
-table.kategorie td.button2 {
+table.kategorie td.button1,
+table.kategorie td.button2,
+table.service td.button1,
+table.service td.button2 {
 	width: 60px;
 }

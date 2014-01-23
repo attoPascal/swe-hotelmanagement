@@ -27,7 +27,7 @@
 						<li><a href="kategorienverwalten.jsp">Kategorien verwalten</a></li>
 						<li><a href="zimmerverwalten.jsp">Zimmer verwalten</a></li>
 						<li><a href="buchungenverwalten.jsp">Buchungen verwalten</a></li>
-						<li><a href="#">Services verwalten</a></li>
+						<li><a href="servicesverwalten.jsp">Services verwalten</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
