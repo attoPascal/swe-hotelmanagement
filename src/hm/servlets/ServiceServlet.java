@@ -56,7 +56,7 @@ public class ServiceServlet extends HttpServlet {
 		}
 	}
 	
-	public DAO getDAO() throws IOException {
+	public static DAO getDAO() throws IOException {
 		return ServiceManagement.getDAO();
 	}
 }
