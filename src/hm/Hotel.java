@@ -175,7 +175,7 @@ public class Hotel implements Serializable {
 	 * @param newService das neue Service
 	 * @throws ServiceException wenn kein Service mit dem angegebenen Namen existiert
 	 */
-	public void editService(Service oldName, Service newService) throws ServiceException {
+	public void editService(String oldName, Service newService) throws ServiceException {
 		if (!services.containsKey(oldName)) {
 			throw new ServiceException("Es existiert kein Service mit dem angegebenen Namen");
 		} else {

@@ -64,7 +64,7 @@ public class ServiceManagement {
 		}
 		
 		Service newService = new Service(name, beschreibung, preis);
-		hotel.editService(oldService, newService);
+		hotel.editService(oldName, newService);
 		dao.saveHotel(hotel);
 	}
 	
