@@ -21,7 +21,7 @@ public class Zimmer implements Serializable {
 	/**
 	 * Liste mit allen Buchungen fuer dieses Zimmer
 	 */
-	ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
+	private ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 	
 	/**
 	 * @param nummer initialisiert eine Zimmernummer
