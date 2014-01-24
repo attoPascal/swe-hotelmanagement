@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -110,7 +111,7 @@ public class ServiceManagement {
 		Service service = hotel.getService(serviceName);
 		Buchung buchung = hotel.getBuchungByID(buchungsID);
 		
-		DateFormat df = DateFormat.getDateTimeInstance();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = df.parse(dateString);
 		
 		buchung.addService(service, date);
