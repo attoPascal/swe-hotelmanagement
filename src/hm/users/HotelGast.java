@@ -1,13 +1,9 @@
 package hm.users;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import hm.Buchung;
-import hm.Service;
 
 /**
  * Benutzer Hotelgast, kann Buchungen vornehmen
@@ -17,15 +13,12 @@ public class HotelGast extends AbstractUser{
 	
 	private ArrayList<Integer> buchungen;
 	private String zahlungsdaten;
-	private HashMap<Date,Service> services;
 	
 	public HotelGast(String username, String password, String zahlungsdaten) {
 		super(username, password);
 		
 		this.zahlungsdaten = zahlungsdaten;
-		this.services = new HashMap<Date,Service>();
 		this.buchungen = new ArrayList<Integer>();
-
 	}
 	
 	/**
@@ -54,19 +47,5 @@ public class HotelGast extends AbstractUser{
 	 */
 	public void setZahlungsdaten(String zahlungsdaten) {
 		this.zahlungsdaten = zahlungsdaten;
-	}
-	
-	/**
-	 * Fügt ein neues Service zum angegebenen Zeitpunkt hinzu
-	 */
-	public void addService(Service service, Date date) {
-		services.put(date, service);
-	}
-	
-	/**
-	 * Gibt die HashMap aller gebuchten Services mit ihrem jeweiligen Datum zurück
-	 */
-	public Map<Date,Service> getServices() {
-		return services;
 	}
 }

@@ -8,12 +8,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import hm.Buchung;
 import hm.Hotel;
 import hm.Service;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
+import hm.exceptions.BuchungsException;
 import hm.exceptions.ServiceException;
-import hm.users.HotelGast;
 
 /**
  * Zur Verwaltung der Services
@@ -90,26 +91,30 @@ public class ServiceManagement {
 	}
 	
 	/**
-	 * Liefert alle gebuchten Services des spezifizierten Gasts zurück
+	 * Liefert alle gebuchten Services der jeweiligen Buchung zurück
 	 */
-	public static Map<Date,Service> getServices(HotelGast gast) {
-		return gast.getServices();
+	public static Map<Date,Service> getServices(int buchungsID, String hotelName) throws BuchungsException, IOException, ClassNotFoundException {
+		DAO dao = getDAO();
+		Hotel hotel = dao.getHotelByName(hotelName);
+		
+		return hotel.getBuchungByID(buchungsID).getServices();
 	}
 	
 	/**
-	 * Weist das übergebene Service zum übergebenen Zeitpunkt dem übergebenen Gast zu
+	 * Weist das übergebene Service zum übergebenen Zeitpunkt der übergebenen Buchung zu
 	 */
-	public static void serviceBuchen(HotelGast gast, String serviceName, String hotelName, String dateString) throws FileNotFoundException, ClassNotFoundException, IOException, ServiceException, ParseException {
+	public static void serviceBuchen(String serviceName, String dateString, int buchungsID, String hotelName) throws FileNotFoundException, ClassNotFoundException, IOException, ServiceException, ParseException, BuchungsException {
 		DAO dao = getDAO();
 		
 		Hotel hotel = dao.getHotelByName(hotelName);
 		Service service = hotel.getService(serviceName);
+		Buchung buchung = hotel.getBuchungByID(buchungsID);
 		
 		DateFormat df = DateFormat.getDateTimeInstance();
 		Date date = df.parse(dateString);
 		
-		gast.addService(service, date);
-		dao.saveUser(gast);
+		buchung.addService(service, date);
+		dao.saveHotel(hotel);
 	}
 	
 	/**

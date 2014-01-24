@@ -2,36 +2,21 @@ package hm;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Buchung. Weist ein Zimmer einem Aufenthalt zu
  */
 public class Buchung implements Serializable {
-
-	/**
-	 * 
-	 */
+	private static int buchungen = 0;
 	private static final long serialVersionUID = 1L;
-	/**
-	 * zu buchendes Zimmer
-	 */
+	
 	private Zimmer zimmer;
 	private Kategorie kategorie;
-	
-	/**
-	 * Dauer des Aufenthalts
-	 */
 	private Aufenthalt aufenthalt;
-	
-	/**
-	 * kosten der Buchung
-	 */
 	private int kosten;
-	
-	private static int buchungen = 0;
-	
 	private int id;
-	
+	private HashMap<Date,Service> services; 
 	
 	/**
 	 * @return Nummer der Buchung
@@ -95,15 +80,15 @@ public class Buchung implements Serializable {
 	public void setKosten(int kosten) {
 		this.kosten = kosten;
 	}
-/*
-	public Buchung(Zimmer zimmer, Date d, int tage){
-		
-		this.zimmer = zimmer;
-		this.aufenthalt = new Aufenthalt(d,tage);
-		this.kosten = tage * zimmer.getKategorie().getPreis();
-		
+	
+	public HashMap<Date, Service> getServices() {
+		return services;
 	}
-	*/
+	
+	public void addService(Service service, Date date) {
+		services.put(date, service);
+	}
+	
 	/**
 	 * Buchung anhand von Kategorie, Datum und Tage
 	 * 
@@ -112,13 +97,12 @@ public class Buchung implements Serializable {
 	 * @param tage Anzahl der Tage der Buchung
 	 */
 	public Buchung(Kategorie kategorie, Date d, int tage){
-		
 		this.kategorie = kategorie;
 		this.aufenthalt = new Aufenthalt(d,tage);
 		this.kosten = tage * kategorie.getPreis();
 		this.zimmer = kategorie.getZimmer(aufenthalt);
 		this.id = buchungen++;
-		
+		this.services = new HashMap<Date,Service>();
 	}
 	
 	/**
@@ -128,12 +112,11 @@ public class Buchung implements Serializable {
 	 * @param aufenthalt Zeitraum der Buchung
 	 */
 	public Buchung(Kategorie kategorie, Aufenthalt aufenthalt){
-		
 		this.kategorie = kategorie;
 		this.aufenthalt = aufenthalt;
 		this.kosten = aufenthalt.getDays() * kategorie.getPreis();
 		this.zimmer = kategorie.getZimmer(aufenthalt);
 		this.id = buchungen++;
+		this.services = new HashMap<Date,Service>();
 	}
-
 }
