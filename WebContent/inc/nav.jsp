@@ -17,8 +17,8 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Gäste <b class="caret"></b></a>
 					<ul class="dropdown-menu">
 						<li><a href="allekategorien.jsp">Zimmer buchen</a></li>
+						<li><a href="meinebuchungen.jsp">Meine Buchungen</a></li>
 						<li><a href="buchungstornieren.jsp">Buchung stornieren</a></li>
-						<li><a href="#">Services buchen</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -42,7 +42,6 @@
 					<ul class="dropdown-menu">
 						<li><a href="CreateTestData" target="_blank">Testdaten erstellen</a></li>
 						<li><a href="login.jsp">Login</a></li>
-						<li><a href="buchungstest.jsp">Buchungs-Test</a></li>
 					</ul>
 				</li>
 			</ul>
