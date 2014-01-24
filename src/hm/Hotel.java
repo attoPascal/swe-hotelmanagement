@@ -1,5 +1,6 @@
 package hm;
 
+import hm.exceptions.BuchungsException;
 import hm.exceptions.ServiceException;
 
 import java.io.Serializable;
@@ -190,6 +191,18 @@ public class Hotel implements Serializable {
 	
 	public List<Service> getServiceList() {
 		return new ArrayList<Service>(services.values());
+	}
+	
+	public Buchung getBuchungByID(int id) throws BuchungsException {
+		for (Zimmer z : zimmerList) {
+			for (Buchung b : z.getBuchungen()) {
+				if (b.getId() == id) {
+					return b;
+				}
+			}
+		}
+		
+		throw new BuchungsException("Es existiert keine Buchung mit der angegebenen ID");
 	}
 	
 	//TODO toHtml?
