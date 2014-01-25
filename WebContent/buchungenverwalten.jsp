@@ -20,7 +20,8 @@
 	}
 
 	BuchungsManagement bm = new BuchungsManagement();
-	bm.instantiateDAO("data.ser");
+	//Unnötig gehört überarbeitet
+	bm.instantiateDAO();
 	ArrayList<Hotel> hList = bm.getDAO().getHotelList();
 	
 	String hotelName = request.getParameter("hotel");
