@@ -5,6 +5,7 @@ package hm.managers;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -234,9 +235,15 @@ public class AnalyseManagement {
 	public String getMostBookedMonth(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
-		
-		
-		return null;
+		int month = 0;
+		int months[] = new int [12];
+		for(Buchung b : buchungen){
+			months[b.getAufenthalt().getMonth()]++;
+		}
+		for(int i = 0; i <= 11; i++){
+			if (months[i] > months[month]) month = months[i];
+		}		
+		return new DateFormatSymbols().getMonths()[month];
 		}
 	
 	/**
