@@ -36,6 +36,7 @@ if (!(user instanceof HotelGast)) {
 	
 	<main class="container">
 		<h1>Services buchen</h1>
+		<h2>Für Buchung am: <%= buchung.getAufenthalt().getAnfang() %></h2>
 		
 	<% if (!sList.isEmpty()) { %>
 		<table class="table">
