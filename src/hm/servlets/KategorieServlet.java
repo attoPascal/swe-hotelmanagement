@@ -90,7 +90,6 @@ public class KategorieServlet extends HttpServlet {
 			} else {
 				out.write("No action. Nothing to do.");
 			}
-			management.getDAO().saveHotel(hotel);
 
 		} catch (ClassNotFoundException e) {
 			out.write(e.getMessage());
