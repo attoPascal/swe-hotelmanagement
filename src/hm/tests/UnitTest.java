@@ -87,6 +87,8 @@ public class UnitTest {
 		
 		HotelGast user = new HotelGast("Name", "pwd", "123");
 		
+		//TODO
+		/*
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		int zimmernummer;
 		try {
@@ -96,9 +98,10 @@ public class UnitTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		*/
 
-		
-		
+		//TODO
+		/*
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		int zimmernummer2;
 		try {
@@ -107,6 +110,7 @@ public class UnitTest {
 		} catch (ClassNotFoundException| NullPointerException | IOException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 
@@ -163,6 +167,8 @@ public class UnitTest {
 		
 		HotelGast user = new HotelGast("Name", "pwd", "123");
 		
+		//TODO
+		/*
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		int zimmernummer;
 		try {
@@ -171,7 +177,10 @@ public class UnitTest {
 		} catch (ClassNotFoundException| NullPointerException | IOException e) {
 			e.printStackTrace();
 		}
-
+		*/
+		
+		//TODO
+		/*
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		int zimmernummer2;
 		try {
@@ -180,13 +189,18 @@ public class UnitTest {
 		} catch (ClassNotFoundException| NullPointerException | IOException e) {
 			e.printStackTrace();
 		}
+		*/
 		
+		
+		//TODO
+		/*
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		try {
 			bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
 		} catch (ClassNotFoundException| NullPointerException | IOException e) {
 			e.printStackTrace();
 		}
+		*/
 
 		
 	}
