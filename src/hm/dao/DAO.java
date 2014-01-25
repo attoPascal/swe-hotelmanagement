@@ -48,4 +48,12 @@ public interface DAO {
 	 * @throws FileNotFoundException 
 	 */
 	public void saveUser(AbstractUser user) throws FileNotFoundException, IOException, ClassNotFoundException;
+	
+	/**
+	 * Liefert fortlaufende BuchungsID
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 * @throws FileNotFoundException 
+	 */
+	public int getNextBuchungsID() throws FileNotFoundException, ClassNotFoundException, IOException;
 }

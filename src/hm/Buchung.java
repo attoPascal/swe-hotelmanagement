@@ -8,7 +8,6 @@ import java.util.HashMap;
  * Buchung. Weist ein Zimmer einem Aufenthalt zu
  */
 public class Buchung implements Serializable {
-	private static int buchungen = 0;
 	private static final long serialVersionUID = 1L;
 	
 	private Zimmer zimmer;
@@ -96,12 +95,12 @@ public class Buchung implements Serializable {
 	 * @param d Datum des Anfangs der Buchung
 	 * @param tage Anzahl der Tage der Buchung
 	 */
-	public Buchung(Kategorie kategorie, Date d, int tage){
+	public Buchung(Kategorie kategorie, Date d, int tage, int id) {
 		this.kategorie = kategorie;
 		this.aufenthalt = new Aufenthalt(d,tage);
 		this.kosten = tage * kategorie.getPreis();
 		this.zimmer = kategorie.getZimmer(aufenthalt);
-		this.id = buchungen++;
+		this.id = id;
 		this.services = new HashMap<Date,Service>();
 	}
 	
@@ -111,12 +110,12 @@ public class Buchung implements Serializable {
 	 * @param kategorie der Buchung
 	 * @param aufenthalt Zeitraum der Buchung
 	 */
-	public Buchung(Kategorie kategorie, Aufenthalt aufenthalt){
+	public Buchung(Kategorie kategorie, Aufenthalt aufenthalt, int id) {
 		this.kategorie = kategorie;
 		this.aufenthalt = aufenthalt;
 		this.kosten = aufenthalt.getDays() * kategorie.getPreis();
 		this.zimmer = kategorie.getZimmer(aufenthalt);
-		this.id = buchungen++;
+		this.id = id;
 		this.services = new HashMap<Date,Service>();
 	}
 }
