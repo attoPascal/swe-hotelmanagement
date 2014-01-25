@@ -148,7 +148,12 @@ public class BuchungsManagement {
 		
 		return bestaetigung;
 	}
-
+	public void instantiateDAO() throws IOException{
+		
+		dao = SerializedDAO.getInstance();
+		
+	}
+	
 	public DAO getDAO() throws IOException {
 		return SerializedDAO.getInstance();
 	}
