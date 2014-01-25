@@ -19,7 +19,9 @@ import java.util.Iterator;
  * benutzt
  */
 public class SerializedDAO implements DAO {
+	private File file;
 	private static SerializedDAO instance = null;
+	
 	/**
 	 * GetInstance-Methode laut Singleton Pattern
 	 * @return SerializedDAO über Datei "data.ser"
@@ -36,8 +38,6 @@ public class SerializedDAO implements DAO {
 		
 		return instance;
 	}
-	
-	private File file;
 	
 	/**
 	 * Privater Konstruktor laut Singleton Pattern
@@ -262,5 +262,28 @@ public class SerializedDAO implements DAO {
 		} catch (ClassNotFoundException e) {
 			throw new ClassNotFoundException("Die angeforderte Klasse wurde nicht gefunden (SerializedDAO.saveUser)");
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int getNextBuchungsID() throws FileNotFoundException, ClassNotFoundException, IOException {
+		HashMap<String, ArrayList<?>> map = getMap();
+		
+		// erste Verwendung
+		if (!map.containsKey("id")) {
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			list.add(0);
+			map.put("id", list);
+			saveMap(map);
+		}
+		
+		ArrayList<Integer> list = (ArrayList<Integer>) map.get("id");
+		int id = list.get(0);
+		list.set(0, id+1);
+		
+		map.put("id", list);
+		saveMap(map);
+		
+		return id;
 	}
 }

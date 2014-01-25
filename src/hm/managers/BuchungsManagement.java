@@ -45,7 +45,7 @@ public class BuchungsManagement {
 	 */
 	public int createBuchung(Kategorie kategorie, Aufenthalt aufenthalt, HotelGast gast) throws FileNotFoundException, ClassNotFoundException, IOException {
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
-		Buchung buchung = zimmer.addBuchung(kategorie, aufenthalt);
+		Buchung buchung = zimmer.addBuchung(kategorie, aufenthalt, dao.getNextBuchungsID());
 		
 		gast.addBuchung(buchung);
 		dao.saveUser(gast);
@@ -101,9 +101,7 @@ public class BuchungsManagement {
 		 */
 		Zimmer room = hotel.getZimmer(zimmer.getNummer());
 		
-		/**
-		 * Sollte das Zimmer im Hotel nicht vorhanden sein
-		 */
+		// Sollte das Zimmer im Hotel nicht vorhanden sein
 		if (room == null) 
 			return "Das Zimmer existiert nicht";
 		
@@ -111,17 +109,13 @@ public class BuchungsManagement {
 			return "Das Zimmer ist zu diesem Zeitpunkt schon belegt";
 		
 		} else {
-			/**
-			 * Das alte Zimmer aus der Buchung entfernen
-			 */
+			// Das alte Zimmer aus der Buchung entfernen
 			buchung.getZimmer().removeBuchung(buchung.getId());
-			/**
-			 * Dem neuen Zimmer eine Buchung hinzufügen
-			 */
-			room.addBuchung(buchung.getKategorie(), buchung.getAufenthalt());
-			/**
-			 * Das Zimmer der Buchung zuteilen
-			 */
+
+			// Dem neuen Zimmer eine Buchung hinzufügen
+			room.addBuchung(buchung.getKategorie(), buchung.getAufenthalt(), buchung.getId());
+			
+			// Das Zimmer der Buchung zuteilen
 			buchung.setZimmer(room);
 
 			return "Das Zimmer für die Buchung wurde erfolgreich geändert";
