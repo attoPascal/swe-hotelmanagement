@@ -1,6 +1,7 @@
 package hm;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -93,7 +94,21 @@ public class Aufenthalt implements Serializable {
 			return false;
 	}
 
-	
+	public int getMonth(){
+		
+		Calendar cal1 = Calendar.getInstance();
+		Calendar cal2 = Calendar.getInstance();
+
+		cal1.setTime(anfang);
+		cal2.setTime(ende);
+
+		int month1 = cal1.get(Calendar.MONTH);
+		int month2 = cal2.get(Calendar.MONTH);
+		int month = (month1+month2)/2;
+		
+		return month;
+		
+	}
 	@Override
 	public String toString() {
 		return "Aufenthalt [anfang=" + anfang + ", ende=" + ende + "]";
