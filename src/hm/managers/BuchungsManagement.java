@@ -2,6 +2,10 @@ package hm.managers;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import hm.Aufenthalt;
 import hm.Kategorie;
@@ -20,37 +24,31 @@ public class BuchungsManagement {
 	}
 
 	/**
-	 * Damit die Exceptions im Servlet zentral in der doGet-Methode behandelt
-	 * werden können, gibt es eine eigene Methode, die die Membervariable dao
-	 * instanziert
-	 */
-	public void instantiateDAO(String filename) throws IOException {
-		dao = SerializedDAO.getInstance();
-	}
-
-	/**
 	 * Erstellt eine neue Buchung
-	 * 
-	 * @param kategorie
-	 *            Kategorie des Zimmers
-	 * @param aufenthalt
-	 *            Zeitraum, der gebucht wurde
-	 * 
-	 * @param name
-	 *            Name das Hotels für das eine neue Buchung erstellt werden soll
 	 * @return gibt die Nummer des Zimmers zurueck, das gebucht wurde.
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 * @throws FileNotFoundException 
+	 * @throws ParseException 
 	 */
-	public int createBuchung(Kategorie kategorie, Aufenthalt aufenthalt, HotelGast gast) throws FileNotFoundException, ClassNotFoundException, IOException {
+	public Buchung createBuchung(String hotelName, String katName, String dateString, int duration, HotelGast gast) throws FileNotFoundException, ClassNotFoundException, IOException, ParseException {
+		DAO dao = getDAO();
+		
+		Hotel hotel = dao.getHotelByName(hotelName);
+		Kategorie kategorie = hotel.getKategorie(katName);
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = df.parse(dateString);
+		Aufenthalt aufenthalt = new Aufenthalt(date, duration);
+		
 		Zimmer zimmer = kategorie.getZimmer(aufenthalt);
 		Buchung buchung = zimmer.addBuchung(kategorie, aufenthalt, dao.getNextBuchungsID());
 		
 		gast.addBuchung(buchung);
 		dao.saveUser(gast);
-
-		return zimmer.getNummer();
+		dao.saveHotel(hotel);
+		
+		return buchung;
 	}
 
 	/**
@@ -140,8 +138,18 @@ public class BuchungsManagement {
 		Zimmer zimmer = dao.getHotelByName(name).getZimmer(nummer);
 		zimmer.removeBuchung(id);
 	}
+	
+	public String getBuchungsbestaetigung(Buchung buchung) {
+		String bestaetigung =
+				"Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + buchung.getZimmernummer() +
+				"<br>Datum ihrer Buchung: "+ buchung.getAufenthalt().getAnfang().toString() +
+				"<br>Gesamtkosten: " + buchung.getKosten() +
+				"<br>Kategorie: " + buchung.getKategorie().toString();
+		
+		return bestaetigung;
+	}
 
-	public DAO getDAO() {
-		return dao;
+	public DAO getDAO() throws IOException {
+		return SerializedDAO.getInstance();
 	}
 }

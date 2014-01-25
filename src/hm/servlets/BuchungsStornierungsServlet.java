@@ -30,12 +30,7 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		try {
-			/**
-			 * hier wird instantiateDAO innerhalb des try-catch Blocks aufgerufen
-			 */
-			management.instantiateDAO("data.ser");
-
-			// // reading the user input
+			// reading the user input
 			int id = Integer.parseInt(request.getParameter("id"));
 			int nummer = Integer.parseInt(request.getParameter("nummer"));
 			String hotelName = request.getParameter("hotel");
@@ -53,6 +48,7 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 					"im Hotel" + hotel.getName() + 
 					"war erfolgreich.");
 
+			//TODO: Ins Management verlegen
 			management.getDAO().saveHotel(hotel);
 
 		} catch (NullPointerException e) {

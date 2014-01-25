@@ -57,15 +57,15 @@
 				</div>
 				<div class="col-sm-4">
 					<select name="months" class="form-control">
-						<option value="1">Jänner</option>
-						<option value="2">Februar</option>
-						<option value="3">März</option>
-						<option value="4">April</option>
-						<option value="5">Mai</option>
-						<option value="6">Juni</option>
-						<option value="7">Juli</option>
-						<option value="8">August</option>
-						<option value="9">September</option>
+						<option value="01">Jänner</option>
+						<option value="02">Februar</option>
+						<option value="03">März</option>
+						<option value="04">April</option>
+						<option value="05">Mai</option>
+						<option value="06">Juni</option>
+						<option value="07">Juli</option>
+						<option value="08">August</option>
+						<option value="09">September</option>
 						<option value="10">Oktober</option>
 						<option value="11">November</option>
 						<option value="12">Dezember</option>
