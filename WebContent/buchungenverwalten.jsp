@@ -71,6 +71,9 @@
 					<th>Zimmer</th>
 					<th>Anfang</th>
 					<th>Ende</th>
+					<th>Tage</th>
+					<th>Kosten</th>
+					
 				</tr>
 				<tr>
 			
@@ -81,6 +84,9 @@
 							<td><%= b.getZimmernummer() %></td>
 							<td><%= b.getAufenthalt().getAnfang() %></td>
 							<td><%= b.getAufenthalt().getEnde() %></td>
+							<td><%= b.getAufenthalt().getDays() %></td>
+							<td><%= b.getKosten() %></td>
+							
 						</tr>
 					<% } %>
 				<% } %>
