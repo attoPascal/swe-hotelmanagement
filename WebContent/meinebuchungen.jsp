@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Kategorie" %>
 <%@ page import="hm.Buchung" %>
@@ -15,6 +17,7 @@ if (!(user instanceof HotelGast)) {
 	response.sendRedirect("login.jsp");
 } else {
 	List<Hotel> hList = SerializedDAO.getInstance().getHotelList();
+	DateFormat df = new SimpleDateFormat("EEEE, d. MMMM yyyy");
 %>
 	
 <!DOCTYPE html>
@@ -49,8 +52,8 @@ if (!(user instanceof HotelGast)) {
 				<tr>
 					<td><%= b.getId() %></td>
 					<td><%= b.getZimmernummer() %></td>
-					<td><%= b.getAufenthalt().getAnfang() %></td>
-					<td><%= b.getAufenthalt().getEnde() %></td>
+					<td><%= df.format(b.getAufenthalt().getAnfang()) %></td>
+					<td><%= df.format(b.getAufenthalt().getEnde()) %></td>
 					<td>
 						<form action="servicebuchen.jsp" method="get">
 							<input type="hidden" name="hotelName" value="<%= h.getName() %>">
