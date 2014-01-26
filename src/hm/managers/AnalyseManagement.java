@@ -17,6 +17,7 @@ import hm.Service;
 import hm.Zimmer;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
+import hm.exceptions.ServiceException;
 
 
 
@@ -227,7 +228,7 @@ public class AnalyseManagement {
 		int preis = 0;
 		
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
-		if (buchungen.isEmpty()) return -666;
+		if (buchungen.isEmpty()) return 0;
 		for (Buchung buchung : buchungen){
 			
 			preis += buchung.getKosten()/buchung.getAufenthalt().getDays();
@@ -246,7 +247,7 @@ public class AnalyseManagement {
 		int preis = 0;
 		
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
-		if (buchungen.isEmpty()) return -666;
+		if (buchungen.isEmpty()) return 0;
 		for (Buchung buchung : buchungen){
 			
 			preis += buchung.getKosten();
@@ -283,6 +284,7 @@ public class AnalyseManagement {
 	public String getMostBookedMonth(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
+		if(buchungen.isEmpty()) return "-";
 		int month = 0;
 		int months[] = new int [12];
 		
@@ -308,6 +310,7 @@ public class AnalyseManagement {
 		Hotel hotel = dao.getHotelByName(name);
 
 		ArrayList<Buchung> buchungen= getBookings(aufenthalt, name);
+		if(buchungen.isEmpty()) return "-";
 		ArrayList<Kategorie> kategorien = hotel.getKategorien();
 		ArrayList<Integer> score = new ArrayList<Integer>();
 		
@@ -333,17 +336,60 @@ public class AnalyseManagement {
 	 */
 	public int getServiceRevenue(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
-		return 0;
+		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
+		ArrayList<Service> services = new ArrayList<Service>();
+		int revenue= 0;
+
+		for (Buchung buchung : buchungen){
+			
+			services.addAll(buchung.getServices().values());
+			
+		}
+		
+		for (Service service : services){
+			
+			revenue += service.getPreis();
+			
+		}
+		return revenue;
 		}
 	
 	/**
 	 * @param hotel
 	 * @param aufenthalt
 	 * @return
+	 * @throws ServiceException 
 	 */
 	public String getBestService(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
-	ClassNotFoundException{
-		return null;
+	ClassNotFoundException, ServiceException{
+		Hotel hotel = dao.getHotelByName(name);
+
+		ArrayList<Buchung> buchungen= getBookings(aufenthalt, name);
+		ArrayList<Integer> score = new ArrayList<Integer>();
+		ArrayList<Service> services = new ArrayList<Service>();
+		ArrayList<Service> slist = (ArrayList<Service>)hotel.getServiceList();
+		
+		for (Buchung buchung : buchungen){
+			
+			services.addAll(buchung.getServices().values());
+			
+		}
+		
+		if(services.isEmpty()) return "-";
+		
+		int index = 0;
+		int max = 0;
+		
+		for(int i = 0; i < slist.size(); i++){score.add(i, 0);}
+		for(Service service : services){
+			int i = slist.indexOf(hotel.getService(service.getName()));
+			score.set(i, new Integer(score.get(i).intValue()+1));
+		}
+		for (Integer i : score){
+			if(i.intValue() > max) {max = i.intValue(); index = score.indexOf(i);}
+		}
+		
+			return slist.get(index).getName();
 		}
 
 }
