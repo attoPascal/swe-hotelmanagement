@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="hm.Hotel" %>
+<%@ page import="hm.Zimmer" %>
 <%@ page import="hm.Service" %>
+<%@ page import="hm.Buchung" %>
 <%@ page import="hm.users.Hotelier" %>
 <%@ page import="hm.managers.ServiceManagement" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.util.Iterator" %>
+
+
 
 <%
 	Object user = session.getAttribute("user");
@@ -23,7 +32,12 @@
 		//wenn kein Hotel spezifiziert: erstes aus Liste wählen
 		hotel = hList.get(0);
 	}
-	
+	ArrayList<Zimmer> rooms = hotel.getZimmerList();
+	ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
+	for (Zimmer zimmer : rooms){
+		buchungen.addAll(zimmer.getBuchungen());
+	}
+
 	List<Service> sList = hotel.getServiceList();
 %>
 
@@ -121,6 +135,42 @@
 					</tbody>
 				</table>
 			</form>
+
+
+		
+		<table class="service table">
+			<thead>
+				<tr>
+					<th> Service </th>
+					<th> Zimmernummer </th>
+					<th> Preis </th>
+					<th> Datum </th>
+
+				</tr>
+			</thead>
+		<% for(Buchung b : buchungen){ 
+				HashMap<Date, Service> services = b.getServices();
+				Iterator it = services.entrySet().iterator();
+				    while (it.hasNext()) {
+				        Map.Entry pairs = (Map.Entry)it.next(); 
+				        Service s = (Service)pairs.getValue(); %>
+			 <tr>
+			    <td> <%=s.getName() %> </td>
+				<td> <%=b.getZimmernummer() %> </td>
+				<td> <%=s.getPreis() %> </td>
+				<td> <%=pairs.getKey() %> </td>
+			</tr>
+		<% 
+				        it.remove(); 
+				    }
+		%>
+		
+			
+			
+		<% } %>
+		
+		</table>
+		
 		</div>
 	</main>
 </body>
