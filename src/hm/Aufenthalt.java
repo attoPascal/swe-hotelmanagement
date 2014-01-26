@@ -24,7 +24,7 @@ public class Aufenthalt implements Serializable {
 	public Aufenthalt(Date anfang, int tage) {
 		this.anfang = anfang;
 		long day = 86400000;
-		this.ende = new Date(anfang.getTime() + tage * day );
+		this.ende = new Date(anfang.getTime() + tage * day -1);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class Aufenthalt implements Serializable {
 	 * @return Anzahl der Tage eines Aufenthalts
 	 */
 	public int getDays() {
-		return (int) ((ende.getTime() - anfang.getTime())/ 86400000);
+		return (int) ((ende.getTime() - anfang.getTime())/ 86400000+1);
 	}
 
 	/**
