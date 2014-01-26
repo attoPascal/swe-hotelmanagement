@@ -34,7 +34,7 @@ if (!(user instanceof HotelGast)) {
 		List<Buchung> bList = h.getBuchungsList((HotelGast) user);
 		if (!bList.isEmpty()) {
 	%>
-	
+			<h1><%= bList.size() %></h1>
 			<h2><%= h.getName() %></h2>
 			<table class="table">
 				<tr>

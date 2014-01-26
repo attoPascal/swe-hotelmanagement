@@ -208,7 +208,7 @@ public class Hotel implements Serializable {
 	
 	public List<Buchung> getBuchungsList(HotelGast gast) {
 		ArrayList<Buchung> list = new ArrayList<Buchung>();
-		
+		System.out.println("JAJAJAJAJAJAJAJAJAJAJ" + gast.getBuchungsIDs().size());
 		for (int i : gast.getBuchungsIDs()) {
 			try {
 				list.add(getBuchungByID(i));

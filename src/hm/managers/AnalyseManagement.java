@@ -120,10 +120,13 @@ public class AnalyseManagement {
 		ArrayList<Buchung> buchungen = new ArrayList<Buchung>();
 		for (Zimmer zimmer : zlist){
 			
-			buchungen.addAll(zimmer.getBuchungen());
+			ArrayList<Buchung> bs = zimmer.getBuchungen();
+			
+			for (Buchung b : bs){
+				if (b.getAufenthalt().overlaps(aufenthalt)) buchungen.add(b);
+			}
 			
 		}
-		
 		return buchungen;
 	}
 	
@@ -272,6 +275,9 @@ public class AnalyseManagement {
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
 		int month = 0;
 		int months[] = new int [12];
+		
+		if(buchungen.isEmpty()) return null;
+		
 		for(Buchung b : buchungen){
 			months[b.getAufenthalt().getMonth()]++;
 		}
