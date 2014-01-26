@@ -1,3 +1,7 @@
+$.ajaxSetup ({
+    cache: false
+});
+
 $(document).ready(function() {
 	$(document).on("change", "select.set-kategorie", function() {
 		$.get(
