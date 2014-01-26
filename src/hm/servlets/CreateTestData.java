@@ -115,7 +115,11 @@ public class CreateTestData extends HttpServlet {
 		HotelGast u2 = new HotelGast("Gast1", "g1", "12345");
 		
 		Analyst u3 = new Analyst("Analyst1", "a1", true, true, true);
-		
+		Analyst u4 = new Analyst("Analyst2", "a2", true, false, true);
+		Analyst u5 = new Analyst("Analyst3", "a3", false, true, false);
+		Analyst u6 = new Analyst("Analyst4", "a4", false, false, false);
+
+
 		try {
 			//out.write("DAO in " + request.getSession().getServletContext().getRealPath("data.ser") + "<br>");
 			DAO dao = SerializedDAO.getInstance();
@@ -125,6 +129,9 @@ public class CreateTestData extends HttpServlet {
 			dao.saveUser(u1);
 			dao.saveUser(u2);
 			dao.saveUser(u3);
+			dao.saveUser(u4);
+			dao.saveUser(u5);
+			dao.saveUser(u6);
 
 			Hotel h3 = dao.getHotelByName("CrazySharkyFish");
 			ArrayList<Kategorie> katList = h3.getKategorien();

@@ -3,7 +3,7 @@ body {
 }
 
 table.hotel {
-	width: 99%;
+	width: 100%;
 }
 
 table.analyst1 {
@@ -12,10 +12,12 @@ table.analyst1 {
 }
 
 table.analyst2 {
-	width: 100%;
+	width: 99%;
 	float: right;
 }
-
+.analyst {
+	width: 100%;
+}
 .analyst1 {
 	width: 50%;
 	float: left;
