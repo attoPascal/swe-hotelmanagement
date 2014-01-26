@@ -50,7 +50,8 @@ public class AnalyseServlet extends HttpServlet{
 
 		req.getRequestDispatcher("/inc/nav.jsp").include(req, res);
 		
-		
+		out.println("<table class=\"table table-striped hotel\">");
+
 		int tage = Integer.parseInt(req.getParameter("tage"));
 		
 		out.println("<h1> Statistik für "+ hotel + "</h1>"
@@ -69,7 +70,8 @@ public class AnalyseServlet extends HttpServlet{
 
 		}
 		
-		
+		out.println("</table>");
+
 		out.println("</main>"
 				+ "</body>"
 				+ "</html>");
@@ -84,17 +86,13 @@ public class AnalyseServlet extends HttpServlet{
 		String output;
 		try{
 			Aufenthalt aufenthalt = new Aufenthalt (new SimpleDateFormat("yyyy-MM-dd").parse(date),tage);
-	
-			output = "<table class=\"table table-striped hotel\">";
-	
-			output += "<tr><th>Anzahl der Zimmer </th>"
+		
+			output = "<tr><th>Anzahl der Zimmer </th>"
 					+ "<td>"+ management.getNumberOfRooms(name) + "</td></tr>";
 			output += "<tr><th>Anzahl der freien Zimmer </th>"
 					+ "<td>"+ management.getFreeRooms(name, aufenthalt).size() + "</td></tr>";
 			output += "<tr><th>Anzahl der gebuchten Zimmer </th>"
 					+ "<td>"+ management.getBookedRooms(aufenthalt, name).size() + "</td></tr>";
-			
-			output += "</table>";
 			}catch(Exception e){
 				output = "<h1> Ein Fehler ist aufgetreten </h1>";
 				e.printStackTrace();
@@ -107,10 +105,8 @@ public class AnalyseServlet extends HttpServlet{
 		String output;
 		try{
 			Aufenthalt aufenthalt = new Aufenthalt (new SimpleDateFormat("yyyy-MM-dd").parse(date),tage);
-	
-			output = "<table class=\"table table-striped hotel\">";
-	
-			output += "<tr><th>Anzahl der gebuchten Zimmer</th>"
+			
+			output = "<tr><th>Anzahl der gebuchten Zimmer</th>"
 					+ "<td>"+ management.getBookedRooms(aufenthalt, name).size() + "</td></tr>";
 			output += "<tr><th>Meistgebuchte Kategorie</th>"
 					+ "<td>"+ management.getBestCategory(aufenthalt, name) + "</td></tr>";
@@ -120,7 +116,6 @@ public class AnalyseServlet extends HttpServlet{
 					+ "<td>"+ management.getNumberOfBookings(aufenthalt, name) + "</td></tr>";
 			output += "<tr><th>Anzahl an möglichen Buchungen </th>"
 					+ "<td>"+ management.getPossibleBookings(aufenthalt, 1, name) + "</td></tr>";
-			output += "</table>";
 			}catch(Exception e){
 				output = "<h1> Ein Fehler ist aufgetreten </h1>";
 				e.printStackTrace();
@@ -134,9 +129,8 @@ public class AnalyseServlet extends HttpServlet{
 		try{
 			Aufenthalt aufenthalt = new Aufenthalt (new SimpleDateFormat("yyyy-MM-dd").parse(date),tage);
 	
-			output = "<table class=\"table table-striped hotel\">";
 	
-			output += "<tr><th>Durschnittlicher Zimmerpreis </th>"
+			output = "<tr><th>Durschnittlicher Zimmerpreis </th>"
 					+ "<td>"+ String.format("%.2f", management.getAverageRoomPrice(name)/100.) + " &#8364</td></tr>";
 			output += "<tr><th>Durschnittliche Einnahme pro Buchung </th>"
 					+ "<td>"+ String.format("%.2f", management.getAverageBookingPrice(name, aufenthalt)/100.) + " &#8364</td></tr>";
@@ -150,8 +144,6 @@ public class AnalyseServlet extends HttpServlet{
 					+ "<td>"+ String.format("%.2f", management.getAverageServicePrice(name)/100.) + " &#8364</td></tr>";
 			output += "<tr><th>Einnahmen durch Services </th>"
 					+ "<td>"+ String.format("%.2f", management.getServiceRevenue(aufenthalt, name)/100.) + " &#8364</td></tr>";
-
-			output += "</table>";
 			}catch(Exception e){
 				output = "<h1> Ein Fehler ist aufgetreten </h1>";
 				e.printStackTrace();
