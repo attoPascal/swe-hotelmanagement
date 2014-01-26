@@ -11,7 +11,8 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.Iterator" %>
-
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 
 <%
@@ -39,6 +40,7 @@
 	}
 
 	List<Service> sList = hotel.getServiceList();
+	DateFormat df = new SimpleDateFormat("EEEE, d. MMMM yyyy");
 %>
 
 <!DOCTYPE html>
@@ -136,7 +138,7 @@
 				</table>
 			</form>
 
-
+		<h1>Gebuchte Services</h1>
 		
 		<table class="service table">
 			<thead>
@@ -157,8 +159,8 @@
 			 <tr>
 			    <td> <%=s.getName() %> </td>
 				<td> <%=b.getZimmernummer() %> </td>
-				<td> <%=s.getPreis() %> </td>
-				<td> <%=pairs.getKey() %> </td>
+				<td> <%=String.format("%.2f", s.getPreis()/100.0) %> &euro; </td>
+				<td> <%= df.format(pairs.getKey()) %> </td>
 			</tr>
 		<% 
 				        it.remove(); 
