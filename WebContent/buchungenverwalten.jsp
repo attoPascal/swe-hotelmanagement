@@ -75,6 +75,7 @@
 					<th>Ende</th>
 					<th>Tage</th>
 					<th>Kosten</th>
+					<th>Kategorie</th>
 					<th></th>
 					
 				</tr>
@@ -90,6 +91,7 @@
 							<td><%= b.getAufenthalt().getEnde() %></td>
 							<td><%= b.getAufenthalt().getDays() %></td>
 							<td><%= b.getKosten() %></td>
+							<td><%= b.getKategorie().getName() %> </td>
 							<td><input type="submit" value="edit"></td>
 						</tr>
 					<% } %>
