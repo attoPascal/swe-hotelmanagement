@@ -144,7 +144,9 @@ public class BuchungsManagement {
 				"Ihre Buchung war erfolgreich, ihre Zimmernummer ist " + buchung.getZimmernummer() +
 				"<br>Datum ihrer Buchung: "+ buchung.getAufenthalt().getAnfang().toString() +
 				"<br>Gesamtkosten: " + buchung.getKosten() +
-				"<br>Kategorie: " + buchung.getKategorie().toString();
+				"<br>Kategorie: " + buchung.getKategorie().getName() +
+				"<br>Ausstattung: " + buchung.getKategorie().getAusstattung();
+
 		
 		return bestaetigung;
 	}

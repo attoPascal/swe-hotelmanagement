@@ -52,10 +52,10 @@ public class BuchungsServlet extends HttpServlet {
 			} else {
 				throw new UserException("User ist kein HotelGast");
 			}
-			
+			out.write("<main class=\"container\">");
 			Buchung buchung = management.createBuchung(hotelName, katName, dateString, duration, gast);
 			out.write(management.getBuchungsbestaetigung(buchung));
-
+			out.write("</main>");
 		} catch (NullPointerException e) {
 			out.write("Es ist zu diesem Zeitpunkt leider kein Zimmer mehr frei!");
 

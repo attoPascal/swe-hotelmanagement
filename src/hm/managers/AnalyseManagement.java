@@ -18,6 +18,7 @@ import hm.Zimmer;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
 import hm.exceptions.ServiceException;
+import hm.users.HotelGast;
 
 
 
@@ -283,6 +284,7 @@ public class AnalyseManagement {
 	 */
 	public String getMostBookedMonth(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
+				
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
 		if(buchungen.isEmpty()) return "-";
 		int month = 0;

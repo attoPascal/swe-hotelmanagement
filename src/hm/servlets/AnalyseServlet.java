@@ -75,7 +75,9 @@ public class AnalyseServlet extends HttpServlet{
 				}
 		}
 		
-		out.println("<div class=\"analyst1\"><table class=\"table table-striped analyst1\">");
+		if (req.getParameter("hotel2") != null) out.println("<div class=\"analyst1\">");
+		else out.println("<div class=\"analyst\">");
+		out.println("<table class=\"table table-striped analyst1\">");
 
 		int tage = Integer.parseInt(req.getParameter("tage"));
 		
@@ -89,8 +91,6 @@ public class AnalyseServlet extends HttpServlet{
 		
 		out.println("</table></div>");
 
-		
-		
 		if (req.getParameter("hotel2") != null) {
 			out.println("<div class=\"analyst2\"><table class=\"table table-striped analyst2\">");
 			String hotel2 = req.getParameter("hotel2");
