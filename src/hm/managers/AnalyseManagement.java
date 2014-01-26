@@ -90,8 +90,13 @@ public class AnalyseManagement {
 	 * @param hotel
 	 * @param aufenthalt
 	 * @return
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 * @throws FileNotFoundException 
 	 */
-	public ArrayList<Zimmer> getFreeRooms(Hotel hotel, Aufenthalt aufenthalt){
+	public ArrayList<Zimmer> getFreeRooms(String name, Aufenthalt aufenthalt) throws FileNotFoundException, ClassNotFoundException, IOException{
+		
+		Hotel hotel = dao.getHotelByName(name);
 		
 		ArrayList<Zimmer> zlist = hotel.getZimmerList();
 		
@@ -185,9 +190,11 @@ public class AnalyseManagement {
 			gebucht += buchung.getAufenthalt().getDays();
 			
 		}
-		
+		System.out.println("Gebucht: " + gebucht);
 		int days = getNumberOfRooms(name) * aufenthalt.getDays();
-		
+		System.out.println("Zimmer: " + getNumberOfRooms(name));
+		System.out.println("Tage: " + aufenthalt.getDays());
+		System.out.println("Termine: " +  days);
 		return (days-gebucht)/dauer;
 	}
 	
@@ -220,6 +227,7 @@ public class AnalyseManagement {
 		int preis = 0;
 		
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
+		if (buchungen.isEmpty()) return -666;
 		for (Buchung buchung : buchungen){
 			
 			preis += buchung.getKosten()/buchung.getAufenthalt().getDays();
@@ -238,10 +246,12 @@ public class AnalyseManagement {
 		int preis = 0;
 		
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
+		if (buchungen.isEmpty()) return -666;
 		for (Buchung buchung : buchungen){
 			
 			preis += buchung.getKosten();
 			}
+		
 		return preis/buchungen.size();
 		}
 	

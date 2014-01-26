@@ -59,11 +59,14 @@ public class AnalyseServlet extends HttpServlet{
 		
 		out.println(viewRevenue(hotel, date, tage));
 		out.println(viewBookings(hotel, date, tage));
-		
+		out.println(viewRooms(hotel, date, tage));
+
 		if (req.getParameter("hotel2") != null) {
 			String hotel2 = req.getParameter("hotel2");
 			out.println(viewRevenue(hotel2, date, tage));
 			out.println(viewBookings(hotel2, date, tage));
+			out.println(viewRooms(hotel2, date, tage));
+
 		}
 		
 		
@@ -77,14 +80,24 @@ public class AnalyseServlet extends HttpServlet{
 		doPost(req,res);
 	}
 
-	public String viewRooms(String hotel, String date, int tage){
+	public String viewRooms(String name, String date, int tage){
 		String output;
 		try{
 			Aufenthalt aufenthalt = new Aufenthalt (new SimpleDateFormat("yyyy-MM-dd").parse(date),tage);
-
-			output ="<h1>Durschnittlicher Zimmerpreis </h1><p>"+ management.getAverageRoomPrice(hotel)/100. + "</p>";
+	
+			output = "<table class=\"table table-striped hotel\">";
+	
+			output += "<tr><th>Anzahl der Zimmer </th>"
+					+ "<td>"+ management.getNumberOfRooms(name) + "</td></tr>";
+			output += "<tr><th>Anzahl der freien Zimmer </th>"
+					+ "<td>"+ management.getFreeRooms(name, aufenthalt).size() + "</td></tr>";
+			output += "<tr><th>Anzahl der gebuchten Zimmer </th>"
+					+ "<td>"+ management.getBookedRooms(aufenthalt, name).size() + "</td></tr>";
+			
+			output += "</table>";
 			}catch(Exception e){
 				output = "<h1> Ein Fehler ist aufgetreten </h1>";
+				e.printStackTrace();
 			}
 		
 		return output;
