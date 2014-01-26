@@ -85,10 +85,10 @@ public class KategorieManagement {
 	 * @param name
 	 *            Name der Kategorie, die entfernt werden soll
 	 */
-	public void removeKategorie(String katName, String name)
+	public void removeKategorie(String katName, String hotelName)
 			throws FileNotFoundException, IOException, ClassNotFoundException {
-		Hotel hotel = dao.getHotelByName(name);
-		Kategorie kat = hotel.getKategorie(name);
+		Hotel hotel = dao.getHotelByName(hotelName);
+		Kategorie kat = hotel.getKategorie(katName);
 		hotel.removeKategorie(kat);
 
 		dao.saveHotel(hotel);
