@@ -206,6 +206,41 @@ public class AnalyseManagement {
 		return preis/kategorien.size();
 		}
 	
+	/**
+	 * Berechnet die Einnamen pro Buchungen in einem Hotel zu einem gewissen zeitraum
+	 * @param hotel Das Hotel für die der Durschnittspreis berechnet werden soll
+	 * @return Durchschnittspreis der Zimmer
+	 */
+	public int getAverageBookingPricePerDay(String name, Aufenthalt aufenthalt)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
+		//TODO Preis zu einem gewissen Zeitraum
+		int preis = 0;
+		
+		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
+		for (Buchung buchung : buchungen){
+			
+			preis += buchung.getKosten()/buchung.getAufenthalt().getDays();
+			}
+		return preis/buchungen.size();
+		}
+	
+	/**
+	 * Berechnet die Einnamen pro Buchungen in einem Hotel zu einem gewissen zeitraum
+	 * @param hotel Das Hotel für die der Durschnittspreis berechnet werden soll
+	 * @return Durchschnittspreis der Zimmer
+	 */
+	public int getAverageBookingPrice(String name, Aufenthalt aufenthalt)throws FileNotFoundException, IOException,
+	ClassNotFoundException{
+		//TODO Preis zu einem gewissen Zeitraum
+		int preis = 0;
+		
+		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
+		for (Buchung buchung : buchungen){
+			
+			preis += buchung.getKosten();
+			}
+		return preis/buchungen.size();
+		}
 	
 	/**
 	 * Berechnet den Durchschnittspreis für Services in einem bestimmten Hotel
@@ -241,7 +276,7 @@ public class AnalyseManagement {
 			months[b.getAufenthalt().getMonth()]++;
 		}
 		for(int i = 0; i <= 11; i++){
-			if (months[i] > months[month]) month = months[i];
+			if (months[i] > months[month]) month = i;
 		}		
 		return new DateFormatSymbols().getMonths()[month];
 		}
@@ -253,7 +288,26 @@ public class AnalyseManagement {
 	 */
 	public String getBestCategory(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
-		return null;
+		
+		Hotel hotel = dao.getHotelByName(name);
+
+		ArrayList<Buchung> buchungen= getBookings(aufenthalt, name);
+		ArrayList<Kategorie> kategorien = hotel.getKategorien();
+		ArrayList<Integer> score = new ArrayList<Integer>();
+		
+		int index = 0;
+		int max = 0;
+		
+		for(int i = 0; i < kategorien.size(); i++){score.add(i, 0);}
+		for(Buchung buchung : buchungen){
+			int i = kategorien.indexOf(hotel.getKategorie(buchung.getKategorie().getName()));
+			score.set(i, new Integer(score.get(i).intValue()+1));
+		}
+		for (Integer i : score){
+			if(i.intValue() > max) {max = i.intValue(); index = score.indexOf(i);}
+		}
+		
+			return kategorien.get(index).getName();
 		}
 	
 	/**
