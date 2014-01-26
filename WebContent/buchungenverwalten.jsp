@@ -65,6 +65,8 @@
 		</form>
 		
 		<div id="manage">
+			
+		<form action="editBookings.jsp">
 			<table>
 				<tr>
 					<th>ID</th>
@@ -73,24 +75,28 @@
 					<th>Ende</th>
 					<th>Tage</th>
 					<th>Kosten</th>
+					<th></th>
 					
 				</tr>
 				<tr>
+				
 			
 				<% for (Zimmer z : zList) { %>
 					<% for (Buchung b : z.getBuchungen()) { %>
 						<tr>
-							<td><%= b.getId() %></td>
+							<td><input type="hidden" name="id" value="<%= b.getId() %>"><%= b.getId() %></td>
 							<td><%= b.getZimmernummer() %></td>
 							<td><%= b.getAufenthalt().getAnfang() %></td>
 							<td><%= b.getAufenthalt().getEnde() %></td>
 							<td><%= b.getAufenthalt().getDays() %></td>
 							<td><%= b.getKosten() %></td>
-							
+							<td><input type="submit" value="edit"></td>
 						</tr>
 					<% } %>
 				<% } %>
-			</table>
+				
+				</table>
+			</form>
 			<!--<table class="zimmer table">
 				<tr>
 					<th class="zimmer">Zimmer</th>
