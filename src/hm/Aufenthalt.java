@@ -23,7 +23,8 @@ public class Aufenthalt implements Serializable {
 	 */
 	public Aufenthalt(Date anfang, int tage) {
 		this.anfang = anfang;
-		this.ende = new Date(anfang.getTime() + tage * (1000 * 60 * 60 * 24));
+		long day = 86400000;
+		this.ende = new Date(anfang.getTime() + tage * day );
 	}
 
 	/**
@@ -68,15 +69,16 @@ public class Aufenthalt implements Serializable {
 		long a2 = aufenthalt.getAnfang().getTime();
 		long e1 = this.ende.getTime();
 		long e2 = aufenthalt.getEnde().getTime();
-		
-	
-		//a1 a2 e1 e2 || a1 a2 e2 e1
+			
+		//   a2    e2 ||    a2 e2 
+		//a1    e1    || a1       e1
 		if (a1 < a2 && a2 < e1){
 			return true;
 		}
 		
-		//a2 a1 e2 e1 || a1 a2 e2 e1 
-		if (a1 > e2 && a2 < e2){
+		//a2   e2    ||    a2 e2
+		//  a1    e1 || a1       e1 
+		if (a1 < e2 && a1 > a2){
 			return true;
 		}
 		
@@ -86,11 +88,12 @@ public class Aufenthalt implements Serializable {
 			return true;
 		}
 		
-		//a2 a1 e1 e2
+		//a2       e2
+		//   a1 e1 
 		if (a2 < a1 && a1 < e2){
 			return true;
 					
-		}else
+		}
 			return false;
 	}
 
