@@ -53,8 +53,7 @@ public class Aufenthalt implements Serializable {
 	 * @return Anzahl der Tage eines Aufenthalts
 	 */
 	public int getDays() {
-		return (int) (ende.getTime() - anfang.getTime())
-				/ (1000 * 60 * 60 * 24);
+		return (int) ((ende.getTime() - anfang.getTime())/ 86400000);
 	}
 
 	/**
