@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Zimmer" %>
 <%@ page import="hm.Buchung" %>
@@ -38,6 +40,7 @@
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
 	ArrayList<Kategorie> kList = hotel.getKategorien();
 	
+	DateFormat df = new SimpleDateFormat("EEEE, d. MMMM yyyy");
 %>
 
 <!DOCTYPE html>
@@ -87,8 +90,8 @@
 						<tr>
 							<td><input type="hidden" name="id" value="<%= b.getId() %>"><%= b.getId() %></td>
 							<td><%= b.getZimmernummer() %></td>
-							<td><%= b.getAufenthalt().getAnfang() %></td>
-							<td><%= b.getAufenthalt().getEnde() %></td>
+							<td><%= df.format(b.getAufenthalt().getAnfang()) %></td>
+							<td><%= df.format(b.getAufenthalt().getEnde()) %></td>
 							<td><%= b.getAufenthalt().getDays() %></td>
 							<td><%= b.getKosten() %></td>
 							<td><%= b.getKategorie().getName() %> </td>

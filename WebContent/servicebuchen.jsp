@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="hm.Hotel" %>
 <%@ page import="hm.Service" %>
 <%@ page import="hm.Buchung" %>
@@ -23,6 +25,8 @@ if (!(user instanceof HotelGast)) {
 	List<Service> sList = hotel.getServiceList();
 	Buchung buchung = hotel.getBuchungByID(buchungsID);
 	Map<Date,Service> sMap = buchung.getServices();
+	
+	DateFormat df = new SimpleDateFormat("EEEE, d. MMMM yyyy");
 %>
 	
 <!DOCTYPE html>
@@ -36,7 +40,7 @@ if (!(user instanceof HotelGast)) {
 	
 	<main class="container">
 		<h1>Services buchen</h1>
-		<h2>Für Buchung am: <%= buchung.getAufenthalt().getAnfang() %></h2>
+		<h2>Für Buchung am: <%= df.format(buchung.getAufenthalt().getAnfang()) %></h2>
 		
 	<% if (!sList.isEmpty()) { %>
 		<table class="table">
@@ -51,7 +55,7 @@ if (!(user instanceof HotelGast)) {
 			<tr>
 				<td><%= s.getName() %></td>
 				<td><%= s.getBeschreibung() %></td>
-				<td><%= s.getPreis() %></td>
+				<td><%= String.format("%.2f", s.getPreis()/100.0) %> &euro;</td>
 				<td>
 					<form action="ServiceServlet" method="get">
 						<input type="date" name="dateString" placeholder="JJJJ-MM-TT">
