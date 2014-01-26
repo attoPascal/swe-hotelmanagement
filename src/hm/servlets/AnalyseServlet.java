@@ -75,7 +75,7 @@ public class AnalyseServlet extends HttpServlet{
 				}
 		}
 		
-		out.println("<table class=\"table table-striped hotel\">");
+		out.println("<div class=\"analyst1\"><table class=\"table table-striped analyst1\">");
 
 		int tage = Integer.parseInt(req.getParameter("tage"));
 		
@@ -87,12 +87,12 @@ public class AnalyseServlet extends HttpServlet{
 		if(user.isCanViewBookings())out.println(viewBookings(hotel, date, tage));
 		if(user.isCanViewRooms())out.println(viewRooms(hotel, date, tage));
 		
-		out.println("</table>");
+		out.println("</table></div>");
 
 		
 		
 		if (req.getParameter("hotel2") != null) {
-			out.println("<table class=\"table table-striped hotel\">");
+			out.println("<div class=\"analyst2\"><table class=\"table table-striped analyst2\">");
 			String hotel2 = req.getParameter("hotel2");
 			out.println("<h1> Statistik für "+ hotel2 + "</h1>"
 					+ "<h2> Von "+ date + " über eine Zeitspanne von "
@@ -100,12 +100,10 @@ public class AnalyseServlet extends HttpServlet{
 			if(user.isCanViewRevenue()) out.println(viewRevenue(hotel2, date, tage));
 			if(user.isCanViewBookings())out.println(viewBookings(hotel2, date, tage));
 			if(user.isCanViewRooms())out.println(viewRooms(hotel2, date, tage));
-			out.println("</table>");
+			out.println("</table></div>");
 
 		}
 		
-		out.println("</table>");
-
 		out.println("</main>"
 				+ "</body>"
 				+ "</html>");

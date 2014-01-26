@@ -3,9 +3,28 @@ body {
 }
 
 table.hotel {
-	width: 100%;
+	width: 99%;
 }
 
+table.analyst1 {
+	width: 99%;
+	float: left;
+}
+
+table.analyst2 {
+	width: 100%;
+	float: right;
+}
+
+.analyst1 {
+	width: 50%;
+	float: left;
+}
+
+.analyst2 {
+	width: 50%;
+	float: right;
+}
 table.hotel th.kategorie,
 table.hotel td.kategorie {
 	width: 20%;
