@@ -4,7 +4,10 @@
 package hm.servlets;
 
 import hm.Aufenthalt;
+import hm.exceptions.UserException;
 import hm.managers.AnalyseManagement;
+import hm.users.AbstractUser;
+import hm.users.Analyst;
 
 import java.io.*;
 import java.sql.Date;
@@ -34,8 +37,15 @@ public class AnalyseServlet extends HttpServlet{
 		res.setContentType("text/html");
 		
 		PrintWriter out = res.getWriter();
+		
 		management.instantiateDAO();
 		
+		HttpSession session = req.getSession();
+		
+		Object o = session.getAttribute("user");
+		Analyst user;		
+		
+
 		String date = req.getParameter("anfang");
 		
 		String hotel = req.getParameter("hotel");
@@ -49,6 +59,21 @@ public class AnalyseServlet extends HttpServlet{
 				+ "<main class=\"container\">");
 
 		req.getRequestDispatcher("/inc/nav.jsp").include(req, res);
+		if (o instanceof Analyst){
+			user = (Analyst)o;
+		}else {
+				try {
+					throw new UserException("User ist kein HotelGast");
+				} catch (UserException e) {
+					
+					out.println("<h1> Benutzer hat nicht die notwendigen Rechte <h1>");
+					
+					out.println("</main>"
+							+ "</body>"
+							+ "</html>");
+					return;
+				}
+		}
 		
 		out.println("<table class=\"table table-striped hotel\">");
 
@@ -58,15 +83,24 @@ public class AnalyseServlet extends HttpServlet{
 				+ "<h2> Von "+ date + " über eine Zeitspanne von "
 				+ tage + " Tagen</h2>");
 		
-		out.println(viewRevenue(hotel, date, tage));
-		out.println(viewBookings(hotel, date, tage));
-		out.println(viewRooms(hotel, date, tage));
+		if(user.isCanViewRevenue()) out.println(viewRevenue(hotel, date, tage));
+		if(user.isCanViewBookings())out.println(viewBookings(hotel, date, tage));
+		if(user.isCanViewRooms())out.println(viewRooms(hotel, date, tage));
+		
+		out.println("</table>");
 
+		
+		
 		if (req.getParameter("hotel2") != null) {
+			out.println("<table class=\"table table-striped hotel\">");
 			String hotel2 = req.getParameter("hotel2");
-			out.println(viewRevenue(hotel2, date, tage));
-			out.println(viewBookings(hotel2, date, tage));
-			out.println(viewRooms(hotel2, date, tage));
+			out.println("<h1> Statistik für "+ hotel2 + "</h1>"
+					+ "<h2> Von "+ date + " über eine Zeitspanne von "
+					+ tage + " Tagen</h2>");
+			if(user.isCanViewRevenue()) out.println(viewRevenue(hotel2, date, tage));
+			if(user.isCanViewBookings())out.println(viewBookings(hotel2, date, tage));
+			if(user.isCanViewRooms())out.println(viewRooms(hotel2, date, tage));
+			out.println("</table>");
 
 		}
 		
@@ -86,13 +120,15 @@ public class AnalyseServlet extends HttpServlet{
 		String output;
 		try{
 			Aufenthalt aufenthalt = new Aufenthalt (new SimpleDateFormat("yyyy-MM-dd").parse(date),tage);
-		
-			output = "<tr><th>Anzahl der Zimmer </th>"
+			output = "<thead><tr><th>Zimmer</th></tr></thead>";
+			output += "<tr><td>Anzahl der Zimmer </th>"
 					+ "<td>"+ management.getNumberOfRooms(name) + "</td></tr>";
-			output += "<tr><th>Anzahl der freien Zimmer </th>"
+			output += "<tr><td>Anzahl der freien Zimmer </th>"
 					+ "<td>"+ management.getFreeRooms(name, aufenthalt).size() + "</td></tr>";
-			output += "<tr><th>Anzahl der gebuchten Zimmer </th>"
+			output += "<tr><td>Anzahl der gebuchten Zimmer </th>"
 					+ "<td>"+ management.getBookedRooms(aufenthalt, name).size() + "</td></tr>";
+			output += "<tr><td>Durschnittlicher Zimmerpreis </th>"
+					+ "<td>"+ String.format("%.2f", management.getAverageRoomPrice(name)/100.) + " &#8364</td></tr>";
 			}catch(Exception e){
 				output = "<h1> Ein Fehler ist aufgetreten </h1>";
 				e.printStackTrace();
@@ -105,16 +141,18 @@ public class AnalyseServlet extends HttpServlet{
 		String output;
 		try{
 			Aufenthalt aufenthalt = new Aufenthalt (new SimpleDateFormat("yyyy-MM-dd").parse(date),tage);
-			
-			output = "<tr><th>Anzahl der gebuchten Zimmer</th>"
+			output = "<thead><tr><th>Buchungen</th></tr></thead>";
+			output += "<tr><td>Anzahl der gebuchten Zimmer</th>"
 					+ "<td>"+ management.getBookedRooms(aufenthalt, name).size() + "</td></tr>";
-			output += "<tr><th>Meistgebuchte Kategorie</th>"
+			output += "<tr><td>Meistgebuchte Kategorie</th>"
 					+ "<td>"+ management.getBestCategory(aufenthalt, name) + "</td></tr>";
-			output += "<tr><th>Meistgebuchter Service </th>"
+			output += "<tr><td>Meistgebuchter Service </th>"
 					+ "<td>"+ management.getBestService(aufenthalt, name) + "</td></tr>";
-			output += "<tr><th>Anzahl der Buchungen </th>"
+			output += "<tr><td>Meistgebuchter Monat </th>"
+					+ "<td>"+ management.getMostBookedMonth(aufenthalt, name) + "</td></tr>";
+			output += "<tr><td>Anzahl der Buchungen </th>"
 					+ "<td>"+ management.getNumberOfBookings(aufenthalt, name) + "</td></tr>";
-			output += "<tr><th>Anzahl an möglichen Buchungen </th>"
+			output += "<tr><td>Anzahl an möglichen Buchungen </th>"
 					+ "<td>"+ management.getPossibleBookings(aufenthalt, 1, name) + "</td></tr>";
 			}catch(Exception e){
 				output = "<h1> Ein Fehler ist aufgetreten </h1>";
@@ -128,22 +166,18 @@ public class AnalyseServlet extends HttpServlet{
 		String output;
 		try{
 			Aufenthalt aufenthalt = new Aufenthalt (new SimpleDateFormat("yyyy-MM-dd").parse(date),tage);
-	
-	
-			output = "<tr><th>Durschnittlicher Zimmerpreis </th>"
-					+ "<td>"+ String.format("%.2f", management.getAverageRoomPrice(name)/100.) + " &#8364</td></tr>";
-			output += "<tr><th>Durschnittliche Einnahme pro Buchung </th>"
-					+ "<td>"+ String.format("%.2f", management.getAverageBookingPrice(name, aufenthalt)/100.) + " &#8364</td></tr>";
-			output += "<tr><th>Durschnittliche Einnahme pro Buchung pro Tag </th>"
-					+ "<td>"+ String.format("%.2f", management.getAverageBookingPricePerDay(name, aufenthalt)/100.) + " &#8364</td></tr>";
-			output += "<tr><th>Meistgebuchter Monat </th>"
-					+ "<td>"+ management.getMostBookedMonth(aufenthalt, name) + "</td></tr>";
-			output += "<tr><th>Einnahmen durch Zimmer </th>"
-					+ "<td>"+ String.format("%.2f", management.getTotalRevenue(aufenthalt, name)/100.) + " &#8364</td></tr>";
-			output += "<tr><th>Durschnittlicher Servicepreis </th>"
+			output = "<thead><tr><th>Einnahmen</th></tr></thead>";
+			output += "<tr><td>Durschnittlicher Servicepreis </th>"
 					+ "<td>"+ String.format("%.2f", management.getAverageServicePrice(name)/100.) + " &#8364</td></tr>";
-			output += "<tr><th>Einnahmen durch Services </th>"
+			output += "<tr><td>Durschnittliche Einnahme pro Buchung </th>"
+					+ "<td>"+ String.format("%.2f", management.getAverageBookingPrice(name, aufenthalt)/100.) + " &#8364</td></tr>";
+			output += "<tr><td>Einnahmen durch Zimmer </th>"
+					+ "<td>"+ String.format("%.2f", management.getTotalRevenue(aufenthalt, name)/100.) + " &#8364</td></tr>";
+			output += "<tr><td>Einnahmen durch Services </th>"
 					+ "<td>"+ String.format("%.2f", management.getServiceRevenue(aufenthalt, name)/100.) + " &#8364</td></tr>";
+			output += "<tr><td>Durschnittliche Einnahme pro Buchung pro Tag </th>"
+					+ "<td>"+ String.format("%.2f", management.getAverageBookingPricePerDay(name, aufenthalt)/100.) + " &#8364</td></tr>";
+			
 			}catch(Exception e){
 				output = "<h1> Ein Fehler ist aufgetreten </h1>";
 				e.printStackTrace();
