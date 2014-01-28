@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
-	String hotelName = request.getParameter("hotel");
+	String hotelName = request.getParameter("hotelName");
 	String id = request.getParameter("id");
 
 	//Rechte überprüfen:
@@ -38,17 +38,18 @@
 			//Buchung buchung = hotel.getBuchungByID(Integer.parseInt(id));
 		%>
 		
-		<form action="BuchungsServlet" method="get" class="form-horizontal">
+		<form action="BuchungsVerwaltungsServlet" method="get" class="form-horizontal">
 			<div class="form-group">
 				<label for="hotelInput" class="col-sm-2 control-label">Hotel:</label>
 				<div class="col-sm-10">
 					<input type="text" name="hotel" value="<%= hotelName %>" class="form-control" id="hotelInput" readonly>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<label for="IDInput" class="col-sm-2 control-label">Buchungs-ID:</label>
 				<div class="col-sm-10">
-					<input type="text" name="kategorie" value="<%= id %>" class="form-control" id="IDInput" readonly>
+					<input type="text" name="id" value="<%= id %>" class="form-control" id="IDInput" readonly>
 				</div>
 			</div>
 			<div class="form-group">

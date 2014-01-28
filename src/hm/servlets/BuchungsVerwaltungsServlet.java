@@ -3,10 +3,16 @@ package hm.servlets;
 import hm.Buchung;
 import hm.exceptions.UserException;
 import hm.managers.*;
-import hm.users.HotelGast;
+import hm.users.Hotelier;
+import hm.Aufenthalt;
+import hm.Hotel;
+import hm.exceptions.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,22 +41,26 @@ public class BuchungsVerwaltungsServlet extends HttpServlet {
 		try {
 			// reading the user input
 			String hotelName = request.getParameter("hotel");
-			String katName = request.getParameter("kategorie");
+			String id = request.getParameter("id");
 
 			String dateString = request.getParameter("year") + "-" + request.getParameter("months") + "-" + request.getParameter("day");
 			int duration = Integer.parseInt(request.getParameter("duration"));
 
 			Object o = request.getSession().getAttribute("user");
-			HotelGast gast;
+			Hotelier hotelier;
 			
-			if (o instanceof HotelGast) {
-				gast = (HotelGast) o;
+			if (o instanceof Hotelier) {
+				hotelier = (Hotelier) o;
 			} else {
-				throw new UserException("User ist kein HotelGast");
+				throw new UserException("User ist kein Hotelier");
 			}
 			
-			Buchung buchung = management.createBuchung(hotelName, katName, dateString, duration, gast);
-			out.write(management.getBuchungsbestaetigung(buchung));
+			Hotel hotel = management.getDAO().getHotelByName(hotelName);
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = df.parse(dateString);
+	
+			out.write(management.editAufenthalt(hotel.getBuchungByID(Integer.parseInt(id)), new Aufenthalt(date, duration), hotel));
+			management.getDAO().saveHotel(hotel);
 
 		} catch (NullPointerException e) {
 			out.write("Es ist zu diesem Zeitpunkt leider kein Zimmer mehr frei!");
@@ -71,6 +81,9 @@ public class BuchungsVerwaltungsServlet extends HttpServlet {
 			out.write(e.getMessage());
 			
 		} catch (ParseException e) {
+			out.write(e.getMessage());
+			
+		} catch (BuchungsException e) {
 			out.write(e.getMessage());
 		}
 	}
