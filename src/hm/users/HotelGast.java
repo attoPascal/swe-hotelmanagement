@@ -29,14 +29,14 @@ public class HotelGast extends AbstractUser{
 	}
 	
 	/**
-	 * @param buchung
+	 * @param buchung wird hinzugefügt
 	 */
 	public void addBuchung(Buchung buchung) {
 		buchungen.add(buchung.getId());
 	}
 	
 	/**
-	 * @param buchung
+	 * @param buchung wird entfernt
 	 */
 	public void removeBuchung(Buchung buchung) {
 		buchungen.remove(buchung.getId());

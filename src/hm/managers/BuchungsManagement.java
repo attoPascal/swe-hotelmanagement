@@ -129,6 +129,8 @@ public class BuchungsManagement {
 	 *            Nummer des Zimmers von der die Buchung entfernt werden soll
 	 * @param name
 	 *            Name des Hotels von dem die Buchung entfernt werden soll
+	 * @param gast 
+	 * 			  Hotelgast, dessen Buchung entfernt wird            
 	 * @throws FileNotFoundException
 	 * @throws ClassNotFoundException
 	 * @throws IOException

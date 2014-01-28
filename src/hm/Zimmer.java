@@ -106,6 +106,7 @@ public class Zimmer implements Serializable {
 	
 	/**
 	 * Entfernt die Buchung mit der übergebenen ID
+	 * @param id ID der Buchung die gelöscht werden soll
 	 * @param gast Hotel-Gast, dessen Buchung gelöscht werden soll
 	 */
 	public void removeBuchungHG(int id, HotelGast gast) {
