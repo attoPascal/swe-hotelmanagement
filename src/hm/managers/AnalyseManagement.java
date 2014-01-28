@@ -22,18 +22,20 @@ import hm.users.HotelGast;
 
 
 
-public class AnalyseManagement {
-
-	private DAO dao;
-	
+/**
+ * @author vincent
+ *Diese Klasse implementiert die notwendige funktionalität für die 
+ *Use Cases des Analysten.
+ *Es gibt Methoden zur berechnung von Durschnittspreisen,
+ * Einkommen, besten Kategorien, Services, Monaten usw.
+ */
+public class AnalyseManagement { 
 	
 	/**
-	 * 
+	 * Data Access Object mit dem auf die Hoteldaten zugegriffen wird
 	 */
-	public AnalyseManagement() {
-		// TODO Auto-generated constructor stub
-	}
-
+	private DAO dao;
+	
 	
 	/**
 	 * Instanziiert das DAO
@@ -55,8 +57,11 @@ public class AnalyseManagement {
 	
 	/**
 	 * Gibt die Anzahl der Zimmer in einem Hotel zurück
-	 * @param hotel
-	 * @return
+	 * @param name Name des Hotels für das die Zimmeranzahl berechnet werden soll
+	 * @return Anzahl der Zimmer in einem Hotel
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public int getNumberOfRooms(String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -65,10 +70,12 @@ public class AnalyseManagement {
 	
 	/**
 	 * Gibt einem eine Liste mit gebuchten Zimmern in einer gewissen Zeitspanne zur�ck
-	 * 
-	 * @param hotel
-	 * @param aufenthalt
-	 * @return
+	 * @param aufenthalt Zeitspanne für die die gebuchten Zimmer berechnet werden sollen
+	 * @param name Name des Hotels für das die gebuchten Zimmer berechnet werden sollen
+	 * @return Liste mit gebuchten Zimmern zu einem gewissen Zeitraum
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public ArrayList<Zimmer> getBookedRooms(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -88,10 +95,9 @@ public class AnalyseManagement {
 	
 	/**
 	 * Gibt einem eine Liste mit freien Zimmern zu einer gewissen Zeitdauer zur�ck
-	 * 
-	 * @param hotel
-	 * @param aufenthalt
-	 * @return
+	 * @param name Name des Hotels für das die freien Zimmer berechnet werden sollen
+	 * @param aufenthalt Zeitraum für den die freien Zimmer berechnet werden sollen
+	 * @return Liste mit freien Zimmern in einem Hotel
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
 	 * @throws FileNotFoundException 
@@ -115,10 +121,12 @@ public class AnalyseManagement {
 	
 	/**
 	 * Gibt eine ArrayListe mit allen Buchungen zu einem gewissen Zeitraum in einem Hotel zur�ck
-	 * 
-	 * @param hotel
-	 * @param aufenthalt
-	 * @return
+	 * @param aufenthalt Zeitraum für den die Buchungen berechnet werden sollen
+	 * @param name Name des Hotels für das die Buchungen berechnet werden sollen
+	 * @return Liste mit allen Buchungen in einem Hotel zu einem gewissen Zeitraum
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public ArrayList<Buchung> getBookings(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -139,10 +147,12 @@ public class AnalyseManagement {
 	
 	/**
 	 * Gibt die Anzahl der Buchungen zu einem gewissen Zeitraum in einem Hotel zur�ck
-	 * 
-	 * @param hotel
-	 * @param aufenthalt
-	 * @return
+	 * @param name Name der Hotels für das die Anzahl der Buchungen berechnet werden soll
+	 * @param aufenthalt Zeitraum für den die Anzahl der Buchungen berechnet werden soll
+	 * @return Anzahl der Buchungen in einem Hotel
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public int getNumberOfBookings(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -154,10 +164,13 @@ public class AnalyseManagement {
 	}
 	
 	/**
-	 * Gibt die Eink�nfte eines Hotels �ber einen gewissen Zeitraum zur�ck
-	 * @param hotel
-	 * @param aufenthalt
-	 * @return
+	 * Gibt die Einkünfte eines Hotels über einen gewissen Zeitraum zurück
+	 * @param name Hotel für das die Einkünfte berechnet werden sollen
+	 * @param aufenthalt Zeitraum für den die Einkünfte berechnet werden sollen
+	 * @return Einkünfte des Hotels in Cent
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public int getTotalRevenue(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -175,12 +188,14 @@ public class AnalyseManagement {
 	}
 	
 	/**
-	 * Gibt die Anzahl an m�glichen Buchungen einer gewissen Dauer zu einem gewissen Zeitpunkt f�r ein Hotel zur�ck
-	 * 
-	 * @param hotel
-	 * @param aufenthalt
-	 * @param dauer
-	 * @return
+	 * Gibt die Anzahl an möglichen Buchungen einer gewissen Dauer zu einem gewissen Zeitpunkt für ein Hotel zurück
+	 * @param name Hotel für das die möglichen Buchungen berechnet werden sollen.
+	 * @param aufenthalt Zeitraum für den die möglichen Buchungen berechnet werden sollen. 
+	 * @param dauer Dauer einer Buchung
+	 * @return Anzahl an möglichen Buchungen
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public int getPossibleBookings(Aufenthalt aufenthalt, int dauer, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -202,8 +217,11 @@ public class AnalyseManagement {
 	
 	/**
 	 * Berechnet den Durchschnittspreis für Zimmer in einem Hotel
-	 * @param hotel Das Hotel für die der Durschnittspreis berechnet werden soll
+	 * @param name Das Hotel für die der Durschnittspreis berechnet werden soll
 	 * @return Durchschnittspreis der Zimmer
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public int getAverageRoomPrice(String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -219,13 +237,16 @@ public class AnalyseManagement {
 		}
 	
 	/**
-	 * Berechnet die Einnamen pro Buchungen in einem Hotel zu einem gewissen zeitraum
-	 * @param hotel Das Hotel für die der Durschnittspreis berechnet werden soll
-	 * @return Durchschnittspreis der Zimmer
+	 * Berechnet die Einnamen pro Buchungen pro Tag in einem Hotel zu einem gewissen Zeitraum
+	 * @param name Das Hotel für die der Durschnittspreis berechnet werden soll
+	 * @param aufenthalt Zeitraum für das der Durschnittspreis berechnet werden soll
+	 * @return Durchschnittspreis der Buchungen pro Tag
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public int getAverageBookingPricePerDay(String name, Aufenthalt aufenthalt)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
-		//TODO Preis zu einem gewissen Zeitraum
 		int preis = 0;
 		
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
@@ -238,13 +259,17 @@ public class AnalyseManagement {
 		}
 	
 	/**
-	 * Berechnet die Einnamen pro Buchungen in einem Hotel zu einem gewissen zeitraum
-	 * @param hotel Das Hotel für die der Durschnittspreis berechnet werden soll
-	 * @return Durchschnittspreis der Zimmer
+	 * Berechnet die Einnamen pro Buchungen in einem Hotel zu einem gewissen Zeitraum
+	 * @param name Das Hotel für die der Durschnittspreis berechnet werden soll
+	 * @param aufenthalt Zeitraum für das der Durschnittspreis berechnet werden soll
+	 * @return Durchschnittspreis der Buchungen
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
+
 	public int getAverageBookingPrice(String name, Aufenthalt aufenthalt)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
-		//TODO Preis zu einem gewissen Zeitraum
 		int preis = 0;
 		
 		ArrayList<Buchung> buchungen = getBookings(aufenthalt, name);
@@ -259,12 +284,14 @@ public class AnalyseManagement {
 	
 	/**
 	 * Berechnet den Durchschnittspreis für Services in einem bestimmten Hotel
-	 * @param hotel Hotel für das die Durchschnittspreise ermittelt werden sollen
+	 * @param name Hotel für das die Durchschnittspreise ermittelt werden sollen
 	 * @return Durchschnittspreis der Services
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException 
 	 */
 	public int getAverageServicePrice(String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
-		//TODO Preis zu einem gewissen Zeitraum
 		int preis = 0;
 		List<Service> services = dao.getHotelByName(name).getServiceList();
 		for (Service service : services){
@@ -275,12 +302,14 @@ public class AnalyseManagement {
 		}
 	
 	/**
-	 * @param aufenthalt
-	 * @param name
-	 * @return
+	 * Berechnet den meist gebuchten Monat zu einem bestimmten Zeitraum
+	 * @param aufenthalt Zeitraum für den der Monat berechnet werden soll
+	 * @param name Name des Hotels für das der Monat berechnet werden soll
+	 * @return Name des meist gebuchten Monats
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 * @throws ClassNotFoundException
+	 * @throws ServiceException
 	 */
 	public String getMostBookedMonth(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -301,10 +330,16 @@ public class AnalyseManagement {
 		return new DateFormatSymbols().getMonths()[month];
 		}
 	
+
 	/**
-	 * @param hotel
-	 * @param aufenthalt
-	 * @return
+	 * Berechnet die meist gebuchte Kategorie zu einem bestimmten Zeitraum
+	 * @param aufenthalt Zeitraum für den die Kategorie berechnet werden soll
+	 * @param name Name des Hotels für das die Kategorie berechnet werden soll
+	 * @return Name der meist gebuchten Kategorie
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws ServiceException
 	 */
 	public String getBestCategory(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -331,10 +366,15 @@ public class AnalyseManagement {
 			return kategorien.get(index).getName();
 		}
 	
+
 	/**
-	 * @param hotel
-	 * @param aufenthalt
-	 * @return
+	 * Berechnet die Einnamhen eines Hotels durch Services zu einem gewissen Zeitraum
+	 * @param aufenthalt Zeitraum für den die Einnahmen berechnet werden soll
+	 * @param name Name des Hotels für das die Einnahmen berechnet werden soll
+	 * @return Einnahmen durch Services in Cent
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public int getServiceRevenue(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException{
@@ -356,11 +396,16 @@ public class AnalyseManagement {
 		return revenue;
 		}
 	
+
 	/**
-	 * @param hotel
-	 * @param aufenthalt
-	 * @return
-	 * @throws ServiceException 
+	 * Berechnet den meist gebuchten Service zu einem bestimmten Zeitraum
+	 * @param aufenthalt Zeitraum für den der Service berechnet werden soll
+	 * @param name Name des Hotels für das der Service berechnet werden soll
+	 * @return Name des meist gebuchten Services
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws ServiceException
 	 */
 	public String getBestService(Aufenthalt aufenthalt, String name)throws FileNotFoundException, IOException,
 	ClassNotFoundException, ServiceException{
