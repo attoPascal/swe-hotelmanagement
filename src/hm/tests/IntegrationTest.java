@@ -4,13 +4,11 @@
 package hm.tests;
 
 import static org.junit.Assert.*;
-import hm.Aufenthalt;
 import hm.Buchung;
 import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
-import hm.dao.SerializedDAO;
 import hm.managers.*;
 import hm.users.HotelGast;
 
@@ -22,7 +20,6 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -35,7 +32,7 @@ import org.junit.Test;
  * 
  *
  */
-public class UnitTest {
+public class IntegrationTest {
 
 	/**
 	 * Testet ob erfolgreich gebucht wird
@@ -214,6 +211,7 @@ public class UnitTest {
 		
 
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
+		@SuppressWarnings("unused")
 		Buchung b3;
 		try {
 			b3 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
