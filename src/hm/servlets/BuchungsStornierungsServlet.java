@@ -72,9 +72,6 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 		} catch (FileNotFoundException e) {
 			out.write(e.getMessage());
 			
-		} catch (UserException e) {
-			out.write(e.getMessage());
-			
 		} catch (IOException e) {
 			out.write(e.getMessage());
 			

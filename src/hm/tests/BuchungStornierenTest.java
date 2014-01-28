@@ -108,7 +108,7 @@ public class BuchungStornierenTest {
 		
 		//entfernt die Buchung
 		try {
-			bm.removeBuchung(b1.getId(),b1.getZimmernummer(), h1.getName(), user);
+			bm.removeBuchung(b1.getId(),b1.getZimmernummer(), h1.getName());
 			assertEquals(102,b1.getZimmernummer());
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
