@@ -4,7 +4,7 @@
 package hm.tests;
 
 import static org.junit.Assert.*;
-import hm.Aufenthalt;
+import hm.Buchung;
 import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
@@ -18,8 +18,8 @@ import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,7 +32,7 @@ import org.junit.Test;
  * 
  *
  */
-public class UnitTest {
+public class IntegrationTest {
 
 	/**
 	 * Testet ob erfolgreich gebucht wird
@@ -86,31 +86,40 @@ public class UnitTest {
 		c.set(2014, 5, 23, 0, 0, 0);
 		
 		HotelGast user = new HotelGast("Name", "pwd", "123");
-		
-		//TODO
-		/*
+		try{
+		bm.instantiateDAO();
+		DAO dao = bm.getDAO();
+		dao.saveHotel(h1);
+		dao.saveUser(user);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer;
+		Buchung b1;
 		try {
-			zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-			assertEquals(102,zimmernummer);
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			b1 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+			assertEquals(102,b1.getZimmernummer());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
-
-		//TODO
-		/*
+	
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer2;
+		Buchung b2;
 		try {
-			zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-			assertEquals(101,zimmernummer2);
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			b2 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+			assertEquals(101,b2.getZimmernummer());
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+	
 	}
 	
 
@@ -166,41 +175,53 @@ public class UnitTest {
 		c.set(2014, 5, 23, 0, 0, 0);
 		
 		HotelGast user = new HotelGast("Name", "pwd", "123");
-		
-		//TODO
-		/*
-		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer;
-		try {
-			zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-			assertEquals(102,zimmernummer);
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+		try{
+		bm.instantiateDAO();
+		DAO dao = bm.getDAO();
+		dao.saveHotel(h1);
+		dao.saveUser(user);
+		}catch(Exception e){
 			e.printStackTrace();
 		}
-		*/
 		
-		//TODO
-		/*
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer2;
+		Buchung b1;
 		try {
-			zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-			assertEquals(101,zimmernummer2);
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			b1 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+			assertEquals(102,b1.getZimmernummer());
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
-		
-		
-		//TODO
-		/*
+
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
+		Buchung b2;
 		try {
-			bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			b2 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+			assertEquals(101,b2.getZimmernummer());
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
+		
+
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
+		@SuppressWarnings("unused")
+		Buchung b3;
+		try {
+			b3 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 
 		
 	}
@@ -224,7 +245,12 @@ public class UnitTest {
 		}
 		
 		ZimmerManagement zm = new ZimmerManagement();
-
+		try {
+			zm.instantiateDAO();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		DAO dao = zm.getDAO();
 
 		//erstellt ein hotel
@@ -325,7 +351,12 @@ public class UnitTest {
 		}
 		
 		ZimmerManagement zm = new ZimmerManagement();
-
+		try {
+			zm.instantiateDAO();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		DAO dao = zm.getDAO();
 
 		//erstellt ein hotel
@@ -469,7 +500,27 @@ public class UnitTest {
 		
 		
 		KategorieManagement km = new KategorieManagement();
-
+		try {
+			km.instantiateDAO();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		DAO dao = km.getDAO();
+		try {
+			dao.saveHotel(h1);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		try {
 			km.createKategorie("Absteige", "Heu, Eimer zum Waschen ", 5, h1.getName());
 		} catch (FileNotFoundException e) {
@@ -482,9 +533,7 @@ public class UnitTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		DAO dao = km.getDAO();
-		
+				
 		Hotel h2 = new Hotel("Test1");
 		
 		try {
@@ -555,41 +604,60 @@ public class UnitTest {
 		
 		
 		KategorieManagement km = new KategorieManagement();
-
 		try {
-			km.editKategorie("Einzel", "Loft", 5,"Heu, Eimer zum Waschen", h1.getName());
+			km.instantiateDAO();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		DAO dao = km.getDAO();
+		try {
+			dao.saveHotel(h1);
+		} catch (ClassNotFoundException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			String hotel = h1.getName();
+			km.editKategorie("Einzel", "Loft", 5,"Heu, Eimer zum Waschen", hotel);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("muuh");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("määh");
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Mooh");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("miiiii");
 			e.printStackTrace();
 		}
-		
-		DAO dao = km.getDAO();
-		
+				
 		Hotel h2 = new Hotel("Test2");
 		try {
 			h2 = dao.getHotelByName("CrazySharkyFish");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("wääänb");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("mpüüü");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("ggggggggggg");
 			e.printStackTrace();
 		}
-		
-		assertEquals(5, h2.getKategorie("Loft").getPreis());
-		assertEquals("Heu, Eimer zum Waschen ", h2.getKategorie("Loft").getAusstattung());
+		Kategorie loft = h2.getKategorie("Loft");
+		int preis = loft.getPreis();
+		assertEquals(5, preis);
+		assertEquals("Heu, Eimer zum Waschen", h2.getKategorie("Loft").getAusstattung());
 
 	}
 	

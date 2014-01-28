@@ -18,9 +18,6 @@ import hm.Zimmer;
 import hm.dao.DAO;
 import hm.dao.SerializedDAO;
 import hm.exceptions.ServiceException;
-import hm.users.HotelGast;
-
-
 
 /**
  * @author vincent
