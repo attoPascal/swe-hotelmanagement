@@ -22,7 +22,6 @@
 	}
 
 	BuchungsManagement bm = new BuchungsManagement();
-	//Unnötig gehört überarbeitet
 	bm.instantiateDAO();
 	ArrayList<Hotel> hList = bm.getDAO().getHotelList();
 	
@@ -39,7 +38,6 @@
 	
 	ArrayList<Zimmer> zList = hotel.getZimmerList();
 	ArrayList<Kategorie> kList = hotel.getKategorien();
-	
 	DateFormat df = new SimpleDateFormat("EEEE, d. MMMM yyyy");
 %>
 
@@ -66,107 +64,43 @@
 				</select>
   			</div>
 		</form>
-		
-		<div id="manage">
 			
-		<form action="editBookings.jsp">
-			<table>
-				<tr>
-					<th>ID</th>
-					<th>Zimmer</th>
-					<th>Anfang</th>
-					<th>Ende</th>
-					<th>Tage</th>
-					<th>Kosten</th>
-					<th>Kategorie</th>
-					<th></th>
-					
-				</tr>
-				<tr>
-				
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Zimmer</th>
+				<th>Anfang</th>
+				<th>Ende</th>
+				<th>Tage</th>
+				<th>Kosten</th>
+				<th>Kategorie</th>
+				<th></th>
+				<th></th>
+			</tr>
+			
 			
 				<% for (Zimmer z : zList) { %>
 					<% for (Buchung b : z.getBuchungen()) { %>
-						<tr>
-							<td><input type="hidden" name="id" value="<%= b.getId() %>"><%= b.getId() %></td>
-							<td><%= b.getZimmernummer() %></td>
-							<td><%= df.format(b.getAufenthalt().getAnfang()) %></td>
-							<td><%= df.format(b.getAufenthalt().getEnde()) %></td>
-							<td><%= b.getAufenthalt().getDays() %></td>
-							<td><%= b.getKosten() %></td>
-							<td><%= b.getKategorie().getName() %> </td>
-							<td><input type="submit" value="edit"></td>
-						</tr>
+						<form action="editBookings.jsp">
+							<tr>
+								<td><input type="hidden" name="id" value="<%= b.getId() %>"><%= b.getId() %></td>
+								<td><%= b.getZimmernummer() %></td>
+								<td><%= df.format(b.getAufenthalt().getAnfang()) %></td>
+								<td><%= df.format(b.getAufenthalt().getEnde()) %></td>
+								<td><%= b.getAufenthalt().getDays() %></td>
+								<td><%= b.getKosten() %></td>
+								<td><%= b.getKategorie().getName() %> </td>
+								<td><input type="hidden" name="hotelName" value="<%= hotel.getName() %>"></td>
+								<td><input type="submit" value="edit"></td>
+							</tr>	
+						</form>	
 					<% } %>
 				<% } %>
-				
-				</table>
-			</form>
-			<!--<table class="zimmer table">
-				<tr>
-					<th class="zimmer">Zimmer</th>
-					<th class="kategorie">Kategorie</th>
-					<th class="button"></th>
-				</tr>
-		
-				<% for (Zimmer z : zList) { %>
-				<tr>
-					<td class="zimmer">
-						<input type="text" class="form-control" value="<%= z.getNummer() %>" readonly>
-					</td>
-					<td class="kategorie">
-						<select class="set-kategorie form-control" data-zimmer="<%= z.getNummer() %>">
-							<% for (Kategorie k : kList) {
-								String selected = (k.hasZimmer(z.getNummer())) ? " selected" : "";
-							%>
-							<option value="<%= k.getName() %>"<%= selected %>><%= k.getName() %></option>
-							<% } %>
-						</select>
-					</td>
-					<td class="button">
-						<form action="ZimmerServlet" method="get">
-							<input type="hidden" name="action" value="delete">
-							<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
-							<input type="hidden" name="zimmer" value="<%= z.getNummer() %>">
-							
-							<button type="submit" class="btn btn-danger">
-								<span class="glyphicon glyphicon-remove"></span>
-							</button>
-						</form>
-					</td>
-				</tr>
-				<% } %>
-			</table>
-			
-			<form action="ZimmerServlet" method="get">
-				<table class="zimmer table">
-					<tr>
-						<td class="zimmer">
-							<input type="hidden" name="action" value="create">
-							<input type="hidden" name="hotel" value="<%= hotel.getName() %>">
-							<input type="text" name="zimmer" class="form-control">
-						</td>
-						<td class="kategorie">
-							<select name="kategorie" class="form-control">
-								<option value="" selected disabled>Bitte auswählen:</option>
-								<% for (Kategorie k : kList) { %>
-								<option value="<%= k.getName() %>"><%= k.getName() %></option>
-								<% } %>
-							</select>
-						</td>
-						<td class="button">
-							<button type="submit" class="btn btn-success">
-								<span class="glyphicon glyphicon-plus"></span>
-							</button>
-							<button type="submit" class="aufenthalt">
-								<span class="glyphicon glyphicon-plus"></span>
-							</button>
-						</td>
-					</tr>
-				</table>
-			</form>-->
-		</div>
+		</table>
 	</main>
 </body>
-
 </html>
+		
+		
+								
+								
