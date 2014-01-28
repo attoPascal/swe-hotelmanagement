@@ -115,7 +115,7 @@ public class BuchungsManagement {
 			
 			// Das Zimmer der Buchung zuteilen
 			buchung.setZimmer(room);
-
+			dao.saveHotel(hotel);
 			return "Das Zimmer für die Buchung wurde erfolgreich geändert";
 		}
 	}
@@ -135,16 +135,16 @@ public class BuchungsManagement {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public void removeBuchung(int id, int nummer, String name)
+	public void removeBuchung(int id, int nummer, String name, HotelGast gast)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
-		DAO dao = getDAO();
-		Hotel hotel = dao.getHotelByName(name);
+		
+		Hotel hotel =dao.getHotelByName(name);
 		Zimmer zimmer = hotel.getZimmer(nummer);
 		zimmer.removeBuchung(id);
+				
+		zimmer.removeBuchungHG(id, gast);
 		
-//		zimmer.removeBuchungHG(id, gast);
-//		
-//		dao.saveUser(gast);
+		dao.saveUser(gast);
 		dao.saveHotel(hotel);
 	}
 	
