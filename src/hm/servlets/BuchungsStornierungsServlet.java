@@ -1,7 +1,9 @@
 package hm.servlets;
 
 import hm.Hotel;
+import hm.exceptions.UserException;
 import hm.managers.*;
+import hm.users.HotelGast;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,11 +38,20 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 			String hotelName = request.getParameter("hotel");
 			
 			Hotel hotel = management.getDAO().getHotelByName(hotelName);
-
+			Object o = request.getSession().getAttribute("user");
+			HotelGast gast;
+			
+			if (o instanceof HotelGast) {
+				gast = (HotelGast) o;
+			} else {
+				throw new UserException("User ist kein HotelGast");
+			}
+			
 			management.removeBuchung(
 					id,						//Buchung.getid(id),
 					nummer,					//Zimmer.getNummer(Nummer),
-					hotel.getName()
+					hotel.getName(),
+					gast
 			);
 
 			out.write("Die Stornierung ihrer Buchung #" + id + 
@@ -60,7 +71,10 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 
 		} catch (FileNotFoundException e) {
 			out.write(e.getMessage());
-
+			
+		} catch (UserException e) {
+			out.write(e.getMessage());
+			
 		} catch (IOException e) {
 			out.write(e.getMessage());
 			
