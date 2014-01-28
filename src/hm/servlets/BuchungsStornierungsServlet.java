@@ -39,13 +39,13 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 			
 			Hotel hotel = management.getDAO().getHotelByName(hotelName);
 			Object o = request.getSession().getAttribute("user");
-			HotelGast gast;
-			
-			if (o instanceof HotelGast) {
-				gast = (HotelGast) o;
-			} else {
-				throw new UserException("User ist kein HotelGast");
-			}
+//			HotelGast gast;
+//			
+//			if (o instanceof HotelGast) {
+//				gast = (HotelGast) o;
+//			} else {
+//				throw new UserException("User ist kein HotelGast");
+//			}
 			
 			management.removeBuchung(
 					id,						//Buchung.getid(id),
