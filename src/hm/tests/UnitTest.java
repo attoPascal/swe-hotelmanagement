@@ -89,31 +89,40 @@ public class UnitTest {
 		c.set(2014, 5, 23, 0, 0, 0);
 		
 		HotelGast user = new HotelGast("Name", "pwd", "123");
-		
-		//TODO
-		/*
+		try{
+		bm.instantiateDAO();
+		DAO dao = bm.getDAO();
+		dao.saveHotel(h1);
+		dao.saveUser(user);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer;
+		Buchung b1;
 		try {
-			zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-			assertEquals(102,zimmernummer);
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			b1 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+			assertEquals(102,b1.getZimmernummer());
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
-
-		//TODO
-		/*
+	
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer2;
+		Buchung b2;
 		try {
-			zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-			assertEquals(101,zimmernummer2);
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+			b2 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+			assertEquals(101,b2.getZimmernummer());
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+	
 	}
 	
 
@@ -169,14 +178,21 @@ public class UnitTest {
 		c.set(2014, 5, 23, 0, 0, 0);
 		
 		HotelGast user = new HotelGast("Name", "pwd", "123");
-		
+		try{
+		bm.instantiateDAO();
+		DAO dao = bm.getDAO();
+		dao.saveHotel(h1);
+		dao.saveUser(user);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
 		Buchung b1;
 		try {
 			b1 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
 			assertEquals(102,b1.getZimmernummer());
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -188,7 +204,7 @@ public class UnitTest {
 		try {
 			b2 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
 			assertEquals(101,b2.getZimmernummer());
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
