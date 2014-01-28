@@ -1,5 +1,7 @@
 package hm;
 
+import hm.users.HotelGast;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -96,8 +98,23 @@ public class Zimmer implements Serializable {
 		
 		for (Buchung buchung : buchungen){
 			
-			if (buchung.getId() == id) buchungen.remove(buchung);
+			if (buchung.getId() == id) 
+				buchungen.remove(buchung);	
+		}
+	}
+	
+	
+	/**
+	 * Entfernt die Buchung mit der übergebenen ID
+	 * @param id ID der Buchung die gelöscht werden soll
+	 * @param gast Hotel-Gast, dessen Buchung gelöscht werden soll
+	 */
+	public void removeBuchungHG(int id, HotelGast gast) {
+		
+		for (Buchung buchung : buchungen){
 			
+			if (buchung.getId() == id) 
+				buchungen.remove(buchung);	
 		}
 	}
 	
