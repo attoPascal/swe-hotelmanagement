@@ -1,5 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="hm.Hotel"%>
+<%@page import="hm.Zimmer"%>
+<%@page import="hm.Buchung"%>
 <%@page import="hm.users.HotelGast"%>
 <%@page import="hm.dao.SerializedDAO"%>
 <%@page import="hm.dao.DAO"%>
