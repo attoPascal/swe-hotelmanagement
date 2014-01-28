@@ -53,17 +53,33 @@
 		<h1>Buchungen verwalten</h1>
 		
 		<form>
-			<div class="form-group">
-    			<label for="setHotel">Hotel auswählen:</label>
-    			<select name="hotel" class="set-hotel form-control" id="setHotel">
-    				<% for (Hotel h : hList) { 
-					String selected = (h.getName().equals(hotel.getName())) ? "selected=\"selected\"" : "";
-					%>
-					<option value="<%= h.getName() %>"<%= selected %>><%= h.getName() %></option>
-					<% } %>
-				</select>
-  			</div>
+			<table>
+				<tr>
+					<td style="width:100%">
+		    			<label for="setHotelNoAjax">Hotel&nbsp;auswählen:</label>
+		    			<select name="hotel" class="set-hotel-no-ajax form-control" id="setHotelNoAjax">
+		    				<% for (Hotel h : hList) { 
+							String selected = (h.getName().equals(hotel.getName())) ? "selected=\"selected\"" : "";
+							%>
+							<option value="<%= h.getName() %>"<%= selected %>><%= h.getName() %></option>
+							<% } %>
+						</select>
+					</td>
+					<td style="vertical-align:bottom">
+						<button type="submit" class="btn btn-primary">
+							<span class="glyphicon glyphicon-ok"></span>
+						</button>
+					</td>
+				</tr>
+  			</table>
 		</form>
+<<<<<<< HEAD
+=======
+		
+		<div>&nbsp;</div>
+		
+		<div id="manage">
+>>>>>>> 036a513620d4c887bd802643ed5ffcc9869b32a9
 			
 		<table>
 			<tr>

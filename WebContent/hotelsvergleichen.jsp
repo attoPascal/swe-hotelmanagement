@@ -33,7 +33,7 @@
 	<%@ include file="inc/nav.jsp" %>
 	
 	<main class="container">
-		<h1>Statistik erstellen</h1>
+		<h1>Hotels vergleichen</h1>
 	
 		<form>
 			<div class="form-group">

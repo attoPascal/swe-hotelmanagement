@@ -129,14 +129,23 @@ public class BuchungsManagement {
 	 *            Nummer des Zimmers von der die Buchung entfernt werden soll
 	 * @param name
 	 *            Name des Hotels von dem die Buchung entfernt werden soll
+	 * @param gast 
+	 * 			  Hotelgast, dessen Buchung entfernt wird            
 	 * @throws FileNotFoundException
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public void removeBuchung(int id, int nummer, String name)
+	public void removeBuchung(int id, int nummer, String name, HotelGast gast)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
-		Zimmer zimmer = dao.getHotelByName(name).getZimmer(nummer);
+		
+		Hotel hotel =dao.getHotelByName(name);
+		Zimmer zimmer = hotel.getZimmer(nummer);
 		zimmer.removeBuchung(id);
+				
+		zimmer.removeBuchungHG(id, gast);
+		
+		dao.saveUser(gast);
+		dao.saveHotel(hotel);
 	}
 	
 	public String getBuchungsbestaetigung(Buchung buchung) {
