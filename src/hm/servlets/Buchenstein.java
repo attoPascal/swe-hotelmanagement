@@ -94,7 +94,7 @@ public class Buchenstein extends HttpServlet {
 				//Buchung stornieren
 				}else {
 					//buchung entfernen
-					management.removeBuchung(Integer.parseInt(id),Integer.parseInt(nummer),hotel.getName(),gast);
+					management.removeBuchung(Integer.parseInt(id),Integer.parseInt(nummer),hotel.getName());
 
 					out.write("Die Stornierung ihrer Buchung #" + id + 
 							"des Zimmers" + nummer + 
