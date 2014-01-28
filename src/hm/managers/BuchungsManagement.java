@@ -60,10 +60,10 @@ public class BuchungsManagement {
 	 * @return
 	 */
 	public String editAufenthalt(Buchung buchung, Aufenthalt aufenthalt,
-			String name) throws ClassNotFoundException, FileNotFoundException,
+			Hotel h) throws ClassNotFoundException, FileNotFoundException,
 			IOException {
 
-		Hotel hotel = dao.getHotelByName(name);
+		Hotel hotel = h;
 		Zimmer zimmer = hotel.getZimmer(buchung.getZimmernummer());
 		
 		/**
