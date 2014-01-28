@@ -73,13 +73,10 @@
 				</tr>
   			</table>
 		</form>
-<<<<<<< HEAD
-=======
-		
+
 		<div>&nbsp;</div>
 		
 		<div id="manage">
->>>>>>> 036a513620d4c887bd802643ed5ffcc9869b32a9
 			
 		<table>
 			<tr>
