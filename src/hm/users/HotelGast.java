@@ -36,6 +36,13 @@ public class HotelGast extends AbstractUser{
 	}
 	
 	/**
+	 * @param buchung
+	 */
+	public void removeBuchung(Buchung buchung) {
+		buchungen.remove(buchung.getId());
+	}
+	
+	/**
 	 * @return Zahlungsdaten des Hotelgasts
 	 */
 	public String getZahlungsdaten() {
