@@ -50,8 +50,8 @@ public class BuchungsStornierungsServlet extends HttpServlet {
 			management.removeBuchung(
 					id,						//Buchung.getid(id),
 					nummer,					//Zimmer.getNummer(Nummer),
-					hotel.getName(),
-					gast
+					hotel.getName()
+					//gast
 			);
 
 			out.write("Die Stornierung ihrer Buchung #" + id + 
