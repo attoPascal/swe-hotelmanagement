@@ -9,6 +9,7 @@ import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
+import hm.dao.SerializedDAO;
 import hm.managers.*;
 import hm.users.HotelGast;
 
@@ -224,7 +225,12 @@ public class UnitTest {
 		}
 		
 		ZimmerManagement zm = new ZimmerManagement();
-
+		try {
+			zm.instantiateDAO();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		DAO dao = zm.getDAO();
 
 		//erstellt ein hotel
@@ -325,7 +331,12 @@ public class UnitTest {
 		}
 		
 		ZimmerManagement zm = new ZimmerManagement();
-
+		try {
+			zm.instantiateDAO();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		DAO dao = zm.getDAO();
 
 		//erstellt ein hotel
@@ -469,7 +480,27 @@ public class UnitTest {
 		
 		
 		KategorieManagement km = new KategorieManagement();
-
+		try {
+			km.instantiateDAO();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		DAO dao = km.getDAO();
+		try {
+			dao.saveHotel(h1);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		try {
 			km.createKategorie("Absteige", "Heu, Eimer zum Waschen ", 5, h1.getName());
 		} catch (FileNotFoundException e) {
@@ -482,9 +513,7 @@ public class UnitTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		DAO dao = km.getDAO();
-		
+				
 		Hotel h2 = new Hotel("Test1");
 		
 		try {
@@ -555,41 +584,60 @@ public class UnitTest {
 		
 		
 		KategorieManagement km = new KategorieManagement();
-
 		try {
-			km.editKategorie("Einzel", "Loft", 5,"Heu, Eimer zum Waschen", h1.getName());
+			km.instantiateDAO();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		DAO dao = km.getDAO();
+		try {
+			dao.saveHotel(h1);
+		} catch (ClassNotFoundException | IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			String hotel = h1.getName();
+			km.editKategorie("Einzel", "Loft", 5,"Heu, Eimer zum Waschen", hotel);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("muuh");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("määh");
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
+			System.out.println("Mooh");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("miiiii");
 			e.printStackTrace();
 		}
-		
-		DAO dao = km.getDAO();
-		
+				
 		Hotel h2 = new Hotel("Test2");
 		try {
 			h2 = dao.getHotelByName("CrazySharkyFish");
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("wääänb");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println("mpüüü");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			System.out.println("ggggggggggg");
 			e.printStackTrace();
 		}
-		
-		assertEquals(5, h2.getKategorie("Loft").getPreis());
-		assertEquals("Heu, Eimer zum Waschen ", h2.getKategorie("Loft").getAusstattung());
+		Kategorie loft = h2.getKategorie("Loft");
+		int preis = loft.getPreis();
+		assertEquals(5, preis);
+		assertEquals("Heu, Eimer zum Waschen", h2.getKategorie("Loft").getAusstattung());
 
 	}
 	
