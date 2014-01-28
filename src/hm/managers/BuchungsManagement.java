@@ -135,16 +135,16 @@ public class BuchungsManagement {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
-	public void removeBuchung(int id, int nummer, String name, HotelGast gast)
+	public void removeBuchung(int id, int nummer, String name)
 			throws FileNotFoundException, ClassNotFoundException, IOException {
 		
 		Hotel hotel =dao.getHotelByName(name);
 		Zimmer zimmer = hotel.getZimmer(nummer);
 		zimmer.removeBuchung(id);
 				
-		zimmer.removeBuchungHG(id, gast);
-		
-		dao.saveUser(gast);
+//		zimmer.removeBuchungHG(id, gast);
+//		
+//		dao.saveUser(gast);
 		dao.saveHotel(hotel);
 	}
 	
