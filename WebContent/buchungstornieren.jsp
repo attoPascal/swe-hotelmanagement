@@ -33,6 +33,17 @@
 		   	Hotel hotel = dao.getHotelByName(hotelName);					
 		%>
 		
+		<tbody>
+		<%
+			ArrayList<Integer> List = HotelGast.getBuchungsIDs();
+				for (id id : List) {
+		%>
+		<tr>
+			<th class="buchung #:"><%= id %></th>
+		</tr>
+		<% } %>			
+		</tbody>
+		
 		<form action="BuchungsStornierungsServlet" method="get" class="form-horizontal">
 			<div class="form-group">
 				<label for="idInput" class="col-sm-2 control-label">ID:</label>
