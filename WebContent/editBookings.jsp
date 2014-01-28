@@ -5,6 +5,8 @@
 <%@page import="hm.users.Hotelier"%>
 <%@page import="hm.dao.SerializedDAO"%>
 <%@page import="hm.dao.DAO"%>
+<%@page import="java.util.Date" %>
+<%@page import="java.util.Calendar" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
@@ -35,7 +37,16 @@
 			DAO dao = SerializedDAO.getInstance();
 		   	
 		   	Hotel hotel = dao.getHotelByName(hotelName);	
-			//Buchung buchung = hotel.getBuchungByID(Integer.parseInt(id));
+			Buchung buchung = hotel.getBuchungByID(Integer.parseInt(id));
+			
+			Date date = buchung.getAufenthalt().getAnfang();
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(date);
+			
+			int year = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH);
+			int day = cal.get(Calendar.DAY_OF_MONTH);
 		%>
 		
 		<form action="BuchungsVerwaltungsServlet" method="get" class="form-horizontal">
@@ -55,7 +66,7 @@
 			<div class="form-group">
 				<label for="tagInput" class="col-sm-2 control-label">Beginndatum:</label>
 		    	<div class="col-sm-2">
-		    		<input type="number" name="day" placeholder="Tag" class="form-control" id="tagInput"> 
+		    		<input type="number" name="day" value="<%= day %>" placeholder="Tag" class="form-control" id="tagInput"> 
 				</div>
 				<div class="col-sm-4">
 					<select name="months" class="form-control">
@@ -74,13 +85,13 @@
 					</select>
 				</div>
 				<div class="col-sm-4">
-		    		<input type="number" name="year" placeholder="Jahr" class="form-control">
+		    		<input type="number" name="year" value="<%= year %>" placeholder="Jahr" class="form-control">
 		    	</div>
 		    </div>
 		    <div class="form-group">    
 		    	<label for="durationInput" class="col-sm-2 control-label">Aufenthaltsdauer:</label>
 		    	<div class="col-sm-2">
-		    		<input type="number" name="duration" placeholder="Tage" class="form-control" id="durationInput">
+		    		<input type="number" name="duration" value="<%= buchung.getAufenthalt().getDays() %>" placeholder="Tage" class="form-control" id="durationInput">
 		    	</div>
 		    </div>
 		    <div class="form-group">
