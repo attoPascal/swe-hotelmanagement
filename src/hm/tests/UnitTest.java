@@ -5,6 +5,7 @@ package hm.tests;
 
 import static org.junit.Assert.*;
 import hm.Aufenthalt;
+import hm.Buchung;
 import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
@@ -19,6 +20,7 @@ import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -168,40 +170,44 @@ public class UnitTest {
 		
 		HotelGast user = new HotelGast("Name", "pwd", "123");
 		
-		//TODO
-		/*
+		
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer;
+		Buchung b1;
 		try {
-			zimmernummer = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-			assertEquals(102,zimmernummer);
+			b1 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+			assertEquals(102,b1.getZimmernummer());
 		} catch (ClassNotFoundException| NullPointerException | IOException e) {
 			e.printStackTrace();
-		}
-		*/
-		
-		//TODO
-		/*
-		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
-		int zimmernummer2;
-		try {
-			zimmernummer2 = bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
-			assertEquals(101,zimmernummer2);
-		} catch (ClassNotFoundException| NullPointerException | IOException e) {
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
-		
-		
-		//TODO
-		/*
+
 		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
+		Buchung b2;
 		try {
-			bm.createBuchung(h1.getKategorie("Einzel"), new Aufenthalt(new Date(c.getTimeInMillis()), 1), user);
+			b2 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+			assertEquals(101,b2.getZimmernummer());
 		} catch (ClassNotFoundException| NullPointerException | IOException e) {
 			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		*/
+		
+		
+
+		//erstellt neue buchung fuer kategorie einzel am 25.5.2014
+		Buchung b3;
+		try {
+			b3 = bm.createBuchung(h1.getName(),h1.getKategorie("Einzel").getName(), "2014-05-23", 1, user);
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 
 		
 	}
