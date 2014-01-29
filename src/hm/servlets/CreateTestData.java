@@ -40,6 +40,7 @@ public class CreateTestData extends HttpServlet {
 		
 		Hotel h1 = new Hotel("CrazySharkyFish");
 		Hotel h2 = new Hotel("FunkySharkyFish");
+		Hotel h3 = new Hotel("NewSharkyFish");
 		
 		Zimmer z1 = new Zimmer(101);
 		Zimmer z2 = new Zimmer(102);
@@ -52,6 +53,15 @@ public class CreateTestData extends HttpServlet {
 		Zimmer z8 = new Zimmer(301);
 		Zimmer z9 = new Zimmer(401);
 		
+		Zimmer z10 = new Zimmer(101);
+		Zimmer z11 = new Zimmer(102);
+		Zimmer z12 = new Zimmer(103);
+		Zimmer z13 = new Zimmer(104);
+		Zimmer z14 = new Zimmer(201);
+		Zimmer z15 = new Zimmer(202);
+		Zimmer z16 = new Zimmer(203);
+		Zimmer z17 = new Zimmer(204);
+		
 		h1.addZimmer(z1);
 		h1.addZimmer(z2);
 		h1.addZimmer(z3);
@@ -63,6 +73,15 @@ public class CreateTestData extends HttpServlet {
 		h2.addZimmer(z8);
 		h2.addZimmer(z9);
 
+		h3.addZimmer(z10);
+		h3.addZimmer(z11);
+		h3.addZimmer(z12);
+		h3.addZimmer(z13);
+		h3.addZimmer(z14);
+		h3.addZimmer(z15);
+		h3.addZimmer(z16);
+		h3.addZimmer(z17);
+		
 		Kategorie kat1 = new Kategorie("Einzel", 5000, "Bad");
 		Kategorie kat2 = new Kategorie("Doppel", 10000, "Bad & Klo");
 		Kategorie kat3 = new Kategorie("Suite", 20000, "Bad & Klo, Affenbutler");
@@ -71,6 +90,10 @@ public class CreateTestData extends HttpServlet {
 		Kategorie kat5 = new Kategorie("Doppel", 8000, "nix");
 		Kategorie kat6 = new Kategorie("Tripel", 12000, "nix");
 		Kategorie kat7 = new Kategorie("Quadrupel", 15000, "nix");
+		
+		Kategorie kat8 = new Kategorie("Einzel", 4000, "Bad");
+		Kategorie kat9 = new Kategorie("Doppel", 12000, "Bad, Balkon, Butler");
+		Kategorie kat10 = new Kategorie("Luxus", 25000, "Bad, Balkon, Affenbutler");
 		
 		kat1.addZimmer(z1);
 		kat1.addZimmer(z2);
@@ -82,6 +105,15 @@ public class CreateTestData extends HttpServlet {
 		kat5.addZimmer(z7);
 		kat6.addZimmer(z8);
 		kat7.addZimmer(z9);
+		
+		kat8.addZimmer(z10);
+		kat8.addZimmer(z11);
+		kat8.addZimmer(z12);
+		kat8.addZimmer(z13);
+		kat9.addZimmer(z14);
+		kat9.addZimmer(z15);
+		kat10.addZimmer(z16);
+		kat10.addZimmer(z17);
 		
 		h1.addKategorie(kat1);
 		h1.addKategorie(kat2);
@@ -97,6 +129,7 @@ public class CreateTestData extends HttpServlet {
 		Service s3 = new Service("Massage extra", "20min, mit Happy End", 5000);
 		Service s4 = new Service("Fruehstueck", "Schinken, Kaese, Ei", 1500);
 		Service s5 = new Service("Kalte Platte", "Schinken, Kaese, Ei, Spargel", 3000);
+		Service s6 = new Service("Jetski", "Jetski fahren, 2 Stunden", 35000);
 		
 		try {
 			h1.addService(s1);
@@ -104,6 +137,7 @@ public class CreateTestData extends HttpServlet {
 			h1.addService(s3);
 			h2.addService(s4);
 			h2.addService(s5);
+			h3.addService(s6);
 		} catch (ServiceException e1) {
 			e1.printStackTrace();
 		}
@@ -133,8 +167,8 @@ public class CreateTestData extends HttpServlet {
 			dao.saveUser(u5);
 			dao.saveUser(u6);
 
-			Hotel h3 = dao.getHotelByName("CrazySharkyFish");
-			ArrayList<Kategorie> katList = h3.getKategorien();
+			Hotel h4 = dao.getHotelByName("CrazySharkyFish");
+			ArrayList<Kategorie> katList = h4.getKategorien();
 		
 			for (Kategorie k : katList) {
 				out.write(k.getName() + ": ");
