@@ -94,15 +94,13 @@ public class Buchenstein extends HttpServlet {
 				//Buchung stornieren
 				}else {
 					//buchung entfernen
-					management.removeBuchung(Integer.parseInt(id),Integer.parseInt(nummer),hotel.getName());
+					management.removeBuchung(Integer.parseInt(id),hotel.getName(), gast);
 
 					out.write("Die Stornierung ihrer Buchung #" + id + 
 							"des Zimmers" + nummer + 
 							"im Hotel" + hotel.getName() + 
 							"war erfolgreich.");
-					
-					management.getDAO().saveHotel(hotel);
-					
+										
 					return;
 				}
 			//Falscher User
