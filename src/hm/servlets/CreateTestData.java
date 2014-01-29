@@ -145,6 +145,7 @@ public class CreateTestData extends HttpServlet {
 		Hotelier u1 = new Hotelier("Hotelier1", "h1");
 		u1.addHotel(h1);
 		u1.addHotel(h2);
+		u1.addHotel(h3);
 		
 		HotelGast u2 = new HotelGast("Gast1", "g1", "12345");
 		
@@ -160,6 +161,7 @@ public class CreateTestData extends HttpServlet {
 			//DAO dao = new SerializedDAO(request.getSession().getServletContext().getRealPath("data.ser"));
 			dao.saveHotel(h1);
 			dao.saveHotel(h2);
+			dao.saveHotel(h3);
 			dao.saveUser(u1);
 			dao.saveUser(u2);
 			dao.saveUser(u3);
