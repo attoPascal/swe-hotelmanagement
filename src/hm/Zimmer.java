@@ -4,6 +4,7 @@ import hm.users.HotelGast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * Eindeutiges Zimmer mit zugeordneten Buchungen
@@ -97,8 +98,8 @@ public class Zimmer implements Serializable {
 	public void removeBuchung(int id) {
 		
 		for (Buchung buchung : buchungen){
-			
-			if (buchung.getId() == id) 
+			 ListIterator<Buchung> it = buchungen.listIterator();
+			if (it.hasNext() && id == buchung.getId()) 
 				buchungen.remove(buchung);	
 		}
 	}

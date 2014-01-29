@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import hm.Aufenthalt;
@@ -13,6 +14,7 @@ import hm.Zimmer;
 import hm.Buchung;
 import hm.Hotel;
 import hm.dao.*;
+import hm.exceptions.BuchungsException;
 import hm.users.HotelGast;
 
 public class BuchungsManagement {
@@ -134,17 +136,25 @@ public class BuchungsManagement {
 	 * @throws FileNotFoundException
 	 * @throws ClassNotFoundException
 	 * @throws IOException
+	 * @throws BuchungsException 
 	 */
-	public void removeBuchung(int id, int nummer, String name)
-			throws FileNotFoundException, ClassNotFoundException, IOException {
+	public void removeBuchung(int id, String name, HotelGast gast)
+			throws FileNotFoundException, ClassNotFoundException, IOException, BuchungsException {
 		
-		Hotel hotel =dao.getHotelByName(name);
-		Zimmer zimmer = hotel.getZimmer(nummer);
-		zimmer.removeBuchung(id);
-				
-//		zimmer.removeBuchungHG(id, gast);
-//		
-//		dao.saveUser(gast);
+		Hotel hotel = dao.getHotelByName(name);
+		Buchung buchung = hotel.getBuchungByID(id);
+		hotel.getBuchungsList(gast);
+		Zimmer zimmer = buchung.getZimmer();
+		ArrayList<Buchung> buchungen = zimmer.getBuchungen();
+		Buchung b1 = null;
+		for(Buchung b : buchungen){
+			if(b.getId() == id)
+				b1 = b;
+		}
+		buchungen.remove(buchungen.indexOf(b1));
+		zimmer.setBuchungen(buchungen);
+		gast.getBuchungsIDs().remove(new Integer(id));
+		dao.saveUser(gast);
 		dao.saveHotel(hotel);
 	}
 	

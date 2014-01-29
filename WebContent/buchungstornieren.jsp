@@ -1,4 +1,5 @@
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="hm.Hotel"%>
 <%@page import="hm.Zimmer"%>
 <%@page import="hm.Buchung"%>
@@ -13,7 +14,7 @@
 	Object user = session.getAttribute("user");
 	if (!(user instanceof HotelGast)) {
 		session.setAttribute("alert", "Zugriff verweigert. Bitte melden Sie sich als HotelGast an, um auf diese Seite zuzugreifen.");
-		session.setAttribute("redirect", "zimmerstornieren.jsp?id=" + id + "&nummer=" + nummer + "&hotel=" + hotelName);
+		session.setAttribute("redirect", "zimmerstornieren.jsp");
 		response.sendRedirect("login.jsp");
 	}
 %>
@@ -29,38 +30,57 @@
 	<main class="container">
 		<h1>Zimmer stornieren</h1>		
 		<%
-			DAO dao = SerializedDAO.getInstance();	   	
-		   	Hotel hotel = dao.getHotelByName(hotelName);					
+			DAO dao = SerializedDAO.getInstance();	
+			HotelGast gast = (HotelGast)user;
 		%>
 		
-		<tbody>
+		<table class="table table-striped">
+		
 		<%
-			ArrayList<Integer> List = HotelGast.getBuchungsIDs();
-				for (id id : List) {
+			for(Hotel hotel : dao.getHotelList()){
+				
+		%>
+		
+		<tr>
+			<th><%=hotel.getName() %></th>
+		</tr>
+		<tr>
+			<th> ID </th>
+			<th> Zimmernummer </th>
+			<th> Anfang </th>
+			<th> Ende </th>
+		</tr>
+		<%
+				List<Integer> List = gast.getBuchungsIDs();
+				for (Integer id : List) {
+					int i = id.intValue();
+					for(Buchung buchung : hotel.getBuchungsList(gast))
+						if (buchung.getId() == i){
 		%>
 		<tr>
-			<th class="buchung #:"><%= id %></th>
+			<td><%=buchung.getId() %></td>
+			<td><%=buchung.getZimmernummer() %></td>
+			<td><%=buchung.getAufenthalt().getAnfang()%></td>
+			<td><%=buchung.getAufenthalt().getEnde()%></td>
+			
 		</tr>
-		<% } %>			
-		</tbody>
+		<% }
+		} 
+		}
+		%>	
+		</table>		
 		
-		<form action="BuchungsStornierungsServlet" method="get" class="form-horizontal">
+		<form action="Buchenstein" method="get" class="form-horizontal">
 			<div class="form-group">
 				<label for="idInput" class="col-sm-2 control-label">ID:</label>
 				<div class="col-sm-10">
-					<input type="text" name="id" value="<%= id %>" class="form-control" id="idInput" readonly>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="nummerInput" class="col-sm-2 control-label">Zimmer-Nummer:</label>
-				<div class="col-sm-10">
-					<input type="text" name="nummer" value="<%= id %>" class="form-control" nummer="nummerInput" readonly>
+					<input type="text" name="id" class="form-control" id="idInput">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="hotelInput" class="col-sm-2 control-label">Hotel:</label>
 				<div class="col-sm-10">
-					<input type="text" name="hotel" value="<%= hotelName %>" class="form-control" id="hotelInput" readonly>
+					<input type="text" name="hotel" class="form-control" id="hotelInput">
 				</div>
 			</div>
 		    <div class="form-group">
