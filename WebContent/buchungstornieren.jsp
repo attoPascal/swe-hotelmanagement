@@ -14,9 +14,9 @@
 	Object user = session.getAttribute("user");
 	if (!(user instanceof HotelGast)) {
 		session.setAttribute("alert", "Zugriff verweigert. Bitte melden Sie sich als HotelGast an, um auf diese Seite zuzugreifen.");
-		session.setAttribute("redirect", "zimmerstornieren.jsp");
+		session.setAttribute("redirect", "buchungstornieren.jsp");
 		response.sendRedirect("login.jsp");
-	}
+	} else {
 %>
 
 <!DOCTYPE html>
@@ -42,7 +42,7 @@
 		%>
 		
 		<tr>
-			<th><%=hotel.getName() %></th>
+			<th colspan="4"><%=hotel.getName() %></th>
 		</tr>
 		<tr>
 			<th> ID </th>
@@ -93,3 +93,5 @@
 </body>
 
 </html>
+
+<% } %>
