@@ -124,6 +124,10 @@ public class CreateTestData extends HttpServlet {
 		h2.addKategorie(kat6);
 		h2.addKategorie(kat7);
 		
+		h3.addKategorie(kat8);
+		h3.addKategorie(kat9);
+		h3.addKategorie(kat10);
+		
 		Service s1 = new Service("Sauna", "30min, 2 Aufguesse", 5000);
 		Service s2 = new Service("Massage", "20min, ohne Happy End", 7500);
 		Service s3 = new Service("Massage extra", "20min, mit Happy End", 5000);
