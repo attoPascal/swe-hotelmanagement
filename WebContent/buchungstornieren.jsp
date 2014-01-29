@@ -70,7 +70,7 @@
 		%>	
 		</table>		
 		
-		<form action="Buchenstein" method="get" class="form-horizontal">
+		<form action="BuchungsServlet" method="get" class="form-horizontal">
 			<div class="form-group">
 				<label for="idInput" class="col-sm-2 control-label">ID:</label>
 				<div class="col-sm-10">

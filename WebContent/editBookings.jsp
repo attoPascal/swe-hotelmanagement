@@ -49,7 +49,7 @@
 			int day = cal.get(Calendar.DAY_OF_MONTH);
 		%>
 		
-		<form action="BuchungsVerwaltungsServlet" method="get" class="form-horizontal">
+		<form action="BuchungsServlet" method="get" class="form-horizontal">
 			<div class="form-group">
 				<label for="hotelInput" class="col-sm-2 control-label">Hotel:</label>
 				<div class="col-sm-10">
