@@ -1,5 +1,7 @@
 hm
 hm.dao
+hm.exceptions
+hm.managers
 hm.servlets
 hm.tests
 hm.users
