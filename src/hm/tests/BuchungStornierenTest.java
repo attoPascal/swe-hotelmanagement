@@ -10,6 +10,7 @@ import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
+import hm.exceptions.BuchungsException;
 //import hm.dao.SerializedDAO;
 import hm.managers.*;
 import hm.users.HotelGast;
@@ -38,10 +39,11 @@ public class BuchungStornierenTest {
 	 * @throws NullPointerException 
 	 * @throws ClassNotFoundException 
 	 * @throws FileNotFoundException 
+	 * @throws BuchungsException 
 	 */
 
 	@Test
-	public void buchungsTest() throws FileNotFoundException, ClassNotFoundException, NullPointerException, IOException, ParseException {
+	public void buchungsTest() throws FileNotFoundException, ClassNotFoundException, NullPointerException, IOException, ParseException, BuchungsException {
 		
 		//loescht alte daten
 		try {
@@ -103,7 +105,7 @@ public class BuchungStornierenTest {
 		
 		//entfernt die Buchung
 		try {
-			bm.removeBuchung(b1.getId(),b1.getZimmernummer(), h1.getName());
+			bm.removeBuchung(b1.getId(), h1.getName(), user);
 			assertEquals(102,b1.getZimmernummer());
 		} catch (ClassNotFoundException | IOException e) {
 			// TODO Auto-generated catch block
