@@ -146,11 +146,13 @@ public class BuchungsManagement {
 		hotel.getBuchungsList(gast);
 		Zimmer zimmer = buchung.getZimmer();
 		ArrayList<Buchung> buchungen = zimmer.getBuchungen();
-		Buchung b1 = null;
+		
+		Buchung b1 = null;		
 		for(Buchung b : buchungen){
 			if(b.getId() == id)
 				b1 = b;
 		}
+		
 		buchungen.remove(buchungen.indexOf(b1));
 		zimmer.setBuchungen(buchungen);
 		gast.getBuchungsIDs().remove(new Integer(id));
