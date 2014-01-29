@@ -4,13 +4,13 @@
 package hm.tests;
 
 import static org.junit.Assert.*;
-import hm.Aufenthalt;
+//import hm.Aufenthalt;
 import hm.Buchung;
 import hm.Hotel;
 import hm.Kategorie;
 import hm.Zimmer;
 import hm.dao.DAO;
-import hm.dao.SerializedDAO;
+//import hm.dao.SerializedDAO;
 import hm.managers.*;
 import hm.users.HotelGast;
 
@@ -22,12 +22,7 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.junit.Test;
 
